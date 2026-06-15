@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="docs/readmelogo.png" alt="Sloth Clash" width="256" />
+  <img src="docs/readmelogo.png" alt="Arch Clash" width="256" />
 </h1>
 
 <p align="center">
@@ -17,14 +17,14 @@
 </p>
 
 <p align="center">
-  <img src="docs/preview.png" alt="Sloth Clash preview" width="900" />
+  <img src="docs/preview.png" alt="Arch Clash preview" width="900" />
 </p>
 
 ---
 
 ## Overview
 
-Sloth Clash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository ships the **Wails** desktop shell (`apps/sloth-clash-desktop`). The Windows **system service / IPC** layer lives in a separate project: [sloth-clash-service-ipc](https://github.com/Nemu-x/sloth-clash-service-ipc) (release artifacts are consumed by `pnpm run prebuild`).
+Arch Clash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository ships the **Wails** desktop shell (`apps/arch-clash-desktop`). The Windows **system service / IPC** layer lives in a separate project: [arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc) (release artifacts are consumed by `pnpm run prebuild`).
 
 ## Features (high level)
 
@@ -34,7 +34,7 @@ Sloth Clash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository
 - Visual + YAML rule editor, live connections monitor, and a diagnostics/advanced panel  
 - Signed, fail-closed **in-app updates** (Windows) with UAC-elevated installer hand-off  
 - Windows service installer bundle + sidecar layout compatible with Wails packaging  
-- Deep link scheme `slothclash://` (see `wails.json`)
+- Deep link scheme `archclash://` (see `wails.json`)
 
 ## Screenshots
 
@@ -59,8 +59,8 @@ Sloth Clash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository
 
 ## Downloads
 
-Releases for **this app**: [SlothClash releases](https://github.com/Nemu-x/SlothClash/releases) (when published).  
-Service binaries used at build time: [sloth-clash-service-ipc releases](https://github.com/Nemu-x/sloth-clash-service-ipc/releases).
+Releases for **this app**: [ArchClash releases](https://github.com/Nemu-x/ArchClash/releases) (when published).  
+Service binaries used at build time: [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases).
 
 ## Build (local)
 
@@ -68,11 +68,11 @@ Prerequisites: **Go 1.25+**, **Node 20+**, **pnpm**, Wails v2 (`go run github.co
 
 ```bash
 pnpm install
-pnpm run desktop:resources   # mihomo sidecar, geo DBs, Sloth service exes, Windows icon → build/
+pnpm run desktop:resources   # mihomo sidecar, geo DBs, Arch service exes, Windows icon → build/
 pnpm run wails:dev           # or: pnpm run wails:build
 ```
 
-`desktop:resources` writes under `apps/sloth-clash-desktop/build/` (ignored by git). On Windows, **`pnpm run icons:windows`** is included there and refreshes **`build/windows/icon.ico`** from `build/appicon.png` so installers / shortcuts pick up the right icon.
+`desktop:resources` writes under `apps/arch-clash-desktop/build/` (ignored by git). On Windows, **`pnpm run icons:windows`** is included there and refreshes **`build/windows/icon.ico`** from `build/appicon.png` so installers / shortcuts pick up the right icon.
 
 ## CI
 
@@ -80,7 +80,7 @@ GitHub Actions: `.github/workflows/desktop-artifacts.yml` (Windows, Linux, macOS
 
 ## Security
 
-Sloth Clash ships **fail-closed, cryptographically verified updates**: the in-app updater verifies a **minisign (ed25519)** signature over `SHA256SUMS` against a public key embedded in the binary, then checks the installer's SHA-256 before launching — anything unsigned or tampered is refused (see [docs/UPDATES.md](./docs/UPDATES.md)). CI runs `govulncheck` + `pnpm audit` on every change, the mihomo core is pinned for reproducible builds, and the project is GPL-3.0 / fully auditable. The privileged helper that manages the core/TUN requires a one-time elevation to install, then runs without further prompts.
+Arch Clash ships **fail-closed, cryptographically verified updates**: the in-app updater verifies a **minisign (ed25519)** signature over `SHA256SUMS` against a public key embedded in the binary, then checks the installer's SHA-256 before launching — anything unsigned or tampered is refused (see [docs/UPDATES.md](./docs/UPDATES.md)). CI runs `govulncheck` + `pnpm audit` on every change, the mihomo core is pinned for reproducible builds, and the project is GPL-3.0 / fully auditable. The privileged helper that manages the core/TUN requires a one-time elevation to install, then runs without further prompts.
 
 To report a vulnerability, see [SECURITY.md](./SECURITY.md) (use GitHub private vulnerability reporting — please don't open public issues for security bugs).
 
@@ -90,7 +90,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Support the project
 
-Sloth Clash is free and **GPL-3.0**. If it's useful to you, a crypto donation helps keep development and releases going. Thank you! 🦥
+Arch Clash is free and **GPL-3.0**. If it's useful to you, a crypto donation helps keep development and releases going. Thank you! 🦥
 
 | Asset | Address |
 | --- | --- |
@@ -103,7 +103,7 @@ Sloth Clash is free and **GPL-3.0**. If it's useful to you, a crypto donation he
 
 ## Acknowledgements
 
-- **Basis (upstream GUI this work descends from):** [clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) — Clash Verge Rev (Tauri); Sloth Clash reimplements the product direction with **Wails + Go** in this repo.
+- **Basis (upstream GUI this work descends from):** [clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) — Clash Verge Rev (Tauri); Arch Clash reimplements the product direction with **Wails + Go** in this repo.
 - **Proxy core (Clash Meta):** [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo).
 - **Desktop shell:** [Wails](https://github.com/wailsapp/wails) — Go backend + web frontend in one binary.
 

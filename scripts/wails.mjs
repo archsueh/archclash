@@ -6,19 +6,19 @@ import { cwd } from 'node:process'
 function findRepoRoot() {
   let d = path.resolve(cwd())
   for (let i = 0; i < 10; i++) {
-    const marker = path.join(d, 'apps', 'sloth-clash-desktop', 'wails.json')
+    const marker = path.join(d, 'apps', 'arch-clash-desktop', 'wails.json')
     if (fs.existsSync(marker)) return d
     const p = path.dirname(d)
     if (p === d) break
     d = p
   }
   throw new Error(
-    `[wails] Could not find SlothClash repo root (expected apps/sloth-clash-desktop/wails.json). cwd=${cwd()}`,
+    `[wails] Could not find ArchClash repo root (expected apps/arch-clash-desktop/wails.json). cwd=${cwd()}`,
   )
 }
 
 const repoRoot = findRepoRoot()
-const appDir = path.join(repoRoot, 'apps', 'sloth-clash-desktop')
+const appDir = path.join(repoRoot, 'apps', 'arch-clash-desktop')
 const args = process.argv.slice(2)
 const commandArgs = args.length > 0 ? args : ['dev']
 
@@ -69,7 +69,7 @@ const hasServiceInstaller = () => {
       const files = fs.readdirSync(dir)
       return files.some((f) => {
         const x = f.toLowerCase()
-        return x.includes('sloth-clash-service-install')
+        return x.includes('arch-clash-service-install')
       })
     } catch {
       return false

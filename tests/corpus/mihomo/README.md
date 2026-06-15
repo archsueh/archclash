@@ -4,7 +4,7 @@ This corpus is used by automated prebuild tests to harden runtime config handlin
 
 ## Structure
 
-- `valid/` — configs that should parse and pass Sloth runtime pipeline normalization.
+- `valid/` — configs that should parse and pass Arch runtime pipeline normalization.
 - `invalid/` — malformed YAML samples that must fail parsing.
 
 ## Notes

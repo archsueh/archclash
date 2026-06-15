@@ -4,7 +4,7 @@
  *
  * - NSIS: multilingual project.nsi for Windows installer strings + language picker.
  * - trayicons: Wails reads tray bitmaps from `<app>/trayicons/*.png` at build time when you use TrayMenu.
- *   We mirror build/appicon.png → trayicons/sloth.png (gitignored). The native macOS tray embeds
+ *   We mirror build/appicon.png → trayicons/arch.png (gitignored). The native macOS tray embeds
  *   tracked trayicons/mono.png via go:embed (see darwin_tray_mono_embed.go).
  */
 import { fileURLToPath } from 'node:url'
@@ -16,7 +16,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 function findRepoRoot() {
   let d = process.cwd()
   for (let i = 0; i < 8; i++) {
-    const marker = path.join(d, 'apps', 'sloth-clash-desktop', 'wails.json')
+    const marker = path.join(d, 'apps', 'arch-clash-desktop', 'wails.json')
     if (fs.existsSync(marker)) return d
     const p = path.dirname(d)
     if (p === d) break
@@ -26,7 +26,7 @@ function findRepoRoot() {
 }
 
 const repoRoot = findRepoRoot()
-const appDir = path.join(repoRoot, 'apps', 'sloth-clash-desktop')
+const appDir = path.join(repoRoot, 'apps', 'arch-clash-desktop')
 const srcNsi = path.join(appDir, 'packaging', 'windows', 'project.nsi')
 const destNsi = path.join(
   appDir,
@@ -35,7 +35,7 @@ const destNsi = path.join(
   'installer',
   'project.nsi',
 )
-// PowerShell helper invoked by sloth.vcRedistRuntime macro. Lives next to
+// PowerShell helper invoked by arch.vcRedistRuntime macro. Lives next to
 // project.nsi so the NSIS `File` directive picks it up at compile time.
 const srcVcPs1 = path.join(appDir, 'packaging', 'windows', 'vc_install.ps1')
 const destVcPs1 = path.join(
@@ -47,7 +47,7 @@ const destVcPs1 = path.join(
 )
 const appIcon = path.join(appDir, 'build', 'appicon.png')
 const trayDir = path.join(appDir, 'trayicons')
-const trayPng = path.join(trayDir, 'sloth.png')
+const trayPng = path.join(trayDir, 'arch.png')
 
 function main() {
   if (!fs.existsSync(srcNsi)) {
@@ -83,7 +83,7 @@ function main() {
     console.log(
       '[sync-desktop-packaging] tray icon →',
       path.relative(repoRoot, trayPng),
-      '(for future Wails TrayMenu Image: "sloth")',
+      '(for future Wails TrayMenu Image: "arch")',
     )
   } else {
     console.log(

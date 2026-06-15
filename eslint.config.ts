@@ -16,11 +16,11 @@ import tseslint from 'typescript-eslint'
 const importResolverProjects = ['./tsconfig.json']
 const desktopFrontendTsconfig = path.join(
   process.cwd(),
-  'apps/sloth-clash-desktop/frontend/tsconfig.json',
+  'apps/arch-clash-desktop/frontend/tsconfig.json',
 )
 if (fs.existsSync(desktopFrontendTsconfig)) {
   importResolverProjects.push(
-    './apps/sloth-clash-desktop/frontend/tsconfig.json',
+    './apps/arch-clash-desktop/frontend/tsconfig.json',
   )
 }
 
@@ -39,7 +39,7 @@ export default defineConfig([
     name: 'vite-config-no-react',
     files: [
       'vite.config.mts',
-      'apps/sloth-clash-desktop/frontend/vite.config.ts',
+      'apps/arch-clash-desktop/frontend/vite.config.ts',
     ],
     plugins: {
       js: eslintJS,
@@ -66,7 +66,7 @@ export default defineConfig([
       'scripts/**/*.mjs',
       'tests/required/**/*.mjs',
       'vite.config.mts',
-      'apps/sloth-clash-desktop/frontend/vite.config.ts',
+      'apps/arch-clash-desktop/frontend/vite.config.ts',
     ],
 
     plugins: {
@@ -187,7 +187,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['apps/sloth-clash-desktop/frontend/src/App.tsx'],
+    files: ['apps/arch-clash-desktop/frontend/src/App.tsx'],
     rules: {
       // Large UI shell: relax until split/refactor (blocks lint-staged otherwise).
       'import-x/no-unresolved': 'off',

@@ -1,11 +1,11 @@
-# CONTRIBUTING — i18n (Sloth Clash desktop)
+# CONTRIBUTING — i18n (Arch Clash desktop)
 
 The Wails desktop UI uses **react-i18next** with **one JSON file per language** — no separate Tauri/Rust locale bundles.
 
 ## Where strings live
 
 ```
-apps/sloth-clash-desktop/frontend/src/locales/
+apps/arch-clash-desktop/frontend/src/locales/
   en.json    ← canonical keys and English copy
   ru.json
   zh.json
@@ -13,11 +13,11 @@ apps/sloth-clash-desktop/frontend/src/locales/
 
 - **`en.json`** is the source of truth: add or change keys here first, then mirror the same key structure in `ru.json` and `zh.json`.
 - Nested keys use the usual JSON object shape (e.g. `settings.title`, `tour.connectTitle`).
-- Runtime wiring: `apps/sloth-clash-desktop/frontend/src/i18n.ts` imports these files and registers them with i18next.
+- Runtime wiring: `apps/arch-clash-desktop/frontend/src/i18n.ts` imports these files and registers them with i18next.
 
 ## Language selection
 
-The app persists the choice in `localStorage` under **`sloth-lang`** (`en` | `ru` | `zh`). The Settings screen and `readStoredLang()` / `changeLanguage()` must stay consistent when adding a new locale code.
+The app persists the choice in `localStorage` under **`arch-lang`** (`en` | `ru` | `zh`). The Settings screen and `readStoredLang()` / `changeLanguage()` must stay consistent when adding a new locale code.
 
 ## Adding or updating translations
 
@@ -28,7 +28,7 @@ The app persists the choice in `localStorage` under **`sloth-lang`** (`en` | `ru
 
 ## Adding a new language (e.g. `de`)
 
-1. Add `apps/sloth-clash-desktop/frontend/src/locales/de.json` (duplicate structure from `en.json`).
+1. Add `apps/arch-clash-desktop/frontend/src/locales/de.json` (duplicate structure from `en.json`).
 2. Extend the `resources` object and `readStoredLang()` / language picker types in **`i18n.ts`** and the Settings UI in **`App.tsx`** so `de` is selectable and persisted.
 3. Document the new code in this file.
 

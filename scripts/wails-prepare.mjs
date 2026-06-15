@@ -4,28 +4,28 @@ import path from 'path'
 import { glob } from 'glob'
 
 const cwd = process.cwd()
-const desktopBuild = path.join(cwd, 'apps', 'sloth-clash-desktop', 'build')
+const desktopBuild = path.join(cwd, 'apps', 'arch-clash-desktop', 'build')
 /** Windows/macOS: prebuild puts service binaries here (Wails bundle). */
 const resourcesDir = path.join(desktopBuild, 'resources')
 /** Linux: prebuild puts them under sidecar (see scripts/prebuild.mjs SERVICE_DIR). */
 const sidecarDir = path.join(desktopBuild, 'sidecar')
 
-/** Only Sloth on-disk names; legacy Verge files are migrated once if present. */
+/** Only Arch on-disk names; legacy Verge files are migrated once if present. */
 const patterns = [
-  'sloth-clash-service*.exe',
-  'sloth-clash-service',
-  'sloth-clash-service-install*.exe',
-  'sloth-clash-service-install',
-  'sloth-clash-service-uninstall*.exe',
-  'sloth-clash-service-uninstall',
+  'arch-clash-service*.exe',
+  'arch-clash-service',
+  'arch-clash-service-install*.exe',
+  'arch-clash-service-install',
+  'arch-clash-service-uninstall*.exe',
+  'arch-clash-service-uninstall',
 ]
 
 async function migrateLegacyVergeAliases() {
   if (process.platform !== 'win32') return
   const pairs = [
-    ['clash-verge-service.exe', 'sloth-clash-service.exe'],
-    ['clash-verge-service-install.exe', 'sloth-clash-service-install.exe'],
-    ['clash-verge-service-uninstall.exe', 'sloth-clash-service-uninstall.exe'],
+    ['clash-verge-service.exe', 'arch-clash-service.exe'],
+    ['clash-verge-service-install.exe', 'arch-clash-service-install.exe'],
+    ['clash-verge-service-uninstall.exe', 'arch-clash-service-uninstall.exe'],
   ]
   for (const [legacy, next] of pairs) {
     const from = path.join(resourcesDir, legacy)
@@ -57,7 +57,7 @@ async function main() {
 
   if (present === 0) {
     console.error(
-      `[wails-prepare] No sloth-clash-service bundle in ${resourcesDir} or ${sidecarDir}. Run: pnpm run prebuild`,
+      `[wails-prepare] No arch-clash-service bundle in ${resourcesDir} or ${sidecarDir}. Run: pnpm run prebuild`,
     )
     process.exit(1)
   }

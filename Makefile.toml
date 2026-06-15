@@ -21,7 +21,7 @@ command = "pnpm.cmd"
 [tasks.git-add]
 description = "Add desktop locale files to git"
 command = "git"
-args = ["add", "apps/sloth-clash-desktop/frontend/src/locales"]
+args = ["add", "apps/arch-clash-desktop/frontend/src/locales"]
 
 # --- Jobs ---
 

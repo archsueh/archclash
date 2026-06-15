@@ -10,9 +10,9 @@ From repo root:
 
 ## What it checks
 
-- backend tests: `go test ./...` in `apps/sloth-clash-desktop`
-- backend build: `go build ./...` in `apps/sloth-clash-desktop`
-- frontend type safety: `pnpm tsc --noEmit` in `apps/sloth-clash-desktop/frontend`
+- backend tests: `go test ./...` in `apps/arch-clash-desktop`
+- backend build: `go build ./...` in `apps/arch-clash-desktop`
+- frontend type safety: `pnpm tsc --noEmit` in `apps/arch-clash-desktop/frontend`
 - config corpus validation: `TestMihomoCorpus*`
 - runtime pipeline smoke validation: `TestRuntimeSmoke*`
 - runtime E2E scenarios: `TestE2ERuntime*`

@@ -1,5 +1,5 @@
 {
-  "name": "sloth-clash",
+  "name": "arch-clash",
   "version": "0.6.0",
   "license": "GPL-3.0-only",
   "scripts": {
@@ -28,11 +28,11 @@
     "updater-fixed-webview2": "node scripts/updater-fixed-webview2.mjs",
     "fix-alpha-version": "node scripts/fix-alpha_version.mjs",
     "publish-version": "node scripts/publish-version.mjs",
-    "lint": "eslint -c eslint.config.ts --max-warnings=0 --cache --cache-location .eslintcache apps/sloth-clash-desktop/frontend/src",
-    "lint:fix": "eslint -c eslint.config.ts --max-warnings=0 --cache --cache-location .eslintcache --fix apps/sloth-clash-desktop/frontend/src",
+    "lint": "eslint -c eslint.config.ts --max-warnings=0 --cache --cache-location .eslintcache apps/arch-clash-desktop/frontend/src",
+    "lint:fix": "eslint -c eslint.config.ts --max-warnings=0 --cache --cache-location .eslintcache --fix apps/arch-clash-desktop/frontend/src",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "typecheck": "pnpm exec tsc --noEmit -p apps/sloth-clash-desktop/frontend/tsconfig.json"
+    "typecheck": "pnpm exec tsc --noEmit -p apps/arch-clash-desktop/frontend/tsconfig.json"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",

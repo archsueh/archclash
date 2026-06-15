@@ -22,7 +22,7 @@ const src = envSrc
 const dest = path.join(
   repoRoot,
   'apps',
-  'sloth-clash-desktop',
+  'arch-clash-desktop',
   'build',
   'appicon.png',
 )

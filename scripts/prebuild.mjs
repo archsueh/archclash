@@ -90,10 +90,10 @@ const SIDECAR_HOST = target
     })()
 
 /** Wails desktop only — no src-tauri / Tauri workspace in this repo. */
-const desktopRoot = path.join(cwd, 'apps', 'sloth-clash-desktop')
+const desktopRoot = path.join(cwd, 'apps', 'arch-clash-desktop')
 if (!fs.existsSync(desktopRoot)) {
   throw new Error(
-    `[prebuild] Missing ${desktopRoot}. Clone or add the Sloth Wails app (apps/sloth-clash-desktop).`,
+    `[prebuild] Missing ${desktopRoot}. Clone or add the Arch Wails app (apps/arch-clash-desktop).`,
   )
 }
 
@@ -211,8 +211,8 @@ function clashMeta() {
   const isWin = platform === 'win32'
   const urlExt = isWin ? 'zip' : 'gz'
   return {
-    name: 'sloth-mihomo',
-    targetFile: `sloth-mihomo-${SIDECAR_HOST}${isWin ? '.exe' : ''}`,
+    name: 'arch-mihomo',
+    targetFile: `arch-mihomo-${SIDECAR_HOST}${isWin ? '.exe' : ''}`,
     exeFile: `${name}${isWin ? '.exe' : ''}`,
     zipFile: `${name}-${META_VERSION}.${urlExt}`,
     downloadURL: `${META_URL_PREFIX}/${META_VERSION}/${name}-${META_VERSION}.${urlExt}`,
@@ -444,9 +444,9 @@ const resolvePlugin = async () => {
 // service chmod (保留并使用 glob)
 const resolveServicePermission = async () => {
   const serviceExecutables = [
-    'sloth-clash-service*',
-    'sloth-clash-service-install*',
-    'sloth-clash-service-uninstall*',
+    'arch-clash-service*',
+    'arch-clash-service-install*',
+    'arch-clash-service-uninstall*',
   ]
   const hashCache = await loadHashCache()
   let hasChanges = false
@@ -480,7 +480,7 @@ const resolveServicePermission = async () => {
 // =======================
 // Other resource resolvers (service, mmdb, geosite, geoip, enableLoopback)
 // =======================
-// Sloth Windows service IPC binaries (fork of clash-verge-service-ipc).
+// Arch Windows service IPC binaries (fork of clash-verge-service-ipc).
 // Release asset tag is usually the Rust host triple. GNU Windows hosts often
 // have no matching GitHub release — use MSVC triple for downloads instead.
 // Override with: SLOTH_SERVICE_RELEASE_TAG=v0.1.0 pnpm run prebuild
@@ -490,12 +490,12 @@ const SERVICE_DOWNLOAD_TAG =
     ? SIDECAR_HOST.replace('pc-windows-gnu', 'pc-windows-msvc')
     : SIDECAR_HOST)
 
-const SERVICE_URL = `https://github.com/Nemu-x/sloth-clash-service-ipc/releases/download/${SERVICE_DOWNLOAD_TAG}`
+const SERVICE_URL = `https://github.com/Nemu-x/arch-clash-service-ipc/releases/download/${SERVICE_DOWNLOAD_TAG}`
 
-/** Same filenames as GitHub Release assets (see sloth-clash-service-ipc release.yml). */
+/** Same filenames as GitHub Release assets (see arch-clash-service-ipc release.yml). */
 const resolveService = () => {
   const ext = platform === 'win32' ? '.exe' : ''
-  const name = `sloth-clash-service${ext}`
+  const name = `arch-clash-service${ext}`
   return resolveResource({
     file: name,
     dir: SERVICE_DIR,
@@ -504,7 +504,7 @@ const resolveService = () => {
 }
 const resolveInstall = () => {
   const ext = platform === 'win32' ? '.exe' : ''
-  const name = `sloth-clash-service-install${ext}`
+  const name = `arch-clash-service-install${ext}`
   return resolveResource({
     file: name,
     dir: SERVICE_DIR,
@@ -513,7 +513,7 @@ const resolveInstall = () => {
 }
 const resolveUninstall = () => {
   const ext = platform === 'win32' ? '.exe' : ''
-  const name = `sloth-clash-service-uninstall${ext}`
+  const name = `arch-clash-service-uninstall${ext}`
   return resolveResource({
     file: name,
     dir: SERVICE_DIR,
@@ -558,7 +558,7 @@ const resolveUnSetDnsScript = () =>
 // =======================
 const tasks = [
   {
-    name: 'sloth-mihomo',
+    name: 'arch-mihomo',
     func: () =>
       getLatestReleaseVersion().then(() => resolveSidecar(clashMeta())),
     retry: 5,

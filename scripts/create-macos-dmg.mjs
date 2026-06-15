@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
-const appDir = path.join(repoRoot, 'apps', 'sloth-clash-desktop')
+const appDir = path.join(repoRoot, 'apps', 'arch-clash-desktop')
 const binDir = path.join(appDir, 'build', 'bin')
 const dmgBg = path.join(repoRoot, 'docs', 'dmg-background.png')
 
@@ -24,7 +24,7 @@ function findBuiltApp() {
 }
 
 function writeInstallNotes(stageDir, appName) {
-  const readme = `Sloth Clash macOS Install
+  const readme = `Arch Clash macOS Install
 ========================
 
 1) Drag "${appName}" to "Applications".
@@ -45,7 +45,7 @@ if [ ! -d "$APP" ]; then
   exit 1
 fi
 sudo xattr -r -d com.apple.quarantine "$APP" || true
-osascript -e 'display dialog "Done. You can now open Sloth Clash." buttons {"OK"} default button "OK"'
+osascript -e 'display dialog "Done. You can now open Arch Clash." buttons {"OK"} default button "OK"'
 `
   const cmdPath = path.join(stageDir, 'Fix Quarantine.command')
   fs.writeFileSync(cmdPath, command, 'utf8')
@@ -92,11 +92,11 @@ function main() {
   const appPath = findBuiltApp()
   const appName = path.basename(appPath)
   const arch = os.arch() === 'arm64' ? 'arm64' : os.arch()
-  const outName = `SlothClash-macOS-${arch}.dmg`
+  const outName = `ArchClash-macOS-${arch}.dmg`
   const outPath = path.join(binDir, outName)
-  const tempDmg = path.join(binDir, `SlothClash-macOS-${arch}-tmp.dmg`)
+  const tempDmg = path.join(binDir, `ArchClash-macOS-${arch}-tmp.dmg`)
   const stageDir = path.join(appDir, 'build', 'dmg-stage')
-  const volumeName = 'Sloth Clash'
+  const volumeName = 'Arch Clash'
 
   fs.rmSync(stageDir, { recursive: true, force: true })
   fs.mkdirSync(stageDir, { recursive: true })

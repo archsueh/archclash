@@ -1,6 +1,6 @@
 # In-app updates — signing & release guide
 
-SlothClash ships a **fail-closed, signed** in-app updater. This document is for
+ArchClash ships a **fail-closed, signed** in-app updater. This document is for
 maintainers cutting releases and managing the signing key.
 
 ## Trust model
@@ -22,20 +22,20 @@ tampered is **refused** (closes audit findings **F1 / F8**).
 
 ```bash
 # install minisign: winget install jedisct1.minisign | brew install minisign | apt install minisign
-minisign -G -p slothclash-updates.pub -s slothclash-updates.key
+minisign -G -p archclash-updates.pub -s archclash-updates.key
 ```
 
-- **`slothclash-updates.pub`** — public, embed in the app (see below). Not secret.
-- **`slothclash-updates.key`** — **private, password-encrypted**. Store the
+- **`archclash-updates.pub`** — public, embed in the app (see below). Not secret.
+- **`archclash-updates.key`** — **private, password-encrypted**. Store the
   offline backup in a password manager / offline media. **Never commit it.**
 
 ### Embed the public key
 
-The trusted keys live in `apps/sloth-clash-desktop/app_update_verify.go`:
+The trusted keys live in `apps/arch-clash-desktop/app_update_verify.go`:
 
 ```go
 var trustedUpdateKeys = []string{
-    "RWQ...AprY", // the second line of slothclash-updates.pub
+    "RWQ...AprY", // the second line of archclash-updates.pub
 }
 ```
 
@@ -45,7 +45,7 @@ It is an **array for rotation** (see below).
 
 Add two **repository secrets** (Settings → Secrets and variables → Actions):
 
-- `MINISIGN_SECRET_KEY` — the **full contents** of `slothclash-updates.key`
+- `MINISIGN_SECRET_KEY` — the **full contents** of `archclash-updates.key`
   (both lines: the `untrusted comment:` line + the base64 key line).
 - `MINISIGN_SIGN_PASSWORD` — the password that encrypts the key.
 
@@ -55,7 +55,7 @@ The release job (`.github/workflows/desktop-artifacts.yml`) uses them to sign
 
 ## Cutting a release
 
-1. Bump the version (`apps/sloth-clash-desktop/version.go` + desktop version).
+1. Bump the version (`apps/arch-clash-desktop/version.go` + desktop version).
 2. Push a tag `vX.Y.Z`. The **Desktop artifacts** workflow:
    - builds Windows installer `.exe` (exposed as a raw release asset),
      macOS `.dmg`, Linux `.tar.gz`;

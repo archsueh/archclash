@@ -1,7 +1,7 @@
 <h1 align="center">
-  <img src="../apps/sloth-clash-desktop/build/appicon.png" alt="Sloth Clash" width="128" />
+  <img src="../apps/arch-clash-desktop/build/appicon.png" alt="Arch Clash" width="128" />
   <br />
-  Sloth Clash
+  Arch Clash
   <br />
 </h1>
 
@@ -21,7 +21,7 @@ This file exists only so the `docs/` folder has a stable English entry point on 
 
 ### Upstream links (same as root README)
 
-- Basis (what Sloth was forked from conceptually): **[clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev)**
+- Basis (what Arch was forked from conceptually): **[clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev)**
 - Proxy core (Clash Meta): **[MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo)**
 - Desktop UI stack: **[Wails](https://github.com/wailsapp/wails)**
 

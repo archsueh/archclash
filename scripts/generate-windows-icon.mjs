@@ -2,7 +2,7 @@
  * Build multi-size Windows icon.ico from build/appicon.png (Wails reads build/windows/icon.ico).
  * Used for: window title bar / .exe syso resources / NSIS installer header icon (MUI_ICON).
  * macOS .icns and Linux icons are produced by Wails from the same build/appicon.png at package time.
- * Tray: see scripts/sync-desktop-packaging.mjs (copies appicon → trayicons/sloth.png for future TrayMenu).
+ * Tray: see scripts/sync-desktop-packaging.mjs (copies appicon → trayicons/arch.png for future TrayMenu).
  */
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -16,7 +16,7 @@ import { log_info, log_success } from './utils.mjs'
 const SIZES = [16, 20, 24, 32, 40, 48, 64, 128, 256]
 
 export async function generateWindowsIcon() {
-  const root = path.join(process.cwd(), 'apps', 'sloth-clash-desktop', 'build')
+  const root = path.join(process.cwd(), 'apps', 'arch-clash-desktop', 'build')
   const srcPng = path.join(root, 'appicon.png')
   const outIco = path.join(root, 'windows', 'icon.ico')
 
@@ -24,7 +24,7 @@ export async function generateWindowsIcon() {
     await fs.access(srcPng)
   } catch {
     log_info(
-      '[icon] skip: apps/sloth-clash-desktop/build/appicon.png not found',
+      '[icon] skip: apps/arch-clash-desktop/build/appicon.png not found',
     )
     return
   }

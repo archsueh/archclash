@@ -1,11 +1,11 @@
 /**
- * Normalizes apps/sloth-clash-desktop/trayicons/mono.png for the macOS
+ * Normalizes apps/arch-clash-desktop/trayicons/mono.png for the macOS
  * status bar tray (template image).
  *
  * Why: drop a 2048x2048 source PNG with generous transparent margins in there
  * and macOS will scale it down on the fly. The subject reads tiny in the menu
  * bar unless you forcibly upscale the icon — which is what the old code did
- * (`tray_darwin_native.m::SlothTrayNormalisedIconSize` clamped embedded
+ * (`tray_darwin_native.m::ArchTrayNormalisedIconSize` clamped embedded
  * mono to 30-34pt instead of the system-standard 18-22pt). That made the
  * icon visually "fat" compared to every other native menu bar item.
  *
@@ -27,7 +27,7 @@ const repoRoot = path.resolve(__dirname, '..')
 const target = path.join(
   repoRoot,
   'apps',
-  'sloth-clash-desktop',
+  'arch-clash-desktop',
   'trayicons',
   'mono.png',
 )

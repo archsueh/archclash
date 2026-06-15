@@ -1,4 +1,4 @@
-## Sloth Clash desktop `0.6.0` — 2026-06-06
+## Arch Clash desktop `0.6.0` — 2026-06-06
 
 ### English
 
@@ -21,30 +21,30 @@
 - **导入本地配置与分享链接。** 添加配置文件对话框新增 **Paste / File** 模式：可导入本地 mihomo/Clash `config.yaml`，或粘贴/加载 `vless://`、`vmess://`、`ss://`、`trojan://`、`hysteria2://`、`tuic://` 链接——单条、按行列表或 base64 订阅封装——导入时转换为可运行配置（并实时提示「Clash YAML / N 条链接」）。返回链接列表的订阅 URL 现在也可用。
 - **签名且 fail-closed 的应用内更新。** 发布使用项目 minisign 密钥签名，并在启动任何程序前于应用内校验（纯 Go ed25519）——未签名或被篡改的更新默认被拒绝。新增下载**进度条**、来自 release notes 的**「更新内容」**变更日志，以及设置中的**自动更新**开关。Windows 就地更新；macOS/Linux 打开发布页。关闭审计 F1/F8。详见 `docs/UPDATES.md`。
 
-## Sloth Clash desktop `0.3.1` — 2026-04-30
+## Arch Clash desktop `0.3.1` — 2026-04-30
 
 ### English
 
-- **pnpm / Wails frontend:** monorepo `pnpm-workspace.yaml` (root + `apps/sloth-clash-desktop/frontend`), removed nested `frontend/pnpm-lock.yaml`, aligned desktop frontend deps with the root stack (React 19 / Vite 8 / TypeScript 6). The required-test gate runs `tsc` from the repo root so a single `pnpm install` is enough on fresh clones.
+- **pnpm / Wails frontend:** monorepo `pnpm-workspace.yaml` (root + `apps/arch-clash-desktop/frontend`), removed nested `frontend/pnpm-lock.yaml`, aligned desktop frontend deps with the root stack (React 19 / Vite 8 / TypeScript 6). The required-test gate runs `tsc` from the repo root so a single `pnpm install` is enough on fresh clones.
 - **Windows NSIS installer:** fixed inverted `taskkill` / `DetailPrint` messages, removed the extra “you may need to close the app” prompt before install, unified `tasklist` on `${PRODUCT_EXECUTABLE}`, clarified the “still running” abort text.
 - **Home UX:** while connected, the main button and “protected” row stay **green** unless `connection.health` is `broken`; warming/degraded no longer show “partial protection”, long “configuring…”, or “TUN — limited” for typical users (degraded/broken hints remain available via the home alert tooltip where applicable).
 - **Desktop (Go):** connections overview API, rule-provider refresh API, proxy latency API, runtime supervisor and related lifecycle / system-proxy / tray / state / subscription / profile plumbing (see git history on this branch for file-level detail).
 
 ### Русский
 
-- **pnpm / Wails frontend:** добавлен `pnpm-workspace.yaml` (корень + `apps/sloth-clash-desktop/frontend`), удалён вложенный `frontend/pnpm-lock.yaml`, зависимости десктопного фронта выровнены с корнем (React 19 / Vite 8 / TypeScript 6). Обязательный тест запускает `tsc` из корня — на чистом клоне достаточно одного `pnpm install`.
+- **pnpm / Wails frontend:** добавлен `pnpm-workspace.yaml` (корень + `apps/arch-clash-desktop/frontend`), удалён вложенный `frontend/pnpm-lock.yaml`, зависимости десктопного фронта выровнены с корнем (React 19 / Vite 8 / TypeScript 6). Обязательный тест запускает `tsc` из корня — на чистом клоне достаточно одного `pnpm install`.
 - **Установщик Windows (NSIS):** исправлены перепутанные сообщения после `taskkill`, убран лишний `MessageBox` перед установкой, `tasklist` унифицирован по имени exe из `${PRODUCT_EXECUTABLE}`, уточнён текст при «процесс всё ещё запущен».
 - **Главный экран:** при `connected` кнопка и блок «защищено» остаются **зелёными**, пока здоровье не `broken`; состояния warming/degraded больше не показывают «частичную защиту», долгое «настраиваем…» и «TUN — ограничено» для обычного пользователя (подсказки degraded/broken по-прежнему могут быть в тултипе предупреждения на главной).
 - **Десктоп (Go):** API обзора соединений, обновления rule-provider, задержки прокси, супервизор рантайма и сопутствующие правки lifecycle / system proxy / трей / state / subscription / profiles (детали — по коммитам в ветке).
 
 ### 中文
 
-- **pnpm / Wails 前端：** 增加 `pnpm-workspace.yaml`（根目录与 `apps/sloth-clash-desktop/frontend`），移除嵌套的 `frontend/pnpm-lock.yaml`，桌面前端依赖与根项目对齐（React 19 / Vite 8 / TypeScript 6）。必选测试从仓库根运行 `tsc`，全新克隆只需一次 `pnpm install`。
+- **pnpm / Wails 前端：** 增加 `pnpm-workspace.yaml`（根目录与 `apps/arch-clash-desktop/frontend`），移除嵌套的 `frontend/pnpm-lock.yaml`，桌面前端依赖与根项目对齐（React 19 / Vite 8 / TypeScript 6）。必选测试从仓库根运行 `tsc`，全新克隆只需一次 `pnpm install`。
 - **Windows NSIS 安装包：** 修正 `taskkill` 与日志文案颠倒、去掉安装前多余提示、`tasklist` 统一使用 `${PRODUCT_EXECUTABLE}` 对应的 exe 名。
 - **首页体验：** `connected` 时主按钮与“已保护”区域在非 `broken` 时保持绿色；warming/degraded 不再对普通用户显示“部分保护 / 正在配置 / TUN 受限”等字样（必要时仍可在首页警告气泡的提示里查看）。
 - **桌面 Go：** 连接列表、规则提供者刷新、代理延迟 API、运行时监督器及相关生命周期与系统代理/托盘/状态/订阅/配置逻辑（详见本分支提交记录）。
 
-## Sloth Clash desktop `0.3.0` — 2026-04-25
+## Arch Clash desktop `0.3.0` — 2026-04-25
 
 ### English
 
@@ -62,7 +62,7 @@
 - Bumped the default app window to 1200×820 (min 960×640) so the rules editor, proxy-groups editor and advanced YAML modals fit without cramping. Existing window state is not persisted, so the new defaults apply on next launch.
 - Proxy-group normalization now preserves proxy / group / provider names verbatim, including trailing whitespace. Subscriptions whose `proxies:` entries contain trailing spaces (e.g. `"🇦🇪 Intermark.Global [vless - grpc] "`) no longer produce `proxy group[…]: '…' not found` when an extended config without rules is layered on top.
 - Proxy Groups editor now mirrors the Rules editor UX: a read-only `subscription.proxy-groups` list shows every group that the subscription or extended config ships, and each baseline group has a delete / restore toggle that writes the group name into `delete.proxy-groups` of the proxy-groups template. Groups can be suppressed without editing the upstream YAML and restored later.
-- Rules screen is now flat (no more card-inside-card), drops the technical lead text and the "Reachable: \\.\pipe\…" line, and only surfaces controller errors while Sloth is actually connected — the screen stays clean when the core is not running.
+- Rules screen is now flat (no more card-inside-card), drops the technical lead text and the "Reachable: \\.\pipe\…" line, and only surfaces controller errors while Arch is actually connected — the screen stays clean when the core is not running.
 - Removed the "Direct" mode button from the Home mode selector. Routing on Home is now just Rule / Global (a 2-segment slider); the Proxies diagnostics screen keeps Direct for completeness. Onboarding tour copy was updated to match, and the Russian locale now uses "Подключиться" / "Отключиться" instead of the shorter imperative.
 - Settings → Info card was tidied up. The "Developer: Nemu-x" line was removed (the GitHub icon in the top-right corner is the single attribution), the redundant "Stable channel" button was dropped, and the KPI grid + action buttons now use a vertical layout so "Check for updates" / "Download installer" / "Open release page" no longer overflow each other at narrow widths.
 - Windows tray icon is now fully wired via `getlantern/systray` and the bundled `build/windows/icon.ico`. Show Window / Hide Window / Connect (+ live label Connect / Connecting… / Disconnect) / Quit menu entries are available; the existing Close-to-Tray, Start-Minimized and Launch-on-Startup toggles therefore start behaving the way the settings screen already advertises.
@@ -71,12 +71,12 @@
 - Settings → TUN & traffic tuning is now accessed via a **Configure…** button that opens a dedicated modal (`.tunSettingsModal`), replacing the tall inline card. The Settings column shows only a compact summary line (Stack / Auto-route / Sniffer), so the TUN controls no longer push the rest of the settings below the fold.
 - Removed the automatic Rule-mode proxy-group picker entirely. Iterating on anchor / first-safe heuristics kept reintroducing "stickiness" on reconnect (UI momentarily picking GLOBAL / Auto / a stale group, which triggered a frontend refresh loop that ran 24× every 350 ms and manifested as multiple disconnect-reconnect cycles + UI lag). The Connect path now does exactly ONE thing automatically: if the active profile has a persisted `LastGoodGroup` (the user's last explicit `SelectProxyGroup` click for this profile, stored in `profiles.json`) and that group is still present in `/proxies`, it is copied back into `ActiveGroup` so the Proxies screen keeps highlighting the user's own choice across reconnects, app restarts, traffic-mode flips and mode changes. Otherwise `ActiveGroup` stays empty — the Proxies screen shows `—` on a first-ever connect, and the user clicks a group once to set it. That click persists onto the profile and this sticky-restore picks it up on every subsequent connect. Built-in policy tokens (GLOBAL / DIRECT / REJECT / REJECT-DROP / PASS) are filtered even if a stale sticky value somehow names one. Switching profiles re-hydrates `LastGoodGroup` from the newly activated profile, so profile A's MainGroup never leaks into profile B. The frontend warmup nudge now only polls while `/proxies` is returning an empty group list (real warmup), not while `activeGroup` is empty — empty `activeGroup` is now a valid steady state, so that branch no longer spins `refresh()`.
 - Bare-subscription fallback now emits `MATCH,Manual` (a `select` group that lists `Auto` first plus every provider entry) instead of `MATCH,Auto`. Default routing still flows through `Auto` (Manual → Auto → url-test), but users can click an individual node in Manual without hitting Mihomo's 400 on url-test groups. `pruneFallbackAutoManualIfCustom` rewrites both MATCH,Auto and MATCH,Manual to a custom group when the subscription / merge template ships real groups, so existing merge templates keep working.
-- Fixed a reconnect regression where a transient subscription HTTP failure (TUN up-race returning fake-ip timeouts, origin 5xx, captive portal, VPN flap) silently regressed a working full profile into Sloth's bare `sub1 + Manual` fallback on the very next Connect — users saw their real groups (e.g. `♻️ Automatic`, `Nemu-X-*` providers) disappear mid-session and be replaced by `Manual[COMPATIBLE]` routing. `tryWriteMergedFullProfile` now writes the last-known-good subscription body to `subscription.cache.yaml` in the runtime dataDir on every successful fetch and replays it when a later fetch fails, so reconnects keep using the real profile until a fresh full-profile response arrives. The bare fallback is now reserved strictly for first-ever connects where no subscription body has ever been cached.
+- Fixed a reconnect regression where a transient subscription HTTP failure (TUN up-race returning fake-ip timeouts, origin 5xx, captive portal, VPN flap) silently regressed a working full profile into Arch's bare `sub1 + Manual` fallback on the very next Connect — users saw their real groups (e.g. `♻️ Automatic`, `Nemu-X-*` providers) disappear mid-session and be replaced by `Manual[COMPATIBLE]` routing. `tryWriteMergedFullProfile` now writes the last-known-good subscription body to `subscription.cache.yaml` in the runtime dataDir on every successful fetch and replays it when a later fetch fails, so reconnects keep using the real profile until a fresh full-profile response arrives. The bare fallback is now reserved strictly for first-ever connects where no subscription body has ever been cached.
 - Flipped subscription body reads to cache-first on Connect. Previously every Connect did a blocking HTTP fetch of the top-level subscription YAML with up to 50 s origin timeout on the critical path — if the provider was slow / flaky, Connect hung for seconds even though Mihomo could have started immediately from the last-known-good body. `tryWriteMergedFullProfile` now reads `subscription.cache.yaml` first when it exists and schedules a background refresh (deduped per-dataDir via `inflightSubscriptionBGFetch`) to repopulate the cache for the next Connect. Explicit "Refresh subscription" (manual + scheduled auto-update) does a blocking fetch that updates the cache, so reconnects triggered by a refresh still see fresh bodies. Only the first-ever Connect for a profile (or one after Clear Cache) still blocks on the network. This restores the "instant reconnect" behaviour users had before the multi-tier auto-picker cycle and removes the "sometimes fast, sometimes slow" variance.
 - Settings page layout tightened: the Info / updates card now sits inside the two-column `settingsGridCompact` next to Data & Diagnostics instead of spanning a full third row underneath it, so the panel fits without scrolling at 1200×820.
 - Diagnostics tail reader now falls back to the newest rotated `service_*.log` when `service_latest.log` is missing (flexi_logger leaves only timestamped files if the core is killed mid-rotation), so Export Diagnostics Bundle stops returning "no runtime log file found" for sessions where rotation happened. The `ipc start finished` debug log entry also records the exact `logDir` the privileged service was told to write to — so the next "service logs missing" report is diagnosable from a single debug file.
 - Added support for parsing `mieru://` and `mierus://` subscription URIs (protocol: https://github.com/enfein/mieru). The parser covers the full Mihomo `mieru` proxy field surface — `server`, `port` (+ `port-range`), `username`, `password`, `transport`, `udp`, `handshake-mode`, `multiplexing` — so pasting a `mieru` link into the Proxies import dialog produces a working proxy entry without manual YAML editing.
-- macOS: native menu bar tray with embedded `trayicons/mono.png`, CGO defaults for Wails builds, Dock **Quit** parity when close-to-tray is enabled, richer tray menu (navigation + modes + traffic), and CI asserts `mono.png` before packaging. Windows release workflow asserts `build/windows/icon.ico` and synced `trayicons/sloth.png` after `desktop:resources`.
+- macOS: native menu bar tray with embedded `trayicons/mono.png`, CGO defaults for Wails builds, Dock **Quit** parity when close-to-tray is enabled, richer tray menu (navigation + modes + traffic), and CI asserts `mono.png` before packaging. Windows release workflow asserts `build/windows/icon.ico` and synced `trayicons/arch.png` after `desktop:resources`.
 
 ### Русский
 
@@ -94,7 +94,7 @@
 - Увеличено дефолтное окно приложения до 1200×820 (минимум 960×640), чтобы редактор правил, редактор proxy-групп и advanced YAML-модалки помещались без сжатия. Сохранённый размер окна не переносится — новые дефолты применяются при следующем запуске.
 - Нормализация proxy-групп теперь сохраняет имена proxy / group / provider посимвольно, включая пробелы на конце. Подписки, где у `proxies:` есть хвостовые пробелы (например, `"🇦🇪 Intermark.Global [vless - grpc] "`), больше не дают `proxy group[…]: '…' not found`, когда поверх накладывается extended config без секции rules.
 - Редактор Proxy Groups теперь работает по аналогии с редактором правил: появился read-only список `subscription.proxy-groups` со всеми группами из подписки и extended config, и у каждой baseline-группы есть переключатель удалить / вернуть, который записывает имя группы в `delete.proxy-groups` шаблона proxy-групп. Группы можно подавить, не правя верхний YAML, и позже восстановить.
-- Экран Rules стал плоским (без "экран в экране"), убраны технический лид-текст и строка "Reachable: \\.\pipe\…", а ошибки контроллера теперь показываются только когда Sloth действительно подключён — если ядро не запущено, экран остаётся чистым.
+- Экран Rules стал плоским (без "экран в экране"), убраны технический лид-текст и строка "Reachable: \\.\pipe\…", а ошибки контроллера теперь показываются только когда Arch действительно подключён — если ядро не запущено, экран остаётся чистым.
 - На главном экране убрана кнопка режима "Direct". Переключатель на Home теперь только Rule / Global (двухсегментный), экран диагностики Proxies сохраняет Direct для полноты. Обновлены тексты онбординг-тура, а в русской локали «Connect» / «Disconnect» стали "Подключиться" / "Отключиться".
 - Карточка Settings → Info приведена в порядок. Строка "Developer: Nemu-x" убрана (в правом верхнем углу и так есть GitHub-иконка), лишняя кнопка "Stable channel" удалена, а сетка KPI и ряд кнопок теперь раскладываются вертикально, так что "Check for updates" / "Download installer" / "Open release page" больше не наезжают друг на друга на узких окнах.
 - Иконка трея на Windows теперь полностью работает через `getlantern/systray` и вшитый `build/windows/icon.ico`. В меню доступны Show Window / Hide Window / Connect (с живой меткой Connect / Connecting… / Disconnect) / Quit; существующие переключатели Close-to-Tray, Start Minimized и Launch on Startup начинают вести себя так, как и обещает экран настроек.
@@ -108,7 +108,7 @@
 - Компоновка экрана Settings поджата: карточка Info / updates теперь встроена внутрь двухколоночного `settingsGridCompact` рядом с Data & Diagnostics, а не занимает целую отдельную третью строку под ним, — панель помещается без скролла на 1200×820.
 - Чтение хвоста логов теперь откатывается к самому свежему ротированному `service_*.log` если `service_latest.log` отсутствует (flexi_logger оставляет только timestamped-файлы, если ядро убили посреди ротации), так что Export Diagnostics Bundle перестаёт возвращать "no runtime log file found" для сессий, в которых ротация произошла. В debug-лог на старте ядра теперь пишется точный `logDir`, переданный привилегированному сервису, — при очередной жалобе "сервисных логов нет" это видно в debug-файле.
 - Добавлен парсинг ссылок `mieru://` и `mierus://` (протокол: https://github.com/enfein/mieru). Парсер покрывает весь набор полей `mieru`-прокси Mihomo — `server`, `port` (+ `port-range`), `username`, `password`, `transport`, `udp`, `handshake-mode`, `multiplexing`, — так что вставка `mieru`-ссылки в диалог импорта Proxies даёт рабочую запись прокси без ручной правки YAML.
-- macOS: нативный трей в строке меню с вшитым `trayicons/mono.png`, дефолтный CGO для сборок Wails, корректный **Quit** из Dock при режиме «закрыть в трей», расширенное меню трея (навигация + режимы + трафик), в CI проверяется наличие `mono.png` перед упаковкой. В Windows workflow после `desktop:resources` проверяются `build/windows/icon.ico` и синхронизированный `trayicons/sloth.png`.
+- macOS: нативный трей в строке меню с вшитым `trayicons/mono.png`, дефолтный CGO для сборок Wails, корректный **Quit** из Dock при режиме «закрыть в трей», расширенное меню трея (навигация + режимы + трафик), в CI проверяется наличие `mono.png` перед упаковкой. В Windows workflow после `desktop:resources` проверяются `build/windows/icon.ico` и синхронизированный `trayicons/arch.png`.
 
 ### 中文
 
@@ -126,7 +126,7 @@
 - 应用默认窗口提升到 1200×820（最小 960×640），以便规则编辑器、代理分组编辑器以及 advanced YAML 弹窗都能舒适显示。先前保存的窗口尺寸不会迁移，新默认值将在下次启动时生效。
 - 代理分组归一化现在原样保留 proxy / group / provider 名称，包含结尾空白。当订阅中某个 `proxies:` 名称带有尾随空格（例如 `"🇦🇪 Intermark.Global [vless - grpc] "`）时，在其上叠加不含 rules 的 extended config 不会再触发 `proxy group[…]: '…' not found`。
 - 代理分组编辑器现在与规则编辑器保持一致：新增只读的 `subscription.proxy-groups` 区块展示订阅与扩展配置提供的全部分组，每一条都有删除 / 恢复切换按钮，按下时会把分组名写入代理分组模板的 `delete.proxy-groups`。可以在不修改上游 YAML 的情况下屏蔽分组，并可随时恢复。
-- 规则屏幕重新设计为扁平布局（不再出现 "页中页"），移除技术前言与 "Reachable: \\.\pipe\…" 一行，只有在 Sloth 实际连接时才显示控制器错误 —— 核心未运行时页面保持整洁。
+- 规则屏幕重新设计为扁平布局（不再出现 "页中页"），移除技术前言与 "Reachable: \\.\pipe\…" 一行，只有在 Arch 实际连接时才显示控制器错误 —— 核心未运行时页面保持整洁。
 - 主页的 "Direct" 模式按钮已移除。主页的路由切换现在只有 Rule / Global（两段滑块），Proxies 诊断页仍保留 Direct 以完整展示。Onboarding 文案同步更新，俄文本地化将 "Connect" / "Disconnect" 改为 "Подключиться" / "Отключиться"。
 - 设置 → 信息卡片整理完毕。删除 "Developer: Nemu-x"（右上角的 GitHub 图标即唯一署名），删除冗余的 "Stable channel" 按钮，KPI 网格与动作按钮改为纵向布局，这样 "Check for updates" / "Download installer" / "Open release page" 在窄窗口下不会再互相重叠。
 - Windows 托盘图标现在通过 `getlantern/systray` 与打包的 `build/windows/icon.ico` 完整启用。菜单提供 Show Window / Hide Window / Connect（标题随状态切换为 Connect / Connecting… / Disconnect）/ Quit，对应设置中的 Close-to-Tray、Start Minimized、Launch on Startup 三项才真正与界面描述一致。
@@ -135,16 +135,16 @@
 - Settings → TUN 与流量调优现在通过 **配置…** 按钮在独立模态窗口（`.tunSettingsModal`）中打开，替代原来的长表单卡片。设置列只保留简洁的摘要行（Stack / Auto-route / Sniffer），TUN 配置项不再把后续设置挤出屏幕。
 - 完全移除 Rule 模式的自动选组。之前"锚点 / first-safe"启发式反复引入重连时的"粘连"（UI 瞬间落到 GLOBAL / Auto / 过期分组，触发前端 24 次 × 350 ms 的 refresh 循环，表现为连续多次断开—重连并伴随卡顿）。现在 Connect 只自动做一件事：如果当前配置有持久化的 `LastGoodGroup`（你对该配置最近一次 `SelectProxyGroup` 点击，保存在 `profiles.json` 中）并且该分组仍然出现在 `/proxies` 中，就把它复制回 `ActiveGroup`，让 Proxies 页面在重连、重启、traffic 模式切换、mode 切换时都继续高亮你自己的选择。若没有 sticky，则 `ActiveGroup` 保持为空 —— 首次 Connect 时 Proxies 页面显示 `—`，用户点一次分组即可；该点击会持久化到配置上，之后每次 Connect 由 sticky-restore 读回。内置 policy（`GLOBAL` / `DIRECT` / `REJECT` / `REJECT-DROP` / `PASS`）会被过滤，即使 sticky 意外指向它们也不会被恢复。切换配置会从新激活的配置重新水合 `LastGoodGroup`，配置 A 的 MainGroup 不会泄漏到配置 B。前端 warmup-nudge 现在只在 `/proxies` 返回空分组列表时轮询（真实的 warmup），而不再在 `activeGroup` 为空时轮询 —— 空 `activeGroup` 已经是合法的稳定状态。
 - 裸订阅 fallback 现在写入 `MATCH,Manual`（`select` 分组，首项为 `Auto` 后接全部 provider 节点）而不是 `MATCH,Auto`。默认路由仍然经由 `Auto`（Manual → Auto → url-test），但用户可以在 Manual 中点选具体节点而不会触发 Mihomo 对 url-test 分组的 400。当订阅 / merge 模板提供真实分组时，`pruneFallbackAutoManualIfCustom` 会同时改写 MATCH,Auto 与 MATCH,Manual 指向自定义分组，旧的 merge 模板继续可用。
-- 修复一个重连回归：订阅 HTTP 请求临时失败（TUN 拉起时 fake-ip 超时、源站 5xx、强制门户、VPN 抖动）会在下一次 Connect 把正常的 full profile 悄悄降级成 Sloth 的裸 `sub1 + Manual` fallback —— 用户看到自己的真实分组（`♻️ Automatic`、`Nemu-X-*` provider）在会话中途消失并被 `Manual[COMPATIBLE]` 路由取代。`tryWriteMergedFullProfile` 现在在每次成功拉取后把原始订阅体写入 runtime dataDir 的 `subscription.cache.yaml`，当后续请求失败时直接回放它，重连继续使用真实 profile 直到下一次 full-profile 成功。裸 fallback 现在严格保留给"从未成功拉过订阅"的首次 Connect。
+- 修复一个重连回归：订阅 HTTP 请求临时失败（TUN 拉起时 fake-ip 超时、源站 5xx、强制门户、VPN 抖动）会在下一次 Connect 把正常的 full profile 悄悄降级成 Arch 的裸 `sub1 + Manual` fallback —— 用户看到自己的真实分组（`♻️ Automatic`、`Nemu-X-*` provider）在会话中途消失并被 `Manual[COMPATIBLE]` 路由取代。`tryWriteMergedFullProfile` 现在在每次成功拉取后把原始订阅体写入 runtime dataDir 的 `subscription.cache.yaml`，当后续请求失败时直接回放它，重连继续使用真实 profile 直到下一次 full-profile 成功。裸 fallback 现在严格保留给"从未成功拉过订阅"的首次 Connect。
 - Connect 时的订阅体读取改为 cache-first。之前每次 Connect 都会在关键路径上以最长 50 s 超时阻塞抓取顶层订阅 YAML —— 如果上游慢 / 抖，Connect 就会挂住几秒，尽管 Mihomo 本可以立即用最近一次成功的 body 启动。`tryWriteMergedFullProfile` 现在优先读取 `subscription.cache.yaml`，并在后台调度一次刷新（按 dataDir 使用 `inflightSubscriptionBGFetch` 去重）以供下一次 Connect。"Refresh subscription"（手动 + 定时自动更新）仍会阻塞抓取并更新缓存，所以刷新触发的重连仍能拿到新 body。只有某个 profile 的首次 Connect（或 Clear Cache 之后）才继续在网络上阻塞。这恢复了多层自动选组实验之前的"瞬时重连"行为，也消除了"时快时慢"的抖动。
 - Settings 页布局收紧：Info / 更新卡片现在嵌入到两列的 `settingsGridCompact` 中，与 Data & Diagnostics 并列，而不是在其下方独占整整第三行 —— 在 1200×820 下无需滚动即可完整显示。
 - 日志尾部读取现在会在 `service_latest.log` 缺失时回退到最新的已轮转 `service_*.log`（如果核心在轮转中被杀，flexi_logger 只会留下时间戳文件），因此经历过轮转的会话不会再让 Export Diagnostics Bundle 只返回 "no runtime log file found"。核心启动时的 debug 日志现在也会记录传给特权服务的实际 `logDir` —— 下次再有"服务日志缺失"的反馈，从单个 debug 文件即可定位。
 - 新增对 `mieru://` 与 `mierus://` 订阅 URI 的解析（协议：https://github.com/enfein/mieru）。解析器覆盖 Mihomo `mieru` 代理的完整字段面 —— `server`、`port`（含 `port-range`）、`username`、`password`、`transport`、`udp`、`handshake-mode`、`multiplexing`，因此把 `mieru` 链接粘贴到 Proxies 导入框就能直接生成可用的代理条目，无需手动改 YAML。
-- macOS：原生菜单栏托盘，嵌入 `trayicons/mono.png`；Wails 构建默认启用 CGO；关闭到托盘时 Dock **退出**行为一致；托盘菜单扩展（导航 / 模式 / 流量）；CI 在打包前检查 `mono.png`。Windows 发布流程在 `desktop:resources` 后校验 `build/windows/icon.ico` 与同步的 `trayicons/sloth.png`。
+- macOS：原生菜单栏托盘，嵌入 `trayicons/mono.png`；Wails 构建默认启用 CGO；关闭到托盘时 Dock **退出**行为一致；托盘菜单扩展（导航 / 模式 / 流量）；CI 在打包前检查 `mono.png`。Windows 发布流程在 `desktop:resources` 后校验 `build/windows/icon.ico` 与同步的 `trayicons/arch.png`。
 
 ---
 
-## Sloth Clash desktop `0.2.1` — 2026-04-22
+## Arch Clash desktop `0.2.1` — 2026-04-22
 
 ### English
 
@@ -172,26 +172,26 @@
 
 ---
 
-## Sloth Clash desktop `0.1.0` — 2026-04-19
+## Arch Clash desktop `0.1.0` — 2026-04-19
 
 ### English
 
-- First snapshot of the **Wails + Go + React** desktop app under `apps/sloth-clash-desktop`.
-- **Prebuild** targets only the Wails tree (no `src-tauri`); service EXEs are pulled from [sloth-clash-service-ipc releases](https://github.com/Nemu-x/sloth-clash-service-ipc/releases).
+- First snapshot of the **Wails + Go + React** desktop app under `apps/arch-clash-desktop`.
+- **Prebuild** targets only the Wails tree (no `src-tauri`); service EXEs are pulled from [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases).
 - ESLint: separate profile for Vite config; relaxed `import-x` for `App.tsx` → `build/appicon.png`.
 - First-run spotlight onboarding, GitHub release update checks (Windows in-place installer), optional NSIS desktop shortcut.
 
 ### Русский
 
-- Первый снимок десктопа **Wails + Go + React** в `apps/sloth-clash-desktop`.
-- **Prebuild** пишет только в дерево Wails (без `src-tauri`); сервисные `.exe` качаются с [релизов sloth-clash-service-ipc](https://github.com/Nemu-x/sloth-clash-service-ipc/releases).
+- Первый снимок десктопа **Wails + Go + React** в `apps/arch-clash-desktop`.
+- **Prebuild** пишет только в дерево Wails (без `src-tauri`); сервисные `.exe` качаются с [релизов arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc/releases).
 - ESLint: отдельный профиль для `vite.config.ts`; ослаблен резолв импорта иконки в `App.tsx`.
 - Онбординг (spotlight), проверка обновлений с GitHub, опциональный ярлык на рабочем столе в установщике.
 
 ### 中文
 
-- 首个 **Wails + Go + React** 桌面应用快照（`apps/sloth-clash-desktop`）。
-- **Prebuild** 仅面向 Wails 目录（无 `src-tauri`）；Windows 服务程序从 [sloth-clash-service-ipc 发行版](https://github.com/Nemu-x/sloth-clash-service-ipc/releases) 拉取。
+- 首个 **Wails + Go + React** 桌面应用快照（`apps/arch-clash-desktop`）。
+- **Prebuild** 仅面向 Wails 目录（无 `src-tauri`）；Windows 服务程序从 [arch-clash-service-ipc 发行版](https://github.com/Nemu-x/arch-clash-service-ipc/releases) 拉取。
 - ESLint：为 Vite 配置单独规则；`App.tsx` 对 `build/appicon.png` 的导入不再被 `import-x` 拦截。
 - 首次使用引导、GitHub 更新检测、安装程序可选桌面快捷方式。
 

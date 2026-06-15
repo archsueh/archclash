@@ -1,5 +1,5 @@
-# Builds Sloth Clash desktop for Windows, macOS (Apple Silicon + Intel), and Linux.
-# Service binaries: https://github.com/Nemu-x/sloth-clash-service-ipc/releases
+# Builds Arch Clash desktop for Windows, macOS (Apple Silicon + Intel), and Linux.
+# Service binaries: https://github.com/Nemu-x/arch-clash-service-ipc/releases
 # Run: workflow_dispatch or push tag v* for the full release artifact set.
 
 name: Desktop artifacts
@@ -27,7 +27,7 @@ jobs:
         with:
           go-version: '1.26.x'
           cache: true
-          cache-dependency-path: apps/sloth-clash-desktop/go.sum
+          cache-dependency-path: apps/arch-clash-desktop/go.sum
 
       - uses: actions/setup-node@v4
         with:
@@ -47,16 +47,16 @@ jobs:
       - name: Verify Windows tray icon (go:embed build/windows/icon.ico)
         shell: pwsh
         run: |
-          $ico = "apps/sloth-clash-desktop/build/windows/icon.ico"
+          $ico = "apps/arch-clash-desktop/build/windows/icon.ico"
           if (-not (Test-Path $ico)) {
             throw "Missing $ico — ensure copy:desktop-appicon + icons:windows ran (desktop:resources)."
           }
           if ((Get-Item $ico).Length -lt 64) {
             throw "$ico exists but is suspiciously small."
           }
-          $sloth = "apps/sloth-clash-desktop/trayicons/sloth.png"
-          if (-not (Test-Path $sloth)) {
-            throw "Missing $sloth — sync-desktop-packaging should copy appicon after prebuild."
+          $arch = "apps/arch-clash-desktop/trayicons/arch.png"
+          if (-not (Test-Path $arch)) {
+            throw "Missing $arch — sync-desktop-packaging should copy appicon after prebuild."
           }
 
       - name: Wails build (windows/amd64 + NSIS)
@@ -66,19 +66,19 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          $installer = Get-ChildItem "apps/sloth-clash-desktop/build/bin" -Filter "*-installer.exe" | Select-Object -First 1
+          $installer = Get-ChildItem "apps/arch-clash-desktop/build/bin" -Filter "*-installer.exe" | Select-Object -First 1
           if (-not $installer) { throw "Windows installer .exe not found in build/bin" }
           # Raw installer .exe — the in-app updater downloads this directly (must
           # contain "installer" + "amd64" so pickWindowsInstallerAsset matches).
-          Copy-Item $installer.FullName "dist/SlothClash-windows-amd64-installer.exe" -Force
-          Compress-Archive -Path $installer.FullName -DestinationPath "dist/sloth-clash-windows-amd64-installer.zip" -Force
+          Copy-Item $installer.FullName "dist/ArchClash-windows-amd64-installer.exe" -Force
+          Compress-Archive -Path $installer.FullName -DestinationPath "dist/arch-clash-windows-amd64-installer.zip" -Force
 
       - uses: actions/upload-artifact@v4
         with:
           name: release-windows-amd64
           path: |
-            dist/SlothClash-windows-amd64-installer.exe
-            dist/sloth-clash-windows-amd64-installer.zip
+            dist/ArchClash-windows-amd64-installer.exe
+            dist/arch-clash-windows-amd64-installer.zip
 
   windows-arm64:
     runs-on: windows-latest
@@ -89,7 +89,7 @@ jobs:
         with:
           go-version: '1.26.x'
           cache: true
-          cache-dependency-path: apps/sloth-clash-desktop/go.sum
+          cache-dependency-path: apps/arch-clash-desktop/go.sum
 
       - uses: actions/setup-node@v4
         with:
@@ -109,16 +109,16 @@ jobs:
       - name: Verify Windows tray icon (go:embed build/windows/icon.ico)
         shell: pwsh
         run: |
-          $ico = "apps/sloth-clash-desktop/build/windows/icon.ico"
+          $ico = "apps/arch-clash-desktop/build/windows/icon.ico"
           if (-not (Test-Path $ico)) {
             throw "Missing $ico — ensure copy:desktop-appicon + icons:windows ran (desktop:resources)."
           }
           if ((Get-Item $ico).Length -lt 64) {
             throw "$ico exists but is suspiciously small."
           }
-          $sloth = "apps/sloth-clash-desktop/trayicons/sloth.png"
-          if (-not (Test-Path $sloth)) {
-            throw "Missing $sloth — sync-desktop-packaging should copy appicon after prebuild."
+          $arch = "apps/arch-clash-desktop/trayicons/arch.png"
+          if (-not (Test-Path $arch)) {
+            throw "Missing $arch — sync-desktop-packaging should copy appicon after prebuild."
           }
 
       - name: Wails build (windows/arm64 + NSIS)
@@ -133,18 +133,18 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path dist | Out-Null
-          $installer = Get-ChildItem "apps/sloth-clash-desktop/build/bin" -Filter "*-installer.exe" | Select-Object -First 1
+          $installer = Get-ChildItem "apps/arch-clash-desktop/build/bin" -Filter "*-installer.exe" | Select-Object -First 1
           if (-not $installer) { throw "Windows installer .exe not found in build/bin" }
-          Copy-Item $installer.FullName "dist/SlothClash-windows-arm64-installer.exe" -Force
-          Compress-Archive -Path $installer.FullName -DestinationPath "dist/sloth-clash-windows-arm64-installer.zip" -Force
+          Copy-Item $installer.FullName "dist/ArchClash-windows-arm64-installer.exe" -Force
+          Compress-Archive -Path $installer.FullName -DestinationPath "dist/arch-clash-windows-arm64-installer.zip" -Force
 
       - uses: actions/upload-artifact@v4
         if: steps.pack_windows_arm64.outcome == 'success'
         with:
           name: release-windows-arm64
           path: |
-            dist/SlothClash-windows-arm64-installer.exe
-            dist/sloth-clash-windows-arm64-installer.zip
+            dist/ArchClash-windows-arm64-installer.exe
+            dist/arch-clash-windows-arm64-installer.zip
 
   darwin-arm64:
     runs-on: macos-14
@@ -155,7 +155,7 @@ jobs:
         with:
           go-version: '1.26.x'
           cache: true
-          cache-dependency-path: apps/sloth-clash-desktop/go.sum
+          cache-dependency-path: apps/arch-clash-desktop/go.sum
 
       - uses: actions/setup-node@v4
         with:
@@ -170,7 +170,7 @@ jobs:
         run: pnpm run desktop:resources
 
       - name: Verify macOS tray mono icon (go:embed)
-        run: test -f apps/sloth-clash-desktop/trayicons/mono.png
+        run: test -f apps/arch-clash-desktop/trayicons/mono.png
 
       - name: Wails build (darwin/arm64)
         run: pnpm run desktop:build:darwin:arm64
@@ -181,7 +181,7 @@ jobs:
       - name: Pack macOS arm64 artifact
         run: |
           mkdir -p dist
-          cp apps/sloth-clash-desktop/build/bin/*.dmg dist/ || true
+          cp apps/arch-clash-desktop/build/bin/*.dmg dist/ || true
 
       - uses: actions/upload-artifact@v4
         with:
@@ -197,7 +197,7 @@ jobs:
         with:
           go-version: '1.26.x'
           cache: true
-          cache-dependency-path: apps/sloth-clash-desktop/go.sum
+          cache-dependency-path: apps/arch-clash-desktop/go.sum
 
       - uses: actions/setup-node@v4
         with:
@@ -212,7 +212,7 @@ jobs:
         run: pnpm run desktop:resources
 
       - name: Verify macOS tray mono icon (go:embed)
-        run: test -f apps/sloth-clash-desktop/trayicons/mono.png
+        run: test -f apps/arch-clash-desktop/trayicons/mono.png
 
       - name: Wails build (darwin/amd64)
         id: wails_darwin_amd64
@@ -231,7 +231,7 @@ jobs:
         if: steps.pack_darwin_amd64.outcome == 'success'
         run: |
           mkdir -p dist
-          cp apps/sloth-clash-desktop/build/bin/*.dmg dist/ || true
+          cp apps/arch-clash-desktop/build/bin/*.dmg dist/ || true
 
       - uses: actions/upload-artifact@v4
         if: steps.pack_darwin_amd64_dist.outcome == 'success'
@@ -248,7 +248,7 @@ jobs:
         with:
           go-version: '1.26.x'
           cache: true
-          cache-dependency-path: apps/sloth-clash-desktop/go.sum
+          cache-dependency-path: apps/arch-clash-desktop/go.sum
 
       - uses: actions/setup-node@v4
         with:
@@ -273,12 +273,12 @@ jobs:
       - name: Pack Linux artifact (preserve executable bits)
         run: |
           mkdir -p dist
-          tar -C apps/sloth-clash-desktop/build/bin -czf "dist/sloth-clash-linux-amd64.tar.gz" .
+          tar -C apps/arch-clash-desktop/build/bin -czf "dist/arch-clash-linux-amd64.tar.gz" .
 
       - uses: actions/upload-artifact@v4
         with:
           name: release-linux-amd64
-          path: dist/sloth-clash-linux-amd64.tar.gz
+          path: dist/arch-clash-linux-amd64.tar.gz
 
   release:
     if: startsWith(github.ref, 'refs/tags/')

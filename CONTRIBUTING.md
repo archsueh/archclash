@@ -1,6 +1,6 @@
-# Contributing to Sloth Clash
+# Contributing to Arch Clash
 
-Thanks for helping improve **Sloth Clash** — a **Wails + Go + React** desktop client around **Mihomo** (Clash Meta), hosted under `apps/sloth-clash-desktop/`.
+Thanks for helping improve **Arch Clash** — a **Wails + Go + React** desktop client around **Mihomo** (Clash Meta), hosted under `apps/arch-clash-desktop/`.
 
 ## Internationalization (i18n)
 
@@ -30,9 +30,9 @@ pnpm install --frozen-lockfile
 pnpm run desktop:resources
 ```
 
-This runs `prebuild`, Wails asset prep, Windows icon generation, and copies `packaging/windows/project.nsi` into the Wails build tree. Output goes under `apps/sloth-clash-desktop/build/` (gitignored).
+This runs `prebuild`, Wails asset prep, Windows icon generation, and copies `packaging/windows/project.nsi` into the Wails build tree. Output goes under `apps/arch-clash-desktop/build/` (gitignored).
 
-**Windows service binaries** are downloaded from [sloth-clash-service-ipc releases](https://github.com/Nemu-x/sloth-clash-service-ipc/releases); override tag with `SLOTH_SERVICE_RELEASE_TAG` if needed (see `scripts/prebuild.mjs`).
+**Windows service binaries** are downloaded from [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases); override tag with `SLOTH_SERVICE_RELEASE_TAG` if needed (see `scripts/prebuild.mjs`).
 
 **Mihomo core** is pinned to a specific release in `scripts/prebuild.mjs` (the `META_VERSION_PINNED` constant) for reproducible builds. To bump it: edit that constant, then run `pnpm run prebuild --force` to refresh the embedded sidecar. For a one-off build against a candidate version without editing the file, set `MIHOMO_CORE_VERSION` (e.g. `MIHOMO_CORE_VERSION=v1.19.27 pnpm run prebuild --force`).
 
@@ -42,7 +42,7 @@ This runs `prebuild`, Wails asset prep, Windows icon generation, and copies `pac
 pnpm run wails:dev
 ```
 
-Runs the Wails v2 dev server for `apps/sloth-clash-desktop` (frontend + Go backend).
+Runs the Wails v2 dev server for `apps/arch-clash-desktop` (frontend + Go backend).
 
 ## Production-like builds
 
@@ -73,7 +73,7 @@ pnpm run typecheck
 pnpm run format:check   # optional; or pnpm run format to write
 ```
 
-Go code: `cd apps/sloth-clash-desktop && go vet ./...` (and `gofmt` as you prefer).
+Go code: `cd apps/arch-clash-desktop && go vet ./...` (and `gofmt` as you prefer).
 
 ## Commits and PRs
 
@@ -86,6 +86,6 @@ CI: [.github/workflows/desktop-artifacts.yml](.github/workflows/desktop-artifact
 
 ## Releases & signed updates
 
-Cutting a release and managing the in-app update signing key (minisign) is documented in **[docs/UPDATES.md](docs/UPDATES.md)**. In short: bump `apps/sloth-clash-desktop/version.go` **and** `wails.json` `productVersion` together, push a non-prerelease tag `vX.Y.Z`, and CI publishes the installers plus a signed `SHA256SUMS`. The updater is **fail-closed**: unsigned or tampered artifacts are refused.
+Cutting a release and managing the in-app update signing key (minisign) is documented in **[docs/UPDATES.md](docs/UPDATES.md)**. In short: bump `apps/arch-clash-desktop/version.go` **and** `wails.json` `productVersion` together, push a non-prerelease tag `vX.Y.Z`, and CI publishes the installers plus a signed `SHA256SUMS`. The updater is **fail-closed**: unsigned or tampered artifacts are refused.
 
 Thank you for contributing.

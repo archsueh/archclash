@@ -7,7 +7,7 @@ on:
   pull_request:
   push:
     branches:
-      - init/SlothClash
+      - init/ArchClash
   schedule:
     - cron: '0 6 * * 1' # weekly, Monday 06:00 UTC
 
@@ -28,9 +28,9 @@ jobs:
         with:
           go-version: '1.26.x'
           cache: true
-          cache-dependency-path: apps/sloth-clash-desktop/go.sum
+          cache-dependency-path: apps/arch-clash-desktop/go.sum
       - name: govulncheck
-        working-directory: apps/sloth-clash-desktop
+        working-directory: apps/arch-clash-desktop
         run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
 
   frontend-audit:
