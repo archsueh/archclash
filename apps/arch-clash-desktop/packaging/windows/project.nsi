@@ -36,7 +36,7 @@ ManifestDPIAware true
 
 # Remember installer language; LangDLL picks a sensible default from the OS UI language.
 !define MUI_LANGDLL_REGISTRY_ROOT HKCU
-!define MUI_LANGDLL_REGISTRY_KEY "Software\Nemu-x\ArchClash\Installer"
+!define MUI_LANGDLL_REGISTRY_KEY "Software\archsueh\ArchClash\Installer"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "InstallerLanguage"
 
 !insertmacro MUI_RESERVEFILE_LANGDLL

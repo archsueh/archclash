@@ -7,6 +7,7 @@
     "web:dev": "vite",
     "web:build": "tsc --noEmit && vite build",
     "web:serve": "vite preview",
+    "branding:github": "node scripts/refresh-github-branding.mjs",
     "copy:desktop-appicon": "node scripts/copy-desktop-appicon.mjs",
     "optimize-tray-mono": "node scripts/optimize-tray-mono.mjs",
     "prebuild": "node scripts/prebuild.mjs",

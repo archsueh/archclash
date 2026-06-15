@@ -90,7 +90,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Support the project
 
-ArchClash is free and **GPL-3.0**. If it's useful to you, a crypto donation helps keep development and releases going. Thank you! 🦥
+ArchClash is free and **GPL-3.0**. If it's useful to you, a crypto donation helps keep development and releases going. Thank you!
 
 | Asset | Address |
 | --- | --- |

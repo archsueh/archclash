@@ -8,10 +8,10 @@
   "frontend:dev:watcher": "pnpm run dev",
   "frontend:dev:serverUrl": "auto",
   "author": {
-    "name": "Nemu-x"
+    "name": "archsueh"
   },
   "info": {
-    "companyName": "Nemu-x",
+    "companyName": "archsueh",
     "productName": "ArchClash",
     "productVersion": "0.6.0",
     "copyright": "GPL-3.0",
