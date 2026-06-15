@@ -2,6 +2,7 @@ import { type CSSProperties, type Ref } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import type { main } from '../api/models'
+import connectCatIcon from '../assets/images/connect-cat.png'
 import { FlagMark } from '../components/FlagMark'
 import { formatSpeedKbps } from '../utils/format'
 import {
@@ -277,11 +278,20 @@ export function HomePage({
               disabled={connectBusy}
               onClick={onConnectClick}
             >
-              {connectionStatus === 'connected'
-                ? t('ui.home.disconnect')
-                : connectBusy
-                  ? '…'
-                  : t('ui.home.connect')}
+              <img
+                className="connectBtnCat"
+                src={connectCatIcon}
+                alt=""
+                aria-hidden
+                draggable={false}
+              />
+              <span className="connectBtnLabel">
+                {connectionStatus === 'connected'
+                  ? t('ui.home.disconnect')
+                  : connectBusy
+                    ? '…'
+                    : t('ui.home.connect')}
+              </span>
             </button>
             <div className="statusLine statusLineSolo protectedLine">
               {showProtectedBadge ? (

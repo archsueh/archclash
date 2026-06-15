@@ -975,6 +975,11 @@
 }
 
 .connectBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   width: 180px;
   height: 180px;
   border-radius: 50%;
@@ -991,6 +996,26 @@
     transform 140ms ease,
     color 180ms ease,
     opacity 140ms ease;
+}
+
+.connectBtnCat {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
+  opacity: 0.2;
+  pointer-events: none;
+  user-select: none;
+  filter: brightness(0) invert(1);
+  transform: translateY(-6%);
+}
+
+.connectBtnLabel {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.28);
 }
 
 .connectBtn:hover {
