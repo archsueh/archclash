@@ -58,7 +58,7 @@ type Profile struct {
 	MergeTemplate             string `json:"mergeTemplate,omitempty"`             // Extend config YAML
 	RulesTemplate             string `json:"rulesTemplate,omitempty"`             // Rules editor YAML (prepend/append/delete)
 	ProxyTemplate             string `json:"proxyTemplate,omitempty"`             // Proxy groups editor YAML (prepend/append/delete)
-	ScriptTemplate            string `json:"scriptTemplate,omitempty"`            // Mihomo Party–style override.js (main(config) → config)
+	ScriptTemplate            string `json:"scriptTemplate,omitempty"`            // Per-profile override script: function main(config) { return config; }
 	SkipAutoConfig            bool   `json:"skipAutoConfig,omitempty"`            // after manual config.yaml edit, skip regeneration on connect
 	// LastGoodGroup remembers the user's last manually picked proxy group
 	// for this specific profile. It is the authoritative source for the

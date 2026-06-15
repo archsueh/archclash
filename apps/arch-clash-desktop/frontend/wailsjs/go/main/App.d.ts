@@ -55,6 +55,8 @@ export function GetTunStatus(): Promise<main.ServiceState>
 
 export function GetUpdateState(): Promise<main.UpdateState>
 
+export function ImportFromClashParty(): Promise<main.AppState>
+
 export function ImportProfileFromText(
   arg1: string,
   arg2: string,
@@ -64,8 +66,6 @@ export function ImportProfileFromURL(
   arg1: string,
   arg2: string,
 ): Promise<main.AppState>
-
-export function ImportFromClashParty(): Promise<main.AppState>
 
 export function InstallService(): Promise<main.TunSetupResult>
 
@@ -118,6 +118,8 @@ export function SetAppAutoUpdateEnabled(
 
 export function SetCloseToTrayPreference(arg1: boolean): Promise<main.AppState>
 
+export function SetDnsSmartFallback(arg1: boolean): Promise<main.DesktopPrefs>
+
 export function SetHwidEnabled(arg1: boolean): Promise<main.DesktopPrefs>
 
 export function SetLaunchOnStartupPreference(arg1: boolean): Promise<void>
@@ -143,6 +145,11 @@ export function SetProfileProxyTemplate(
 ): Promise<main.AppState>
 
 export function SetProfileRulesTemplate(
+  arg1: string,
+  arg2: string,
+): Promise<main.AppState>
+
+export function SetProfileScriptTemplate(
   arg1: string,
   arg2: string,
 ): Promise<main.AppState>

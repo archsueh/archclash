@@ -1054,6 +1054,46 @@ func (a *App) SetProfileProxyTemplate(profileID string, template string) (AppSta
 	return a.GetAppState(), nil
 }
 
+// SetProfileScriptTemplate stores a per-profile override script (main(config) → config).
+// Empty string clears the script. This is user-owned logic — not shipped by ArchClash.
+func (a *App) SetProfileScriptTemplate(profileID string, template string) (AppState, error) {
+	profileID = strings.TrimSpace(profileID)
+	if profileID == "" {
+		return a.GetAppState(), errors.New("profile id is required")
+	}
+	a.mu.Lock()
+	active := false
+	connected := a.state.Connection.Status == "connected"
+	found := false
+	for i := range a.profiles {
+		if a.profiles[i].ID != profileID {
+			continue
+		}
+		found = true
+		a.profiles[i].ScriptTemplate = template
+		a.profiles[i].SkipAutoConfig = false
+		a.profiles[i].LastUpdated = time.Now().Unix()
+		break
+	}
+	if !found {
+		a.mu.Unlock()
+		return a.GetAppState(), errors.New("profile not found")
+	}
+	a.state.Profile.Profiles = a.profiles
+	a.state.UpdatedAt = time.Now().Unix()
+	active = a.state.Profile.ActiveProfileID == profileID
+	if err := a.persistProfilesLocked(); err != nil {
+		a.mu.Unlock()
+		return a.GetAppState(), err
+	}
+	a.mu.Unlock()
+	if active && connected {
+		go a.reconnectActiveProfile()
+	}
+	a.emitAppStateChanged()
+	return a.GetAppState(), nil
+}
+
 // SetProfileRulesTemplate stores rules editor YAML (separate from extend config).
 func (a *App) SetProfileRulesTemplate(profileID string, template string) (AppState, error) {
 	profileID = strings.TrimSpace(profileID)

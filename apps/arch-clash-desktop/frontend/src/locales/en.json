@@ -52,7 +52,7 @@
     },
     "profilesUpdates": "Profiles & Updates",
     "importFromClashParty": "Import from Clash Party",
-    "importFromClashPartyHint": "Subscriptions + active override script (mihomo-party)",
+    "importFromClashPartyHint": "Migrates your mihomo-party data into profiles — does not ship rules to other users",
     "importFromClashPartyOk": "Imported from Clash Party",
     "dataDiag": "Data & Diagnostics",
     "logLevel": "Log level",
@@ -181,7 +181,14 @@
         "advanced": "Advanced",
         "extendConfig": "Extend config",
         "proxyGroups": "Proxy groups",
+        "overrideScript": "Override script",
         "editFile": "Edit file"
+      },
+      "scriptModal": {
+        "title": "Override script",
+        "blurb": "Applies only to this profile at runtime merge. Define function main(config) { return config; } to rewrite rules, groups, DNS, etc. Leave empty to skip.",
+        "editor": "override.js",
+        "resetScaffold": "Reset scaffold"
       },
       "importModal": {
         "tabUrl": "Subscription URL",

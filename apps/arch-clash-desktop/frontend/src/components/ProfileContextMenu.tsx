@@ -19,6 +19,7 @@ export function ProfileContextMenu({
   onOpenExtendConfig,
   onOpenProxyGroups,
   onOpenEditFile,
+  onOpenOverrideScript,
 }: {
   target: ProfileMenuTarget | null
   // The full profile record (or null) — needed to know if the URL is set and
@@ -32,6 +33,7 @@ export function ProfileContextMenu({
   onOpenExtendConfig: (id: string, name: string) => void
   onOpenProxyGroups: (id: string, name: string) => void
   onOpenEditFile: (id: string, name: string) => void
+  onOpenOverrideScript: (id: string, name: string) => void
 }) {
   const { t } = useTranslation()
   // Hooks must run unconditionally — declare them before the early return.
@@ -145,6 +147,13 @@ export function ProfileContextMenu({
         onClick={() => onOpenProxyGroups(target.id, target.name)}
       >
         {t('ui.profiles.contextMenu.proxyGroups')}
+      </button>
+      <button
+        type="button"
+        className="ctxItem ctxItemSub"
+        onClick={() => onOpenOverrideScript(target.id, target.name)}
+      >
+        {t('ui.profiles.contextMenu.overrideScript')}
       </button>
       <button
         type="button"

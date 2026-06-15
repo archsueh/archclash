@@ -6,6 +6,7 @@ type MonacoYamlEditorProps = {
   onChange: (value: string) => void
   className?: string
   height?: string
+  language?: 'yaml' | 'javascript'
 }
 
 export function MonacoYamlEditor({
@@ -13,14 +14,15 @@ export function MonacoYamlEditor({
   onChange,
   className,
   height = '46vh',
+  language = 'yaml',
 }: MonacoYamlEditorProps) {
   const MonacoEditor = Editor as unknown as ComponentType<any>
   const wrapClass = `${className ? `${className} ` : ''}allowSelect monacoEditorHost`
   return (
     <div className={wrapClass}>
       <MonacoEditor
-        defaultLanguage="yaml"
-        language="yaml"
+        defaultLanguage={language}
+        language={language}
         value={value}
         onChange={(next: string | undefined) => onChange(String(next ?? ''))}
         options={{

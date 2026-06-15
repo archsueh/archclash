@@ -39,6 +39,8 @@ type DesktopPrefs struct {
 	AppUpdate AppUpdateSettings `json:"appUpdate"`
 	// LogLevel is the Mihomo core log level (warning/info/error/debug). Default warning.
 	LogLevel string `json:"logLevel,omitempty"`
+	// DnsSmartFallback fills empty DNS fallback lists at runtime. nil/true → on; false → skip.
+	DnsSmartFallback *bool `json:"dnsSmartFallback,omitempty"`
 	// Lang is the current UI language ("en"/"ru"/"zh"/""). Frontend pushes
 	// this on i18n init / change so the native tray menu can localize its
 	// labels without a separate IPC roundtrip on each redraw.
@@ -179,6 +181,26 @@ func normalizeFindProcessMode(v string) string {
 	default:
 		return ""
 	}
+}
+
+func dnsSmartFallbackEnabled() bool {
+	p := currentDesktopPrefs().DnsSmartFallback
+	if p == nil {
+		return true
+	}
+	return *p
+}
+
+// SetDnsSmartFallback toggles automatic DNS fallback injection in the runtime overlay.
+func (a *App) SetDnsSmartFallback(enabled bool) DesktopPrefs {
+	prefsMu.Lock()
+	v := enabled
+	prefsCurrent.DnsSmartFallback = &v
+	snapshot := prefsCurrent
+	_ = saveDesktopPrefsLocked(snapshot)
+	prefsMu.Unlock()
+	a.triggerRuntimeReloadForPrefs()
+	return snapshot
 }
 
 func effectiveLogLevel() string {

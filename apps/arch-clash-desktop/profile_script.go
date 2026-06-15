@@ -8,8 +8,8 @@ import (
 	"github.com/dop251/goja"
 )
 
-// applyProfileScript runs a Mihomo Party–style override script against doc.
-// Scripts must define `function main(config) { ... return config; }`.
+// applyProfileScript runs a per-profile override script against doc.
+// Scripts must define `function main(config) { ... return config; }` (Mihomo Party compatible).
 func applyProfileScript(doc map[string]any, script string) error {
 	script = strings.TrimSpace(script)
 	if script == "" || doc == nil {

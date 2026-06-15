@@ -56,6 +56,7 @@ export function SettingsPage({
   onSetLang,
   onSetSetting,
   onSetLogLevel,
+  onSetDnsSmartFallback,
   onSetLaunchOnStartup,
   onInstallService,
   onEnsureTun,
@@ -92,6 +93,7 @@ export function SettingsPage({
     value: CompactSettings[K],
   ) => void
   onSetLogLevel: (level: CompactSettings['logLevel']) => void
+  onSetDnsSmartFallback: (next: boolean) => void
   onSetLaunchOnStartup: (next: boolean) => void
   onInstallService: () => void
   onEnsureTun: () => void
@@ -236,7 +238,7 @@ export function SettingsPage({
                 checked={settings.dnsSmartFallback}
                 label={t('settings.smartDns')}
                 onToggle={() =>
-                  onSetSetting('dnsSmartFallback', !settings.dnsSmartFallback)
+                  onSetDnsSmartFallback(!settings.dnsSmartFallback)
                 }
               />
             </div>

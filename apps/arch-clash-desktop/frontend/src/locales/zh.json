@@ -52,7 +52,7 @@
     },
     "profilesUpdates": "配置与更新",
     "importFromClashParty": "从 Clash Party 导入",
-    "importFromClashPartyHint": "导入订阅与当前 override 脚本（mihomo-party）",
+    "importFromClashPartyHint": "仅迁移你的 mihomo-party 数据到对应配置，不修改他人规则",
     "importFromClashPartyOk": "已从 Clash Party 导入",
     "dataDiag": "数据与诊断",
     "logLevel": "日志级别",
@@ -181,7 +181,14 @@
         "advanced": "高级",
         "extendConfig": "扩展配置",
         "proxyGroups": "代理分组",
+        "overrideScript": "覆写脚本",
         "editFile": "编辑文件"
+      },
+      "scriptModal": {
+        "title": "覆写脚本",
+        "blurb": "仅作用于当前配置的运行时合并结果。需定义 function main(config) { return config; }，可改写规则、分组、DNS 等。留空则不执行。",
+        "editor": "override.js",
+        "resetScaffold": "重置模板"
       },
       "importModal": {
         "tabUrl": "订阅 URL",

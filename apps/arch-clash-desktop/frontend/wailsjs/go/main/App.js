@@ -98,16 +98,16 @@ export function GetUpdateState() {
   return window['go']['main']['App']['GetUpdateState']()
 }
 
+export function ImportFromClashParty() {
+  return window['go']['main']['App']['ImportFromClashParty']()
+}
+
 export function ImportProfileFromText(arg1, arg2) {
   return window['go']['main']['App']['ImportProfileFromText'](arg1, arg2)
 }
 
 export function ImportProfileFromURL(arg1, arg2) {
   return window['go']['main']['App']['ImportProfileFromURL'](arg1, arg2)
-}
-
-export function ImportFromClashParty() {
-  return window['go']['main']['App']['ImportFromClashParty']()
 }
 
 export function InstallService() {
@@ -194,6 +194,10 @@ export function SetCloseToTrayPreference(arg1) {
   return window['go']['main']['App']['SetCloseToTrayPreference'](arg1)
 }
 
+export function SetDnsSmartFallback(arg1) {
+  return window['go']['main']['App']['SetDnsSmartFallback'](arg1)
+}
+
 export function SetHwidEnabled(arg1) {
   return window['go']['main']['App']['SetHwidEnabled'](arg1)
 }
@@ -224,6 +228,10 @@ export function SetProfileProxyTemplate(arg1, arg2) {
 
 export function SetProfileRulesTemplate(arg1, arg2) {
   return window['go']['main']['App']['SetProfileRulesTemplate'](arg1, arg2)
+}
+
+export function SetProfileScriptTemplate(arg1, arg2) {
+  return window['go']['main']['App']['SetProfileScriptTemplate'](arg1, arg2)
 }
 
 export function SetProxyNode(arg1, arg2) {

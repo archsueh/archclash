@@ -94,7 +94,9 @@ func ensureDefaultDNSForTun(m map[string]any) {
 		s := strings.ToLower(strings.TrimSpace(v))
 		respectRules = s == "true" || s == "1" || s == "yes" || s == "on"
 	}
-	ensureDNSFallback(dns)
+	if dnsSmartFallbackEnabled() {
+		ensureDNSFallback(dns)
+	}
 
 	if respectRules {
 		repair := true
@@ -123,9 +125,9 @@ func ensureDefaultDNSForTun(m map[string]any) {
 	m["dns"] = dns
 }
 
-// ensureDNSFallback fills empty Mihomo DNS fallback lists — a common Clash Party
-// pain point where override.js sets fallbacks but the merged YAML still ships
-// fallback: [] and AI / Apple auth domains fail intermittently.
+// ensureDNSFallback fills empty Mihomo DNS fallback lists when the user opts in
+// via Settings → Smart DNS fallback (dnsSmartFallback). Override scripts may
+// also set fallbacks; this only runs when the list is still empty.
 func ensureDNSFallback(dns map[string]any) {
 	if dns == nil {
 		return

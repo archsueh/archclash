@@ -203,6 +203,7 @@ export namespace main {
     mergeTemplate?: string
     rulesTemplate?: string
     proxyTemplate?: string
+    scriptTemplate?: string
     skipAutoConfig?: boolean
     lastGoodGroup?: string
 
@@ -225,6 +226,7 @@ export namespace main {
       this.mergeTemplate = source['mergeTemplate']
       this.rulesTemplate = source['rulesTemplate']
       this.proxyTemplate = source['proxyTemplate']
+      this.scriptTemplate = source['scriptTemplate']
       this.skipAutoConfig = source['skipAutoConfig']
       this.lastGoodGroup = source['lastGoodGroup']
     }
@@ -529,6 +531,7 @@ export namespace main {
     privacy: PrivacySettings
     appUpdate: AppUpdateSettings
     logLevel?: string
+    dnsSmartFallback?: boolean
     lang?: string
 
     static createFrom(source: any = {}) {
@@ -545,6 +548,7 @@ export namespace main {
         AppUpdateSettings,
       )
       this.logLevel = source['logLevel']
+      this.dnsSmartFallback = source['dnsSmartFallback']
       this.lang = source['lang']
     }
 

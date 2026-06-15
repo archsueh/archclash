@@ -17,6 +17,7 @@ export {
   SetProfileMergeTemplate,
   SetProfileProxyTemplate,
   SetProfileRulesTemplate,
+  SetProfileScriptTemplate,
   UpdateProfileInfo,
   WriteProfileConfig,
 } from '../../wailsjs/go/main/App'

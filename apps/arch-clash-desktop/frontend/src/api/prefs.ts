@@ -10,6 +10,7 @@ export {
   OnWindowBecameVisible,
   SetAppAutoUpdateEnabled,
   SetCloseToTrayPreference,
+  SetDnsSmartFallback,
   SetHwidEnabled,
   SetLaunchOnStartupPreference,
   SetLogLevel,

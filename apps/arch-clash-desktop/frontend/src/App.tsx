@@ -38,6 +38,7 @@ import {
   OnWindowBecameVisible,
   SetAppAutoUpdateEnabled,
   SetCloseToTrayPreference,
+  SetDnsSmartFallback,
   SetHwidEnabled,
   SetLaunchOnStartupPreference,
   SetLogLevel,
@@ -55,6 +56,7 @@ import {
   RefreshProfileSubscription,
   SetProfileAutoUpdate,
   SetProfileMergeTemplate,
+  SetProfileScriptTemplate,
   UpdateProfileInfo,
   WriteProfileConfig,
 } from './api/profile'
@@ -76,6 +78,7 @@ import { ProfileFileModal } from './components/ProfileFileModal'
 import { ProfileMergeModal } from './components/ProfileMergeModal'
 import { ProfileProxyModal } from './components/ProfileProxyModal'
 import { ProfileRulesModal } from './components/ProfileRulesModal'
+import { ProfileScriptModal } from './components/ProfileScriptModal'
 import { SettingsResetModal } from './components/SettingsResetModal'
 import { SidebarNav } from './components/SidebarNav'
 import { ToastHub } from './components/ToastHub'
@@ -103,6 +106,10 @@ import {
 import { HomePage } from './pages/Home'
 import { ProfilesPage } from './pages/Profiles'
 import { ProxiesPage } from './pages/Proxies'
+import {
+  DEFAULT_OVERRIDE_SCRIPT,
+  scriptTemplateFromProfile,
+} from './profileScript'
 // Heavy / rarely opened screens load lazily so the initial bundle stays
 // focused on Home + Proxies + Profiles (the path 90% of users follow).
 const AdvancedPage = lazy(() =>
@@ -231,6 +238,11 @@ function App() {
     id: string
     name: string
   } | null>(null)
+  const [profileScriptModal, setProfileScriptModal] = useState<{
+    id: string
+    name: string
+  } | null>(null)
+  const [scriptTemplateDraft, setScriptTemplateDraft] = useState('')
   const [profileEditInfo, setProfileEditInfo] = useState<{
     id: string
     name: string
@@ -244,7 +256,8 @@ function App() {
     profileMergeModal ||
       profileFileModal ||
       profileProxyModal ||
-      profileRulesModal,
+      profileRulesModal ||
+      profileScriptModal,
   )
   const [deleteProfileModal, setDeleteProfileModal] = useState<{
     id: string
@@ -446,6 +459,9 @@ function App() {
         setAppUpdateEnabled(rawAppUpd === false ? false : true)
         if (prefs?.logLevel) {
           setSetting('logLevel', normalizeLogLevelFromBackend(prefs.logLevel))
+        }
+        if (prefs?.dnsSmartFallback === false) {
+          setSetting('dnsSmartFallback', false)
         }
       } catch {
         /* ignore: prefs API unavailable */
@@ -877,6 +893,15 @@ function App() {
     setMergeTemplateDraft(raw.trim() ? raw : DEFAULT_MERGE_TEMPLATE)
     // Intentionally only when opening the modal — avoid overwriting edits on refresh.
   }, [profileMergeModal])
+
+  useEffect(() => {
+    if (!profileScriptModal) return
+    const raw = scriptTemplateFromProfile(
+      state?.profile?.profiles,
+      profileScriptModal.id,
+    )
+    setScriptTemplateDraft(raw.trim() ? raw : DEFAULT_OVERRIDE_SCRIPT)
+  }, [profileScriptModal])
 
   useEffect(() => {
     if (!profileEditInfo) return
@@ -1946,6 +1971,18 @@ function App() {
                   }
                 })()
               }}
+              onSetDnsSmartFallback={(next) => {
+                const prev = settings.dnsSmartFallback
+                setSetting('dnsSmartFallback', next)
+                void (async () => {
+                  try {
+                    await SetDnsSmartFallback(next)
+                  } catch (e: any) {
+                    setError(String(e))
+                    setSetting('dnsSmartFallback', prev)
+                  }
+                })()
+              }}
               onSetLaunchOnStartup={(next) => {
                 setSetting('launchOnStartup', next)
                 void (async () => {
@@ -2047,6 +2084,28 @@ function App() {
             setProfileMergeModal(null)
             setTunBanner(
               'Merge template saved. Reconnect if you are already connected.',
+            )
+          } catch (e: any) {
+            setError(String(e))
+          }
+          await refresh()
+        }}
+      />
+
+      <ProfileScriptModal
+        target={profileScriptModal}
+        value={scriptTemplateDraft}
+        onChange={setScriptTemplateDraft}
+        onResetScaffold={() => setScriptTemplateDraft(DEFAULT_OVERRIDE_SCRIPT)}
+        onClose={() => setProfileScriptModal(null)}
+        onSave={async (id) => {
+          setError('')
+          try {
+            const body = scriptTemplateDraft.trim()
+            await SetProfileScriptTemplate(id, body)
+            setProfileScriptModal(null)
+            setTunBanner(
+              'Override script saved. Reconnect if you are already connected.',
             )
           } catch (e: any) {
             setError(String(e))
@@ -2209,6 +2268,10 @@ function App() {
         onOpenEditFile={(id, name) => {
           setProfileMenu(null)
           setProfileFileModal({ id, name })
+        }}
+        onOpenOverrideScript={(id, name) => {
+          setProfileMenu(null)
+          setProfileScriptModal({ id, name })
         }}
       />
 

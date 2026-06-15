@@ -52,7 +52,7 @@
     },
     "profilesUpdates": "Профили и обновления",
     "importFromClashParty": "Импорт из Clash Party",
-    "importFromClashPartyHint": "Подписки и активный override-скрипт (mihomo-party)",
+    "importFromClashPartyHint": "Переносит ваши данные mihomo-party в профили — чужие правила не подставляются",
     "importFromClashPartyOk": "Импортировано из Clash Party",
     "dataDiag": "Данные и диагностика",
     "logLevel": "Уровень лога",
@@ -181,7 +181,14 @@
         "advanced": "Дополнительно",
         "extendConfig": "Расширить конфиг",
         "proxyGroups": "Группы прокси",
+        "overrideScript": "Override-скрипт",
         "editFile": "Редактировать файл"
+      },
+      "scriptModal": {
+        "title": "Override-скрипт",
+        "blurb": "Только для этого профиля при runtime-merge. Нужна function main(config) { return config; } — правила, группы, DNS и т.д. Пусто = не выполнять.",
+        "editor": "override.js",
+        "resetScaffold": "Сбросить шаблон"
       },
       "importModal": {
         "tabUrl": "URL подписки",
