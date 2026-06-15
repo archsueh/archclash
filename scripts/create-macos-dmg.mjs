@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
-const appDir = path.join(repoRoot, 'apps', 'arch-clash-desktop')
+const appDir = path.join(repoRoot, 'apps', 'archclash')
 const binDir = path.join(appDir, 'build', 'bin')
 const dmgBg = path.join(repoRoot, 'docs', 'dmg-background.png')
 

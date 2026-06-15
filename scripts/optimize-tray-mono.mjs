@@ -1,5 +1,5 @@
 /**
- * Normalizes apps/arch-clash-desktop/trayicons/mono.png for the macOS
+ * Normalizes apps/archclash/trayicons/mono.png for the macOS
  * status bar tray (template image).
  *
  * Why: drop a 2048x2048 source PNG with generous transparent margins in there
@@ -21,13 +21,7 @@ import sharp from 'sharp'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
 
-const target = path.join(
-  repoRoot,
-  'apps',
-  'arch-clash-desktop',
-  'trayicons',
-  'mono.png',
-)
+const target = path.join(repoRoot, 'apps', 'archclash', 'trayicons', 'mono.png')
 
 const svgSrc = path.join(repoRoot, 'docs', 'appicon.svg')
 const pngSrcPreferred = path.join(repoRoot, 'docs', 'appicon-main.png')

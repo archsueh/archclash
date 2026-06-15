@@ -16,16 +16,14 @@ import { log_info, log_success } from './utils.mjs'
 const SIZES = [16, 20, 24, 32, 40, 48, 64, 128, 256]
 
 export async function generateWindowsIcon() {
-  const root = path.join(process.cwd(), 'apps', 'arch-clash-desktop', 'build')
+  const root = path.join(process.cwd(), 'apps', 'archclash', 'build')
   const srcPng = path.join(root, 'appicon.png')
   const outIco = path.join(root, 'windows', 'icon.ico')
 
   try {
     await fs.access(srcPng)
   } catch {
-    log_info(
-      '[icon] skip: apps/arch-clash-desktop/build/appicon.png not found',
-    )
+    log_info('[icon] skip: apps/archclash/build/appicon.png not found')
     return
   }
 

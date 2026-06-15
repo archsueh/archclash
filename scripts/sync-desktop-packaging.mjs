@@ -16,7 +16,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 function findRepoRoot() {
   let d = process.cwd()
   for (let i = 0; i < 8; i++) {
-    const marker = path.join(d, 'apps', 'arch-clash-desktop', 'wails.json')
+    const marker = path.join(d, 'apps', 'archclash', 'wails.json')
     if (fs.existsSync(marker)) return d
     const p = path.dirname(d)
     if (p === d) break
@@ -26,7 +26,7 @@ function findRepoRoot() {
 }
 
 const repoRoot = findRepoRoot()
-const appDir = path.join(repoRoot, 'apps', 'arch-clash-desktop')
+const appDir = path.join(repoRoot, 'apps', 'archclash')
 const srcNsi = path.join(appDir, 'packaging', 'windows', 'project.nsi')
 const destNsi = path.join(
   appDir,

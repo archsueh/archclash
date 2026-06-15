@@ -90,10 +90,10 @@ const SIDECAR_HOST = target
     })()
 
 /** Wails desktop only — no src-tauri / Tauri workspace in this repo. */
-const desktopRoot = path.join(cwd, 'apps', 'arch-clash-desktop')
+const desktopRoot = path.join(cwd, 'apps', 'archclash')
 if (!fs.existsSync(desktopRoot)) {
   throw new Error(
-    `[prebuild] Missing ${desktopRoot}. Clone or add the Arch Wails app (apps/arch-clash-desktop).`,
+    `[prebuild] Missing ${desktopRoot}. Clone or add the ArchClash Wails app (apps/archclash).`,
   )
 }
 

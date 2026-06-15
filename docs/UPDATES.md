@@ -31,7 +31,7 @@ minisign -G -p archclash-updates.pub -s archclash-updates.key
 
 ### Embed the public key
 
-The trusted keys live in `apps/arch-clash-desktop/app_update_verify.go`:
+The trusted keys live in `apps/archclash/app_update_verify.go`:
 
 ```go
 var trustedUpdateKeys = []string{
@@ -55,7 +55,7 @@ The release job (`.github/workflows/desktop-artifacts.yml`) uses them to sign
 
 ## Cutting a release
 
-1. Bump the version (`apps/arch-clash-desktop/version.go` + desktop version).
+1. Bump the version (`apps/archclash/version.go` + desktop version).
 2. Push a tag `vX.Y.Z`. The **Desktop artifacts** workflow:
    - builds Windows installer `.exe` (exposed as a raw release asset),
      macOS `.dmg`, Linux `.tar.gz`;

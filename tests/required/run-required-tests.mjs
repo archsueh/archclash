@@ -106,7 +106,7 @@ async function optionalStep(title, command, args, cwd) {
 async function main() {
   const goBin = process.platform === 'win32' ? 'go.exe' : 'go'
   const pnpmBin = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm'
-  const desktopDir = path.join(repoRoot, 'apps', 'arch-clash-desktop')
+  const desktopDir = path.join(repoRoot, 'apps', 'archclash')
   const frontendDir = path.join(desktopDir, 'frontend')
   // Required smoke+build baseline before PR merge.
   await ensureDesktopEmbedDirsForGoTest(desktopDir)
@@ -133,7 +133,7 @@ async function main() {
     await step(
       'Desktop frontend production build',
       pnpmBin,
-      ['--dir', 'apps/arch-clash-desktop/frontend', 'run', 'build'],
+      ['--dir', 'apps/archclash/frontend', 'run', 'build'],
       repoRoot,
     )
   }
@@ -192,13 +192,7 @@ async function main() {
   await step(
     'Frontend type check',
     pnpmBin,
-    [
-      'exec',
-      'tsc',
-      '--noEmit',
-      '-p',
-      'apps/arch-clash-desktop/frontend/tsconfig.json',
-    ],
+    ['exec', 'tsc', '--noEmit', '-p', 'apps/archclash/frontend/tsconfig.json'],
     repoRoot,
   )
   console.log('\nPASS: required test gate')

@@ -4,7 +4,7 @@ import path from 'path'
 import { glob } from 'glob'
 
 const cwd = process.cwd()
-const desktopBuild = path.join(cwd, 'apps', 'arch-clash-desktop', 'build')
+const desktopBuild = path.join(cwd, 'apps', 'archclash', 'build')
 /** Windows/macOS: prebuild puts service binaries here (Wails bundle). */
 const resourcesDir = path.join(desktopBuild, 'resources')
 /** Linux: prebuild puts them under sidecar (see scripts/prebuild.mjs SERVICE_DIR). */

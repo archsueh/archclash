@@ -162,9 +162,9 @@ func mihomoSidecarSearchDirs() []string {
 	}
 	d := wd
 	for i := 0; i < 14; i++ {
-		// wails dev: cwd is often apps/arch-clash-desktop OR monorepo root
+		// wails dev: cwd is often apps/archclash OR monorepo root
 		add(filepath.Join(d, "build", "sidecar"))
-		add(filepath.Join(d, "apps", "arch-clash-desktop", "build", "sidecar"))
+		add(filepath.Join(d, "apps", "archclash", "build", "sidecar"))
 		parent := filepath.Dir(d)
 		if parent == d {
 			break

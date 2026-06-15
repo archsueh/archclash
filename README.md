@@ -24,7 +24,7 @@
 
 ## Overview
 
-ArchClash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository ships the **Wails** desktop shell (`apps/arch-clash-desktop`). The Windows **system service / IPC** layer lives in a separate project: [arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc) (release artifacts are consumed by `pnpm run prebuild`).
+ArchClash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository ships the **Wails** desktop shell (`apps/archclash`). The Windows **system service / IPC** layer lives in a separate project: [arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc) (release artifacts are consumed by `pnpm run prebuild`).
 
 ## Features (high level)
 
@@ -72,7 +72,7 @@ pnpm run desktop:resources   # mihomo sidecar, geo DBs, Arch service exes, Windo
 pnpm run wails:dev           # or: pnpm run wails:build
 ```
 
-`desktop:resources` writes under `apps/arch-clash-desktop/build/` (ignored by git). On Windows, **`pnpm run icons:windows`** is included there and refreshes **`build/windows/icon.ico`** from `build/appicon.png` so installers / shortcuts pick up the right icon.
+`desktop:resources` writes under `apps/archclash/build/` (ignored by git). On Windows, **`pnpm run icons:windows`** is included there and refreshes **`build/windows/icon.ico`** from `build/appicon.png` so installers / shortcuts pick up the right icon.
 
 ## CI
 

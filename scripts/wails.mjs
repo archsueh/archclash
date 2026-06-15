@@ -6,19 +6,19 @@ import { cwd } from 'node:process'
 function findRepoRoot() {
   let d = path.resolve(cwd())
   for (let i = 0; i < 10; i++) {
-    const marker = path.join(d, 'apps', 'arch-clash-desktop', 'wails.json')
+    const marker = path.join(d, 'apps', 'archclash', 'wails.json')
     if (fs.existsSync(marker)) return d
     const p = path.dirname(d)
     if (p === d) break
     d = p
   }
   throw new Error(
-    `[wails] Could not find ArchClash repo root (expected apps/arch-clash-desktop/wails.json). cwd=${cwd()}`,
+    `[wails] Could not find ArchClash repo root (expected apps/archclash/wails.json). cwd=${cwd()}`,
   )
 }
 
 const repoRoot = findRepoRoot()
-const appDir = path.join(repoRoot, 'apps', 'arch-clash-desktop')
+const appDir = path.join(repoRoot, 'apps', 'archclash')
 const args = process.argv.slice(2)
 const commandArgs = args.length > 0 ? args : ['dev']
 

@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="../apps/arch-clash-desktop/build/appicon.png" alt="ArchClash" width="128" />
+  <img src="../apps/archclash/build/appicon.png" alt="ArchClash" width="128" />
   <br />
   ArchClash
   <br />
@@ -25,7 +25,7 @@
 
 ## Обзор
 
-**ArchClash** — GUI под **GPL-3.0** вокруг **Mihomo** (Clash Meta). В этом репозитории — оболочка **Wails** (`apps/arch-clash-desktop`). Слой **системного сервиса / IPC** для Windows вынесен в отдельный проект: [arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc) (артефакты релизов подтягивает `pnpm run prebuild`).
+**ArchClash** — GUI под **GPL-3.0** вокруг **Mihomo** (Clash Meta). В этом репозитории — оболочка **Wails** (`apps/archclash`). Слой **системного сервиса / IPC** для Windows вынесен в отдельный проект: [arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc) (артефакты релизов подтягивает `pnpm run prebuild`).
 
 ## Возможности (кратко)
 
@@ -73,7 +73,7 @@ pnpm run desktop:resources
 pnpm run wails:dev
 ```
 
-Каталог `desktop:resources`: `apps/arch-clash-desktop/build/` (в git не входит). На Windows в цепочку входит **`pnpm run icons:windows`** — обновляет **`build/windows/icon.ico`** из `build/appicon.png`.
+Каталог `desktop:resources`: `apps/archclash/build/` (в git не входит). На Windows в цепочку входит **`pnpm run icons:windows`** — обновляет **`build/windows/icon.ico`** из `build/appicon.png`.
 
 ## CI
 

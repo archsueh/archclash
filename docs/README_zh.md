@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="../apps/arch-clash-desktop/build/appicon.png" alt="ArchClash" width="128" />
+  <img src="../apps/archclash/build/appicon.png" alt="ArchClash" width="128" />
   <br />
   ArchClash
   <br />
@@ -25,7 +25,7 @@
 
 ## 简介
 
-**ArchClash** 是基于 **GPL-3.0** 的 **Mihomo（Clash Meta）** 图形客户端。本仓库提供 **Wails** 桌面应用（`apps/arch-clash-desktop`）。Windows **系统服务 / IPC** 在独立仓库维护：[arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc)（构建时由 `pnpm run prebuild` 拉取发行文件）。
+**ArchClash** 是基于 **GPL-3.0** 的 **Mihomo（Clash Meta）** 图形客户端。本仓库提供 **Wails** 桌面应用（`apps/archclash`）。Windows **系统服务 / IPC** 在独立仓库维护：[arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc)（构建时由 `pnpm run prebuild` 拉取发行文件）。
 
 ## 功能概览
 
@@ -73,7 +73,7 @@ pnpm run desktop:resources
 pnpm run wails:dev
 ```
 
-`desktop:resources` 写入 `apps/arch-clash-desktop/build/`（不提交到 git）。在 Windows 上包含 **`pnpm run icons:windows`**，从 `build/appicon.png` 更新 **`build/windows/icon.ico`**。
+`desktop:resources` 写入 `apps/archclash/build/`（不提交到 git）。在 Windows 上包含 **`pnpm run icons:windows`**，从 `build/appicon.png` 更新 **`build/windows/icon.ico`**。
 
 ## CI
 

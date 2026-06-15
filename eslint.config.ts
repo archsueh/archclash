@@ -16,12 +16,10 @@ import tseslint from 'typescript-eslint'
 const importResolverProjects = ['./tsconfig.json']
 const desktopFrontendTsconfig = path.join(
   process.cwd(),
-  'apps/arch-clash-desktop/frontend/tsconfig.json',
+  'apps/archclash/frontend/tsconfig.json',
 )
 if (fs.existsSync(desktopFrontendTsconfig)) {
-  importResolverProjects.push(
-    './apps/arch-clash-desktop/frontend/tsconfig.json',
-  )
+  importResolverProjects.push('./apps/archclash/frontend/tsconfig.json')
 }
 
 export default defineConfig([
@@ -37,10 +35,7 @@ export default defineConfig([
   },
   {
     name: 'vite-config-no-react',
-    files: [
-      'vite.config.mts',
-      'apps/arch-clash-desktop/frontend/vite.config.ts',
-    ],
+    files: ['vite.config.mts', 'apps/archclash/frontend/vite.config.ts'],
     plugins: {
       js: eslintJS,
       'import-x': pluginImportX,
@@ -66,7 +61,7 @@ export default defineConfig([
       'scripts/**/*.mjs',
       'tests/required/**/*.mjs',
       'vite.config.mts',
-      'apps/arch-clash-desktop/frontend/vite.config.ts',
+      'apps/archclash/frontend/vite.config.ts',
     ],
 
     plugins: {
@@ -187,7 +182,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['apps/arch-clash-desktop/frontend/src/App.tsx'],
+    files: ['apps/archclash/frontend/src/App.tsx'],
     rules: {
       // Large UI shell: relax until split/refactor (blocks lint-staged otherwise).
       'import-x/no-unresolved': 'off',

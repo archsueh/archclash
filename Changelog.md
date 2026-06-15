@@ -25,21 +25,21 @@
 
 ### English
 
-- **pnpm / Wails frontend:** monorepo `pnpm-workspace.yaml` (root + `apps/arch-clash-desktop/frontend`), removed nested `frontend/pnpm-lock.yaml`, aligned desktop frontend deps with the root stack (React 19 / Vite 8 / TypeScript 6). The required-test gate runs `tsc` from the repo root so a single `pnpm install` is enough on fresh clones.
+- **pnpm / Wails frontend:** monorepo `pnpm-workspace.yaml` (root + `apps/archclash/frontend`), removed nested `frontend/pnpm-lock.yaml`, aligned desktop frontend deps with the root stack (React 19 / Vite 8 / TypeScript 6). The required-test gate runs `tsc` from the repo root so a single `pnpm install` is enough on fresh clones.
 - **Windows NSIS installer:** fixed inverted `taskkill` / `DetailPrint` messages, removed the extra “you may need to close the app” prompt before install, unified `tasklist` on `${PRODUCT_EXECUTABLE}`, clarified the “still running” abort text.
 - **Home UX:** while connected, the main button and “protected” row stay **green** unless `connection.health` is `broken`; warming/degraded no longer show “partial protection”, long “configuring…”, or “TUN — limited” for typical users (degraded/broken hints remain available via the home alert tooltip where applicable).
 - **Desktop (Go):** connections overview API, rule-provider refresh API, proxy latency API, runtime supervisor and related lifecycle / system-proxy / tray / state / subscription / profile plumbing (see git history on this branch for file-level detail).
 
 ### Русский
 
-- **pnpm / Wails frontend:** добавлен `pnpm-workspace.yaml` (корень + `apps/arch-clash-desktop/frontend`), удалён вложенный `frontend/pnpm-lock.yaml`, зависимости десктопного фронта выровнены с корнем (React 19 / Vite 8 / TypeScript 6). Обязательный тест запускает `tsc` из корня — на чистом клоне достаточно одного `pnpm install`.
+- **pnpm / Wails frontend:** добавлен `pnpm-workspace.yaml` (корень + `apps/archclash/frontend`), удалён вложенный `frontend/pnpm-lock.yaml`, зависимости десктопного фронта выровнены с корнем (React 19 / Vite 8 / TypeScript 6). Обязательный тест запускает `tsc` из корня — на чистом клоне достаточно одного `pnpm install`.
 - **Установщик Windows (NSIS):** исправлены перепутанные сообщения после `taskkill`, убран лишний `MessageBox` перед установкой, `tasklist` унифицирован по имени exe из `${PRODUCT_EXECUTABLE}`, уточнён текст при «процесс всё ещё запущен».
 - **Главный экран:** при `connected` кнопка и блок «защищено» остаются **зелёными**, пока здоровье не `broken`; состояния warming/degraded больше не показывают «частичную защиту», долгое «настраиваем…» и «TUN — ограничено» для обычного пользователя (подсказки degraded/broken по-прежнему могут быть в тултипе предупреждения на главной).
 - **Десктоп (Go):** API обзора соединений, обновления rule-provider, задержки прокси, супервизор рантайма и сопутствующие правки lifecycle / system proxy / трей / state / subscription / profiles (детали — по коммитам в ветке).
 
 ### 中文
 
-- **pnpm / Wails 前端：** 增加 `pnpm-workspace.yaml`（根目录与 `apps/arch-clash-desktop/frontend`），移除嵌套的 `frontend/pnpm-lock.yaml`，桌面前端依赖与根项目对齐（React 19 / Vite 8 / TypeScript 6）。必选测试从仓库根运行 `tsc`，全新克隆只需一次 `pnpm install`。
+- **pnpm / Wails 前端：** 增加 `pnpm-workspace.yaml`（根目录与 `apps/archclash/frontend`），移除嵌套的 `frontend/pnpm-lock.yaml`，桌面前端依赖与根项目对齐（React 19 / Vite 8 / TypeScript 6）。必选测试从仓库根运行 `tsc`，全新克隆只需一次 `pnpm install`。
 - **Windows NSIS 安装包：** 修正 `taskkill` 与日志文案颠倒、去掉安装前多余提示、`tasklist` 统一使用 `${PRODUCT_EXECUTABLE}` 对应的 exe 名。
 - **首页体验：** `connected` 时主按钮与“已保护”区域在非 `broken` 时保持绿色；warming/degraded 不再对普通用户显示“部分保护 / 正在配置 / TUN 受限”等字样（必要时仍可在首页警告气泡的提示里查看）。
 - **桌面 Go：** 连接列表、规则提供者刷新、代理延迟 API、运行时监督器及相关生命周期与系统代理/托盘/状态/订阅/配置逻辑（详见本分支提交记录）。
@@ -176,21 +176,21 @@
 
 ### English
 
-- First snapshot of the **Wails + Go + React** desktop app under `apps/arch-clash-desktop`.
+- First snapshot of the **Wails + Go + React** desktop app under `apps/archclash`.
 - **Prebuild** targets only the Wails tree (no `src-tauri`); service EXEs are pulled from [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases).
 - ESLint: separate profile for Vite config; relaxed `import-x` for `App.tsx` → `build/appicon.png`.
 - First-run spotlight onboarding, GitHub release update checks (Windows in-place installer), optional NSIS desktop shortcut.
 
 ### Русский
 
-- Первый снимок десктопа **Wails + Go + React** в `apps/arch-clash-desktop`.
+- Первый снимок десктопа **Wails + Go + React** в `apps/archclash`.
 - **Prebuild** пишет только в дерево Wails (без `src-tauri`); сервисные `.exe` качаются с [релизов arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc/releases).
 - ESLint: отдельный профиль для `vite.config.ts`; ослаблен резолв импорта иконки в `App.tsx`.
 - Онбординг (spotlight), проверка обновлений с GitHub, опциональный ярлык на рабочем столе в установщике.
 
 ### 中文
 
-- 首个 **Wails + Go + React** 桌面应用快照（`apps/arch-clash-desktop`）。
+- 首个 **Wails + Go + React** 桌面应用快照（`apps/archclash`）。
 - **Prebuild** 仅面向 Wails 目录（无 `src-tauri`）；Windows 服务程序从 [arch-clash-service-ipc 发行版](https://github.com/Nemu-x/arch-clash-service-ipc/releases) 拉取。
 - ESLint：为 Vite 配置单独规则；`App.tsx` 对 `build/appicon.png` 的导入不再被 `import-x` 拦截。
 - 首次使用引导、GitHub 更新检测、安装程序可选桌面快捷方式。

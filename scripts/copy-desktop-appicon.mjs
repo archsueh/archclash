@@ -19,13 +19,7 @@ const src = envSrc
   : fs.existsSync(preferred)
     ? preferred
     : fallback
-const dest = path.join(
-  repoRoot,
-  'apps',
-  'arch-clash-desktop',
-  'build',
-  'appicon.png',
-)
+const dest = path.join(repoRoot, 'apps', 'archclash', 'build', 'appicon.png')
 
 if (!fs.existsSync(src)) {
   console.error('[copy-desktop-appicon] missing:', src)

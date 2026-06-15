@@ -1,6 +1,6 @@
 # Contributing to ArchClash
 
-Thanks for helping improve **ArchClash** — a **Wails + Go + React** desktop client around **Mihomo** (Clash Meta), hosted under `apps/arch-clash-desktop/`.
+Thanks for helping improve **ArchClash** — a **Wails + Go + React** desktop client around **Mihomo** (Clash Meta), hosted under `apps/archclash/`.
 
 ## Internationalization (i18n)
 
@@ -30,7 +30,7 @@ pnpm install --frozen-lockfile
 pnpm run desktop:resources
 ```
 
-This runs `prebuild`, Wails asset prep, Windows icon generation, and copies `packaging/windows/project.nsi` into the Wails build tree. Output goes under `apps/arch-clash-desktop/build/` (gitignored).
+This runs `prebuild`, Wails asset prep, Windows icon generation, and copies `packaging/windows/project.nsi` into the Wails build tree. Output goes under `apps/archclash/build/` (gitignored).
 
 **Windows service binaries** are downloaded from [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases); override tag with `ARCHCLASH_SERVICE_RELEASE_TAG` if needed (see `scripts/prebuild.mjs`).
 
@@ -42,7 +42,7 @@ This runs `prebuild`, Wails asset prep, Windows icon generation, and copies `pac
 pnpm run wails:dev
 ```
 
-Runs the Wails v2 dev server for `apps/arch-clash-desktop` (frontend + Go backend).
+Runs the Wails v2 dev server for `apps/archclash` (frontend + Go backend).
 
 ## Production-like builds
 
@@ -73,7 +73,7 @@ pnpm run typecheck
 pnpm run format:check   # optional; or pnpm run format to write
 ```
 
-Go code: `cd apps/arch-clash-desktop && go vet ./...` (and `gofmt` as you prefer).
+Go code: `cd apps/archclash && go vet ./...` (and `gofmt` as you prefer).
 
 ## Commits and PRs
 
@@ -86,6 +86,6 @@ CI: [.github/workflows/desktop-artifacts.yml](.github/workflows/desktop-artifact
 
 ## Releases & signed updates
 
-Cutting a release and managing the in-app update signing key (minisign) is documented in **[docs/UPDATES.md](docs/UPDATES.md)**. In short: bump `apps/arch-clash-desktop/version.go` **and** `wails.json` `productVersion` together, push a non-prerelease tag `vX.Y.Z`, and CI publishes the installers plus a signed `SHA256SUMS`. The updater is **fail-closed**: unsigned or tampered artifacts are refused.
+Cutting a release and managing the in-app update signing key (minisign) is documented in **[docs/UPDATES.md](docs/UPDATES.md)**. In short: bump `apps/archclash/version.go` **and** `wails.json` `productVersion` together, push a non-prerelease tag `vX.Y.Z`, and CI publishes the installers plus a signed `SHA256SUMS`. The updater is **fail-closed**: unsigned or tampered artifacts are refused.
 
 Thank you for contributing.

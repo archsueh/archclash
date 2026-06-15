@@ -239,7 +239,7 @@ importers:
         specifier: ^5.0.0
         version: 5.2.0(typescript@6.0.2)(vite@8.0.8(@types/node@24.12.2)(jiti@2.6.1)(sass@1.99.0)(terser@5.46.1)(yaml@2.8.3))
 
-  apps/arch-clash-desktop/frontend:
+  apps/archclash/frontend:
     dependencies:
       '@monaco-editor/react':
         specifier: ^4.7.0

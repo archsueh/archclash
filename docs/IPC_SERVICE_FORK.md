@@ -34,7 +34,7 @@ In `Cargo.toml`, `[[bin]]` `name` values drive output filenames. You can keep cr
 ## ArchClash repo follow-up
 
 - `scripts/prebuild.mjs`: pulls **`arch-clash-service*.exe`** from **`https://github.com/Nemu-x/arch-clash-service-ipc/releases/download/<tag>/`**. Default `<tag>` is the Rust host triple; on **Windows GNU** toolchains the tag is mapped to **`…-pc-windows-msvc`** so the MSVC artifacts resolve. Override: `ARCHCLASH_SERVICE_RELEASE_TAG=my-tag pnpm run prebuild`. You must publish a GitHub **Release** whose tag matches that string and attach the three binaries.
-- `apps/arch-clash-desktop/app.go` — `findServiceInstaller` should match the new installer basename.
+- `apps/archclash/app.go` — `findServiceInstaller` should match the new installer basename.
 - Re-test **Install service** + TUN with Verge’s service **stopped** / not registered under the same name.
 
 This document is a checklist; exact strings depend on what you choose for branding (`arch_*` vs `io.github.*` bundle ids for macOS).
