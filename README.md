@@ -88,16 +88,6 @@ To report a vulnerability, see [SECURITY.md](./SECURITY.md) (use GitHub private 
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## Support the project
-
-ArchClash is free and **GPL-3.0**. If it's useful to you, a crypto donation helps keep development and releases going. Thank you!
-
-| Asset | Address |
-| --- | --- |
-| **USDT** (TRC20) | `TPACN1kJRm2FnFF1cSqYtBnJwAmZ3qGMni` |
-| **USDT** (Polygon / MATIC) | `0xD9333e859Fb74D885d22E27568589de61E4433b5` |
-| **BTC** | `bc1qkkcgpqym967k2x73al6f7fpvkx52q4rzkut3we` |
-| **ETH** | `0xD9333e859Fb74D885d22E27568589de61E4433b5` |
 
 > Double-check the network before sending — wrong-network transfers are unrecoverable.
 
