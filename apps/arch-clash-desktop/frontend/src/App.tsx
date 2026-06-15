@@ -1945,7 +1945,7 @@ function App() {
                   setError('')
                   try {
                     const ok = window.confirm(
-                      'The update will download, then the installer starts and Arch Clash restarts to apply it. Continue?',
+                      'The update will download, then the installer starts and ArchClash restarts to apply it. Continue?',
                     )
                     if (!ok) return
                     setUpdateProgress({ downloaded: 0, total: 0, pct: 0 })

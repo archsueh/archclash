@@ -1,6 +1,6 @@
-# Contributing to Arch Clash
+# Contributing to ArchClash
 
-Thanks for helping improve **Arch Clash** — a **Wails + Go + React** desktop client around **Mihomo** (Clash Meta), hosted under `apps/arch-clash-desktop/`.
+Thanks for helping improve **ArchClash** — a **Wails + Go + React** desktop client around **Mihomo** (Clash Meta), hosted under `apps/arch-clash-desktop/`.
 
 ## Internationalization (i18n)
 
@@ -32,7 +32,7 @@ pnpm run desktop:resources
 
 This runs `prebuild`, Wails asset prep, Windows icon generation, and copies `packaging/windows/project.nsi` into the Wails build tree. Output goes under `apps/arch-clash-desktop/build/` (gitignored).
 
-**Windows service binaries** are downloaded from [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases); override tag with `SLOTH_SERVICE_RELEASE_TAG` if needed (see `scripts/prebuild.mjs`).
+**Windows service binaries** are downloaded from [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases); override tag with `ARCHCLASH_SERVICE_RELEASE_TAG` if needed (see `scripts/prebuild.mjs`).
 
 **Mihomo core** is pinned to a specific release in `scripts/prebuild.mjs` (the `META_VERSION_PINNED` constant) for reproducible builds. To bump it: edit that constant, then run `pnpm run prebuild --force` to refresh the embedded sidecar. For a one-off build against a candidate version without editing the file, set `MIHOMO_CORE_VERSION` (e.g. `MIHOMO_CORE_VERSION=v1.19.27 pnpm run prebuild --force`).
 

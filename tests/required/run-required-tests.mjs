@@ -85,13 +85,13 @@ async function optionalStep(title, command, args, cwd) {
     if (
       msg.includes('not found in Downloads') ||
       msg.includes(
-        'set SLOTH_MIHOMO_BIN to run real-core preflight integration',
+        'set ARCHCLASH_MIHOMO_BIN to run real-core preflight integration',
       )
     ) {
       if (msg.includes('not found in Downloads')) {
         console.log(`SKIP: ${title} (stress.yaml not found in Downloads)`)
       } else {
-        console.log(`SKIP: ${title} (SLOTH_MIHOMO_BIN is not set)`)
+        console.log(`SKIP: ${title} (ARCHCLASH_MIHOMO_BIN is not set)`)
       }
       return
     }
@@ -167,10 +167,10 @@ async function main() {
     ],
     desktopDir,
   )
-  if (!hasEnv('SLOTH_MIHOMO_BIN')) {
+  if (!hasEnv('ARCHCLASH_MIHOMO_BIN')) {
     console.log('\n=== Real-core preflight integration ===')
     console.log(
-      'SKIP: Real-core preflight integration (SLOTH_MIHOMO_BIN is not set)',
+      'SKIP: Real-core preflight integration (ARCHCLASH_MIHOMO_BIN is not set)',
     )
   } else {
     await optionalStep(

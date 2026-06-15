@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"ArchClashDesktop/sharelink"
+	"ArchClash/sharelink"
 
 	"gopkg.in/yaml.v3"
 )

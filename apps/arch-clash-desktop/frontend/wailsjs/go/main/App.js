@@ -150,6 +150,10 @@ export function ReadServiceLatestLog(arg1) {
   return window['go']['main']['App']['ReadServiceLatestLog'](arg1)
 }
 
+export function RefreshArchServiceStatus() {
+  return window['go']['main']['App']['RefreshArchServiceStatus']()
+}
+
 export function RefreshHomeInsight() {
   return window['go']['main']['App']['RefreshHomeInsight']()
 }
@@ -160,10 +164,6 @@ export function RefreshProfileSubscription(arg1) {
 
 export function RefreshProxies() {
   return window['go']['main']['App']['RefreshProxies']()
-}
-
-export function RefreshArchServiceStatus() {
-  return window['go']['main']['App']['RefreshArchServiceStatus']()
 }
 
 export function RenameProfile(arg1, arg2) {

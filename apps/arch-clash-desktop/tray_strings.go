@@ -25,8 +25,8 @@ var trayStringsEN = trayStrings{
 	Disconnect: "Disconnect",
 	Connecting: "Connecting...",
 	Settings:   "Settings…",
-	Quit:       "Quit Arch Clash",
-	Tooltip:    "Arch Clash",
+	Quit:       "Quit ArchClash",
+	Tooltip:    "ArchClash",
 }
 
 var trayStringsRU = trayStrings{
@@ -35,8 +35,8 @@ var trayStringsRU = trayStrings{
 	Disconnect: "Отключить",
 	Connecting: "Подключение...",
 	Settings:   "Настройки…",
-	Quit:       "Выйти из Arch Clash",
-	Tooltip:    "Arch Clash",
+	Quit:       "Выйти из ArchClash",
+	Tooltip:    "ArchClash",
 }
 
 var trayStringsZH = trayStrings{
@@ -45,8 +45,8 @@ var trayStringsZH = trayStrings{
 	Disconnect: "断开",
 	Connecting: "连接中…",
 	Settings:   "设置…",
-	Quit:       "退出 Arch Clash",
-	Tooltip:    "Arch Clash",
+	Quit:       "退出 ArchClash",
+	Tooltip:    "ArchClash",
 }
 
 // currentTrayStrings returns the active translation table. Order of

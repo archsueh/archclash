@@ -1,7 +1,7 @@
 Unicode true
 
 ####
-## Arch Clash — NSIS installer (Wails-compatible).
+## ArchClash — NSIS installer (Wails-compatible).
 ## Synced into build/windows/installer/project.nsi before `wails build` (see scripts/sync-desktop-packaging.mjs).
 ##
 ## Adds English / Russian / Simplified Chinese and shows the Modern UI language dialog so the
@@ -36,7 +36,7 @@ ManifestDPIAware true
 
 # Remember installer language; LangDLL picks a sensible default from the OS UI language.
 !define MUI_LANGDLL_REGISTRY_ROOT HKCU
-!define MUI_LANGDLL_REGISTRY_KEY "Software\Nemu-x\ArchClashDesktop\Installer"
+!define MUI_LANGDLL_REGISTRY_KEY "Software\Nemu-x\ArchClash\Installer"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "InstallerLanguage"
 
 !insertmacro MUI_RESERVEFILE_LANGDLL
@@ -163,12 +163,12 @@ Section "${INFO_PRODUCTNAME}" SecApp
     ; nsExec: first Pop = exit code. taskkill: 0 = terminated, 128 = image not found (not running).
     StrCmp $0 "0" KillExit0 KillNot0
   KillExit0:
-    DetailPrint 'Stopped running Arch Clash (taskkill OK).'
+    DetailPrint 'Stopped running ArchClash (taskkill OK).'
     Goto AfterKillMsg
   KillNot0:
     StrCmp $0 "128" KillExit128 KillUnknown
   KillExit128:
-    DetailPrint 'Arch Clash was not running (nothing to stop).'
+    DetailPrint 'ArchClash was not running (nothing to stop).'
     Goto AfterKillMsg
   KillUnknown:
     DetailPrint "taskkill exit $0 — continuing anyway."

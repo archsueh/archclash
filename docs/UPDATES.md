@@ -91,7 +91,7 @@ auto-update:
 
 ## Escape hatch (local testing only)
 
-`SLOTH_ALLOW_UNVERIFIED_UPDATE=1` downgrades to best-effort (verify if present,
+`ARCHCLASH_ALLOW_UNVERIFIED_UPDATE=1` downgrades to best-effort (verify if present,
 else allow). **Never set this in production** — an *invalid* signature is refused
 regardless.
 

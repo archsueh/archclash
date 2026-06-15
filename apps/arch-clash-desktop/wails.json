@@ -1,8 +1,8 @@
 {
   "$schema": "https://wails.io/schemas/config.v2.json",
-  "name": "ArchClashDesktop",
+  "name": "ArchClash",
   "nsisType": "multiple",
-  "outputfilename": "arch-clash-desktop",
+  "outputfilename": "ArchClash",
   "frontend:install": "pnpm install",
   "frontend:build": "pnpm run build",
   "frontend:dev:watcher": "pnpm run dev",
@@ -12,14 +12,14 @@
   },
   "info": {
     "companyName": "Nemu-x",
-    "productName": "Arch Clash",
+    "productName": "ArchClash",
     "productVersion": "0.6.0",
     "copyright": "GPL-3.0",
-    "comments": "https://github.com/Nemu-x/ArchClash",
+    "comments": "https://github.com/archsueh/archclash",
     "protocols": [
       {
         "scheme": "archclash",
-        "description": "Arch Clash (subscription / install-config links)",
+        "description": "ArchClash (subscription / install-config links)",
         "role": "Editor"
       }
     ]

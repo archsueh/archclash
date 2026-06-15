@@ -246,10 +246,10 @@ func (a *App) drainTunAndStopCore() {
 }
 
 func trayEnabled() bool {
-	if v := strings.TrimSpace(strings.ToLower(os.Getenv("SLOTH_DISABLE_TRAY"))); v == "1" || v == "true" || v == "yes" {
+	if v := strings.TrimSpace(strings.ToLower(os.Getenv("ARCHCLASH_DISABLE_TRAY"))); v == "1" || v == "true" || v == "yes" {
 		return false
 	}
-	if v := strings.TrimSpace(strings.ToLower(os.Getenv("SLOTH_ENABLE_EXPERIMENTAL_TRAY"))); v != "" {
+	if v := strings.TrimSpace(strings.ToLower(os.Getenv("ARCHCLASH_ENABLE_EXPERIMENTAL_TRAY"))); v != "" {
 		return v == "1" || v == "true" || v == "yes"
 	}
 	// Enabled by default on platforms where we ship a tray backend
@@ -1120,6 +1120,10 @@ func (a *App) InstallService() (TunSetupResult, error) {
 			InstallAction: true,
 		}, nil
 	}
+	if err := linkLegacyServiceAliases(tmpDir); err != nil {
+		_ = os.RemoveAll(tmpDir)
+		return TunSetupResult{}, err
+	}
 
 	installPath, err := findServiceInstaller(tmpDir)
 	if err != nil {
@@ -1143,7 +1147,7 @@ func (a *App) InstallService() (TunSetupResult, error) {
 			wailsrt.WindowUnminimise(a.ctx)
 		}
 	} else if runtime.GOOS == "darwin" {
-		out, runErr = installServiceElevatedDarwin(installPath, tmpDir)
+		out, runErr = installServiceElevatedDarwin(installPath, filepath.Dir(installPath))
 	} else {
 		cmd := exec.Command(installPath)
 		cmd.Dir = tmpDir
@@ -1547,7 +1551,7 @@ func (a *App) RefreshArchServiceStatus() ServiceState {
 }
 
 // FetchRulesOverview reads rules from the embedded Arch core when connected; otherwise
-// falls back to SLOTH_CLASH_CONTROLLER / SLOTH_CLASH_SECRET (e.g. external Verge).
+// falls back to ARCHCLASH_CLASH_CONTROLLER / ARCHCLASH_CLASH_SECRET (e.g. external Verge).
 func (a *App) FetchRulesOverview() RulesOverview {
 	a.mu.RLock()
 	conn := strings.TrimSpace(a.state.Connection.Status)
@@ -1560,15 +1564,15 @@ func (a *App) FetchRulesOverview() RulesOverview {
 		return a.rulesOverviewFetch(ep, secret)
 	}
 
-	base := strings.TrimSpace(os.Getenv("SLOTH_CLASH_CONTROLLER"))
+	base := strings.TrimSpace(os.Getenv("ARCHCLASH_CLASH_CONTROLLER"))
 	if base == "" {
-		return RulesOverview{LastError: "connect Arch or set SLOTH_CLASH_CONTROLLER for external core"}
+		return RulesOverview{LastError: "connect Arch or set ARCHCLASH_CLASH_CONTROLLER for external core"}
 	}
 	if !strings.HasPrefix(base, "http://") && !strings.HasPrefix(base, "https://") {
 		base = "http://" + base
 	}
 	base = strings.TrimRight(base, "/")
-	envSecret := strings.TrimSpace(os.Getenv("SLOTH_CLASH_SECRET"))
+	envSecret := strings.TrimSpace(os.Getenv("ARCHCLASH_CLASH_SECRET"))
 
 	client := &http.Client{Timeout: 4 * time.Second}
 	out := RulesOverview{Controller: base}
@@ -1700,6 +1704,71 @@ func installServiceElevatedDarwin(installPath, workDir string) ([]byte, error) {
 	appleScript := fmt.Sprintf("do shell script %q with administrator privileges", shellCmd)
 	cmd := exec.Command("osascript", "-e", appleScript)
 	return cmd.CombinedOutput()
+}
+
+// linkLegacyServiceAliases exposes upstream installer basenames (sloth / Verge)
+// beside Arch-renamed binaries. Prebuild stores arch-clash-service* but the
+// sloth-clash-service-ipc installer still looks for sloth-clash-service at runtime.
+// Real file copies (not symlinks) are used so elevated macOS installers can read them.
+func linkLegacyServiceAliases(dir string) error {
+	ext := ""
+	if runtime.GOOS == "windows" {
+		ext = ".exe"
+	}
+	pairs := []struct{ legacy, canonical string }{
+		{"sloth-clash-service" + ext, "arch-clash-service" + ext},
+		{"sloth-clash-service-install" + ext, "arch-clash-service-install" + ext},
+		{"sloth-clash-service-uninstall" + ext, "arch-clash-service-uninstall" + ext},
+		{"clash-verge-service" + ext, "arch-clash-service" + ext},
+		{"clash-verge-service-install" + ext, "arch-clash-service-install" + ext},
+		{"clash-verge-service-uninstall" + ext, "arch-clash-service-uninstall" + ext},
+	}
+	seen := map[string]struct{}{}
+	return filepath.WalkDir(dir, func(p string, d fs.DirEntry, err error) error {
+		if err != nil || d.IsDir() {
+			return err
+		}
+		base := strings.ToLower(d.Name())
+		if base != "arch-clash-service"+ext &&
+			base != "arch-clash-service-install"+ext &&
+			base != "arch-clash-service-uninstall"+ext {
+			return nil
+		}
+		parent := filepath.Dir(p)
+		if _, ok := seen[parent]; ok {
+			return nil
+		}
+		seen[parent] = struct{}{}
+		for _, pair := range pairs {
+			canonical := filepath.Join(parent, pair.canonical)
+			legacy := filepath.Join(parent, pair.legacy)
+			if _, err := os.Stat(canonical); err != nil {
+				continue
+			}
+			if _, err := os.Stat(legacy); err == nil {
+				continue
+			}
+			if err := copyFile(canonical, legacy); err != nil {
+				return fmt.Errorf("service alias %s: %w", pair.legacy, err)
+			}
+		}
+		return nil
+	})
+}
+
+func copyFile(src, dst string) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+	out, err := os.OpenFile(dst, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, 0o755)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+	_, err = io.Copy(out, in)
+	return err
 }
 
 func findServiceInstaller(dir string) (string, error) {

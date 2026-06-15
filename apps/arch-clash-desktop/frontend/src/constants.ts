@@ -3,7 +3,7 @@ export const LS_SPOTLIGHT = 'arch-spotlight-tour-v2'
 export const LS_NAV_COLLAPSED = 'arch-nav-collapsed-v1'
 export const LS_SETTINGS = 'arch-settings-v1'
 
-export const APP_REPO_URL = 'https://github.com/Nemu-x/ArchClash'
+export const APP_REPO_URL = 'https://github.com/archsueh/archclash'
 
 // Full mihomo (Clash.Meta) rule-type set, grouped: domain / IP / source-IP /
 // port / process / inbound / misc / rule-set & logical / MATCH last.

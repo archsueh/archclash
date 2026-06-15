@@ -1,7 +1,7 @@
 <h1 align="center">
-  <img src="../apps/arch-clash-desktop/build/appicon.png" alt="Arch Clash" width="128" />
+  <img src="../apps/arch-clash-desktop/build/appicon.png" alt="ArchClash" width="128" />
   <br />
-  Arch Clash
+  ArchClash
   <br />
 </h1>
 

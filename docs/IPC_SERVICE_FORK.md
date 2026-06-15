@@ -9,7 +9,7 @@ Reference tree: your fork (e.g. `arch-clash-service-ipc`) cloned from [clash-ver
 | What | Where to change | Example Arch value |
 |------|-----------------|---------------------|
 | SCM internal name | `src/bin/install_service.rs` — `open_service("…")`, `ServiceInfo { name: … }` | `arch_clash_service` |
-| Display name / description | same file — `display_name`, `set_description` | `Arch Clash Service` |
+| Display name / description | same file — `display_name`, `set_description` | `ArchClash Service` |
 | Named pipe (IPC) | `src/lib.rs` — `IPC_PATH` | `\\.\pipe\arch-clash-service` |
 | Service EXE on disk | installer looks for `clash-verge-service.exe` next to install exe | build/copy as `arch-clash-service.exe` and adjust `with_file_name(...)` |
 | NSIS bundle | `resources/installer.nsi` — `OutFile`, `InstallDir`, `ExecShell` target names | `ArchClashServiceInstaller.exe`, `ArchClashService`, run `arch-clash-service-install.exe` |
@@ -33,7 +33,7 @@ In `Cargo.toml`, `[[bin]]` `name` values drive output filenames. You can keep cr
 
 ## ArchClash repo follow-up
 
-- `scripts/prebuild.mjs`: pulls **`arch-clash-service*.exe`** from **`https://github.com/Nemu-x/arch-clash-service-ipc/releases/download/<tag>/`**. Default `<tag>` is the Rust host triple; on **Windows GNU** toolchains the tag is mapped to **`…-pc-windows-msvc`** so the MSVC artifacts resolve. Override: `SLOTH_SERVICE_RELEASE_TAG=my-tag pnpm run prebuild`. You must publish a GitHub **Release** whose tag matches that string and attach the three binaries.
+- `scripts/prebuild.mjs`: pulls **`arch-clash-service*.exe`** from **`https://github.com/Nemu-x/arch-clash-service-ipc/releases/download/<tag>/`**. Default `<tag>` is the Rust host triple; on **Windows GNU** toolchains the tag is mapped to **`…-pc-windows-msvc`** so the MSVC artifacts resolve. Override: `ARCHCLASH_SERVICE_RELEASE_TAG=my-tag pnpm run prebuild`. You must publish a GitHub **Release** whose tag matches that string and attach the three binaries.
 - `apps/arch-clash-desktop/app.go` — `findServiceInstaller` should match the new installer basename.
 - Re-test **Install service** + TUN with Verge’s service **stopped** / not registered under the same name.
 

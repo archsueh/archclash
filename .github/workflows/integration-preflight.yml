@@ -103,7 +103,7 @@ jobs:
           if (-not $bin) {
             throw "mihomo executable not found after extracting archive"
           }
-          "SLOTH_MIHOMO_BIN=$($bin.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "ARCHCLASH_MIHOMO_BIN=$($bin.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: Download and unpack mihomo (Unix)
         if: runner.os != 'Windows'
@@ -126,7 +126,7 @@ jobs:
             exit 1
           fi
           chmod +x "$bin" || true
-          echo "SLOTH_MIHOMO_BIN=$bin" >> "$GITHUB_ENV"
+          echo "ARCHCLASH_MIHOMO_BIN=$bin" >> "$GITHUB_ENV"
 
       - name: Run real-core preflight integration
         working-directory: apps/arch-clash-desktop

@@ -56,7 +56,7 @@ void ArchTrayConfigureLabels(const char *showWindow,
     if (gLabelConnect != nil) { [gLabelConnect release]; gLabelConnect = nil; }
     gLabelShowWindow = ArchCopyCString(showWindow, @"Show Window");
     gLabelSettings = ArchCopyCString(settings, @"Settings…");
-    gLabelQuit = ArchCopyCString(quit, @"Quit Arch Clash");
+    gLabelQuit = ArchCopyCString(quit, @"Quit ArchClash");
     gLabelConnect = ArchCopyCString(connect, @"Connect");
 }
 
@@ -103,7 +103,7 @@ static NSImage *ArchTrayTemplateImage(void) {
     NSImage *icon = nil;
     if (@available(macOS 11.0, *)) {
         icon = [NSImage imageWithSystemSymbolName:@"pawprint"
-                         accessibilityDescription:@"Arch Clash"];
+                         accessibilityDescription:@"ArchClash"];
         if (icon != nil) {
             NSImageSymbolConfiguration *cfg =
                 [NSImageSymbolConfiguration configurationWithPointSize:14
@@ -117,7 +117,7 @@ static NSImage *ArchTrayTemplateImage(void) {
     }
     if (@available(macOS 11.0, *)) {
         icon = [NSImage imageWithSystemSymbolName:@"network"
-                         accessibilityDescription:@"Arch Clash"];
+                         accessibilityDescription:@"ArchClash"];
         if (icon != nil) {
             NSImageSymbolConfiguration *cfg =
                 [NSImageSymbolConfiguration configurationWithPointSize:14
@@ -182,11 +182,11 @@ static void ArchTrayCreateOnMain(NSUInteger generation) {
             gStatusItem.button.title = @"SC";
             gStatusItem.button.font = [NSFont menuBarFontOfSize:11];
         }
-        gStatusItem.button.toolTip = @"Arch Clash";
+        gStatusItem.button.toolTip = @"ArchClash";
         gStatusItem.button.appearsDisabled = NO;
         gStatusItem.button.hidden = NO;
 
-        gMenu = [[[NSMenu alloc] initWithTitle:@"Arch Clash"] retain];
+        gMenu = [[[NSMenu alloc] initWithTitle:@"ArchClash"] retain];
 
         // Minimal menu — every navigation/mode/traffic toggle has a dedicated
         // place in the main window already. Earlier 14-item variant turned
@@ -196,7 +196,7 @@ static void ArchTrayCreateOnMain(NSUInteger generation) {
         NSString *showLabel = gLabelShowWindow != nil ? gLabelShowWindow : @"Show Window";
         NSString *connectLabel = gLabelConnect != nil ? gLabelConnect : @"Connect";
         NSString *settingsLabel = gLabelSettings != nil ? gLabelSettings : @"Settings…";
-        NSString *quitLabel = gLabelQuit != nil ? gLabelQuit : @"Quit Arch Clash";
+        NSString *quitLabel = gLabelQuit != nil ? gLabelQuit : @"Quit ArchClash";
 
         NSMenuItem *showItem = [[NSMenuItem alloc] initWithTitle:showLabel action:@selector(onShow:) keyEquivalent:@""];
         [showItem setTarget:gHandler];

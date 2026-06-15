@@ -22,7 +22,7 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title: "Arch Clash",
+		Title: "ArchClash",
 		// 1100x720 leaves comfortable margins on 1366x768 laptops and on
 		// scaled-up 4K monitors (150%/175% DPI) alike. The previous 1200x820
 		// covered ~88%×107% of a 1366x768 screen which made the window taller

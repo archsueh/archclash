@@ -1,4 +1,4 @@
-# Builds Arch Clash desktop for Windows, macOS (Apple Silicon + Intel), and Linux.
+# Builds ArchClash desktop for Windows, macOS (Apple Silicon + Intel), and Linux.
 # Service binaries: https://github.com/Nemu-x/arch-clash-service-ipc/releases
 # Run: workflow_dispatch or push tag v* for the full release artifact set.
 

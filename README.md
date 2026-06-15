@@ -24,7 +24,7 @@
 
 ## Overview
 
-Arch Clash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository ships the **Wails** desktop shell (`apps/arch-clash-desktop`). The Windows **system service / IPC** layer lives in a separate project: [arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc) (release artifacts are consumed by `pnpm run prebuild`).
+ArchClash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository ships the **Wails** desktop shell (`apps/arch-clash-desktop`). The Windows **system service / IPC** layer lives in a separate project: [arch-clash-service-ipc](https://github.com/Nemu-x/arch-clash-service-ipc) (release artifacts are consumed by `pnpm run prebuild`).
 
 ## Features (high level)
 
@@ -59,7 +59,7 @@ Arch Clash is a **GPL-3.0** GUI around **Mihomo** (Clash Meta). This repository 
 
 ## Downloads
 
-Releases for **this app**: [ArchClash releases](https://github.com/Nemu-x/ArchClash/releases) (when published).  
+Releases for **this app**: [ArchClash releases](https://github.com/archsueh/archclash/releases) (when published).  
 Service binaries used at build time: [arch-clash-service-ipc releases](https://github.com/Nemu-x/arch-clash-service-ipc/releases).
 
 ## Build (local)
@@ -80,7 +80,7 @@ GitHub Actions: `.github/workflows/desktop-artifacts.yml` (Windows, Linux, macOS
 
 ## Security
 
-Arch Clash ships **fail-closed, cryptographically verified updates**: the in-app updater verifies a **minisign (ed25519)** signature over `SHA256SUMS` against a public key embedded in the binary, then checks the installer's SHA-256 before launching — anything unsigned or tampered is refused (see [docs/UPDATES.md](./docs/UPDATES.md)). CI runs `govulncheck` + `pnpm audit` on every change, the mihomo core is pinned for reproducible builds, and the project is GPL-3.0 / fully auditable. The privileged helper that manages the core/TUN requires a one-time elevation to install, then runs without further prompts.
+ArchClash ships **fail-closed, cryptographically verified updates**: the in-app updater verifies a **minisign (ed25519)** signature over `SHA256SUMS` against a public key embedded in the binary, then checks the installer's SHA-256 before launching — anything unsigned or tampered is refused (see [docs/UPDATES.md](./docs/UPDATES.md)). CI runs `govulncheck` + `pnpm audit` on every change, the mihomo core is pinned for reproducible builds, and the project is GPL-3.0 / fully auditable. The privileged helper that manages the core/TUN requires a one-time elevation to install, then runs without further prompts.
 
 To report a vulnerability, see [SECURITY.md](./SECURITY.md) (use GitHub private vulnerability reporting — please don't open public issues for security bugs).
 
@@ -90,7 +90,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Support the project
 
-Arch Clash is free and **GPL-3.0**. If it's useful to you, a crypto donation helps keep development and releases going. Thank you! 🦥
+ArchClash is free and **GPL-3.0**. If it's useful to you, a crypto donation helps keep development and releases going. Thank you! 🦥
 
 | Asset | Address |
 | --- | --- |
@@ -103,7 +103,7 @@ Arch Clash is free and **GPL-3.0**. If it's useful to you, a crypto donation hel
 
 ## Acknowledgements
 
-- **Basis (upstream GUI this work descends from):** [clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) — Clash Verge Rev (Tauri); Arch Clash reimplements the product direction with **Wails + Go** in this repo.
+- **Basis (upstream GUI this work descends from):** [clash-verge-rev](https://github.com/clash-verge-rev/clash-verge-rev) — Clash Verge Rev (Tauri); ArchClash reimplements the product direction with **Wails + Go** in this repo.
 - **Proxy core (Clash Meta):** [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo).
 - **Desktop shell:** [Wails](https://github.com/wailsapp/wails) — Go backend + web frontend in one binary.
 

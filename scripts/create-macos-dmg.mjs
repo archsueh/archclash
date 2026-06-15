@@ -24,7 +24,7 @@ function findBuiltApp() {
 }
 
 function writeInstallNotes(stageDir, appName) {
-  const readme = `Arch Clash macOS Install
+  const readme = `ArchClash macOS Install
 ========================
 
 1) Drag "${appName}" to "Applications".
@@ -45,7 +45,7 @@ if [ ! -d "$APP" ]; then
   exit 1
 fi
 sudo xattr -r -d com.apple.quarantine "$APP" || true
-osascript -e 'display dialog "Done. You can now open Arch Clash." buttons {"OK"} default button "OK"'
+osascript -e 'display dialog "Done. You can now open ArchClash." buttons {"OK"} default button "OK"'
 `
   const cmdPath = path.join(stageDir, 'Fix Quarantine.command')
   fs.writeFileSync(cmdPath, command, 'utf8')
@@ -96,7 +96,7 @@ function main() {
   const outPath = path.join(binDir, outName)
   const tempDmg = path.join(binDir, `ArchClash-macOS-${arch}-tmp.dmg`)
   const stageDir = path.join(appDir, 'build', 'dmg-stage')
-  const volumeName = 'Arch Clash'
+  const volumeName = 'ArchClash'
 
   fs.rmSync(stageDir, { recursive: true, force: true })
   fs.mkdirSync(stageDir, { recursive: true })

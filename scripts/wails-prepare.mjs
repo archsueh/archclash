@@ -62,9 +62,33 @@ async function main() {
     process.exit(1)
   }
 
+  await linkLegacyServiceAliases(resourcesDir)
+  if (resourcesDir !== sidecarDir) {
+    await linkLegacyServiceAliases(sidecarDir)
+  }
+
   console.log(
     `[wails-prepare] OK (${present} service file(s) under build/resources or build/sidecar)`,
   )
+}
+
+/** Upstream sloth/Verge installers still look for legacy basenames at runtime. */
+async function linkLegacyServiceAliases(dir) {
+  const ext = process.platform === 'win32' ? '.exe' : ''
+  const pairs = [
+    ['sloth-clash-service', 'arch-clash-service'],
+    ['sloth-clash-service-install', 'arch-clash-service-install'],
+    ['sloth-clash-service-uninstall', 'arch-clash-service-uninstall'],
+    ['clash-verge-service', 'arch-clash-service'],
+    ['clash-verge-service-install', 'arch-clash-service-install'],
+    ['clash-verge-service-uninstall', 'arch-clash-service-uninstall'],
+  ]
+  for (const [legacyBase, canonicalBase] of pairs) {
+    const canonical = path.join(dir, `${canonicalBase}${ext}`)
+    const legacy = path.join(dir, `${legacyBase}${ext}`)
+    if (!fs.existsSync(canonical) || fs.existsSync(legacy)) continue
+    await fsp.copyFile(canonical, legacy)
+  }
 }
 
 main().catch((err) => {

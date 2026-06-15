@@ -172,8 +172,8 @@ type TunSetupResult struct {
 }
 
 // RulesOverview is a best-effort snapshot from a running mihomo external-controller.
-// Point SLOTH_CLASH_CONTROLLER at the listen address (e.g. 127.0.0.1:9090) and
-// SLOTH_CLASH_SECRET at the API secret if configured.
+// Point ARCHCLASH_CLASH_CONTROLLER at the listen address (e.g. 127.0.0.1:9090) and
+// ARCHCLASH_CLASH_SECRET at the API secret if configured.
 type RulesOverview struct {
 	Controller        string `json:"controller"`
 	Reachable         bool   `json:"reachable"`

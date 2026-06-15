@@ -1,4 +1,4 @@
-## Arch Clash desktop `0.6.0` — 2026-06-06
+## ArchClash desktop `0.6.0` — 2026-06-06
 
 ### English
 
@@ -21,7 +21,7 @@
 - **导入本地配置与分享链接。** 添加配置文件对话框新增 **Paste / File** 模式：可导入本地 mihomo/Clash `config.yaml`，或粘贴/加载 `vless://`、`vmess://`、`ss://`、`trojan://`、`hysteria2://`、`tuic://` 链接——单条、按行列表或 base64 订阅封装——导入时转换为可运行配置（并实时提示「Clash YAML / N 条链接」）。返回链接列表的订阅 URL 现在也可用。
 - **签名且 fail-closed 的应用内更新。** 发布使用项目 minisign 密钥签名，并在启动任何程序前于应用内校验（纯 Go ed25519）——未签名或被篡改的更新默认被拒绝。新增下载**进度条**、来自 release notes 的**「更新内容」**变更日志，以及设置中的**自动更新**开关。Windows 就地更新；macOS/Linux 打开发布页。关闭审计 F1/F8。详见 `docs/UPDATES.md`。
 
-## Arch Clash desktop `0.3.1` — 2026-04-30
+## ArchClash desktop `0.3.1` — 2026-04-30
 
 ### English
 
@@ -44,7 +44,7 @@
 - **首页体验：** `connected` 时主按钮与“已保护”区域在非 `broken` 时保持绿色；warming/degraded 不再对普通用户显示“部分保护 / 正在配置 / TUN 受限”等字样（必要时仍可在首页警告气泡的提示里查看）。
 - **桌面 Go：** 连接列表、规则提供者刷新、代理延迟 API、运行时监督器及相关生命周期与系统代理/托盘/状态/订阅/配置逻辑（详见本分支提交记录）。
 
-## Arch Clash desktop `0.3.0` — 2026-04-25
+## ArchClash desktop `0.3.0` — 2026-04-25
 
 ### English
 
@@ -144,7 +144,7 @@
 
 ---
 
-## Arch Clash desktop `0.2.1` — 2026-04-22
+## ArchClash desktop `0.2.1` — 2026-04-22
 
 ### English
 
@@ -172,7 +172,7 @@
 
 ---
 
-## Arch Clash desktop `0.1.0` — 2026-04-19
+## ArchClash desktop `0.1.0` — 2026-04-19
 
 ### English
 

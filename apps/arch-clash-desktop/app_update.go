@@ -20,8 +20,8 @@ import (
 )
 
 const (
-	githubOwner = "Nemu-x"
-	githubRepo  = "ArchClash"
+	githubOwner = "archsueh"
+	githubRepo  = "archclash"
 
 	githubAPIHTTPTimeout  = 45 * time.Second
 	updateDownloadTimeout = 60 * time.Minute
@@ -180,7 +180,7 @@ func fetchReleaseAssets() ([]githubAsset, error) {
 		return nil, err
 	}
 	req.Header.Set("Accept", "application/vnd.github+json")
-	req.Header.Set("User-Agent", "ArchClashDesktop/"+AppVersion)
+	req.Header.Set("User-Agent", "ArchClash/"+AppVersion)
 	resp, err := githubAPIHTTPClient.Do(req)
 	if err != nil {
 		return nil, err
@@ -190,7 +190,18 @@ func fetchReleaseAssets() ([]githubAsset, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode == http.StatusNotFound {
+		return nil, fmt.Errorf(
+			"no published release on GitHub (%s/%s); publish a release or disable auto-update until then",
+			githubOwner,
+			githubRepo,
+		)
+	}
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		bodyText := strings.TrimSpace(string(body))
+		if bodyText != "" && len(bodyText) < 240 {
+			return nil, fmt.Errorf("GitHub API %s: %s", resp.Status, bodyText)
+		}
 		return nil, fmt.Errorf("GitHub API %s", resp.Status)
 	}
 	var rel githubRelease
@@ -206,7 +217,7 @@ func downloadAssetBytes(url string, limit int64) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "ArchClashDesktop/"+AppVersion)
+	req.Header.Set("User-Agent", "ArchClash/"+AppVersion)
 	resp, err := githubAPIHTTPClient.Do(req)
 	if err != nil {
 		return nil, err
@@ -305,7 +316,7 @@ func fetchLatestGitHubRelease() (tag, htmlURL, notes, assetName, assetURL string
 		return "", "", "", "", "", err
 	}
 	req.Header.Set("Accept", "application/vnd.github+json")
-	req.Header.Set("User-Agent", "ArchClashDesktop/"+AppVersion)
+	req.Header.Set("User-Agent", "ArchClash/"+AppVersion)
 
 	resp, err := githubAPIHTTPClient.Do(req)
 	if err != nil {
@@ -419,7 +430,7 @@ func (a *App) CheckForUpdates() UpdateState {
 //  4. Only then tear down the core/TUN and launch the installer.
 //
 // If the release is NOT signed by a trusted key, the update is REFUSED unless
-// `SLOTH_ALLOW_UNVERIFIED_UPDATE=1` is set (local testing only). This closes
+// `ARCHCLASH_ALLOW_UNVERIFIED_UPDATE=1` is set (local testing only). This closes
 // audit findings F1/F8. (Signature verification is implemented here, not a
 // future TODO.)
 func (a *App) ApplyUpdate() error {
@@ -442,9 +453,9 @@ func (a *App) ApplyUpdate() error {
 	// Verify the release is authentic before launching anything. Secure by
 	// default (fail-closed): require a checksums file signed by a trusted minisign
 	// key, then verify the downloaded installer's digest against it. The
-	// SLOTH_ALLOW_UNVERIFIED_UPDATE=1 escape hatch (local testing only) downgrades
+	// ARCHCLASH_ALLOW_UNVERIFIED_UPDATE=1 escape hatch (local testing only) downgrades
 	// to best-effort. A present-but-invalid signature is always refused.
-	allowUnverified := strings.EqualFold(strings.TrimSpace(os.Getenv("SLOTH_ALLOW_UNVERIFIED_UPDATE")), "1")
+	allowUnverified := strings.EqualFold(strings.TrimSpace(os.Getenv("ARCHCLASH_ALLOW_UNVERIFIED_UPDATE")), "1")
 	digest, verified, vErr := a.resolveInstallerDigest(installerName)
 	if vErr != nil {
 		_ = os.Remove(tmp)
@@ -452,7 +463,7 @@ func (a *App) ApplyUpdate() error {
 	}
 	if !verified && !allowUnverified {
 		_ = os.Remove(tmp)
-		return errors.New("refusing to launch update: release is not signed by a trusted key — set SLOTH_ALLOW_UNVERIFIED_UPDATE=1 to override (local testing only)")
+		return errors.New("refusing to launch update: release is not signed by a trusted key — set ARCHCLASH_ALLOW_UNVERIFIED_UPDATE=1 to override (local testing only)")
 	}
 	if digest != "" {
 		gotHash, err := hashFileSHA256(tmp)
@@ -505,7 +516,7 @@ func (a *App) downloadUpdateAsset(url, dest string) error {
 		out.Close()
 		return err
 	}
-	req.Header.Set("User-Agent", "ArchClashDesktop/"+AppVersion)
+	req.Header.Set("User-Agent", "ArchClash/"+AppVersion)
 	resp, err := updateDownloadHTTPClient.Do(req)
 	if err != nil {
 		out.Close()

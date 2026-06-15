@@ -91,13 +91,13 @@ export function ReadProfileConfig(arg1: string): Promise<main.ProfileConfigPeek>
 
 export function ReadServiceLatestLog(arg1: number): Promise<main.ServiceLogPeek>
 
+export function RefreshArchServiceStatus(): Promise<main.ServiceState>
+
 export function RefreshHomeInsight(): Promise<main.AppState>
 
 export function RefreshProfileSubscription(arg1: string): Promise<main.AppState>
 
 export function RefreshProxies(): Promise<main.AppState>
-
-export function RefreshArchServiceStatus(): Promise<main.ServiceState>
 
 export function RenameProfile(
   arg1: string,

@@ -27,9 +27,9 @@ func (a *App) TestProxyDelay(name string) (int, error) {
 	a.mu.RUnlock()
 
 	if ep == "" || (conn != "connected" && !running) {
-		base := strings.TrimSpace(os.Getenv("SLOTH_CLASH_CONTROLLER"))
+		base := strings.TrimSpace(os.Getenv("ARCHCLASH_CLASH_CONTROLLER"))
 		if base == "" {
-			return 0, errors.New("connect Arch or set SLOTH_CLASH_CONTROLLER for external core")
+			return 0, errors.New("connect Arch or set ARCHCLASH_CLASH_CONTROLLER for external core")
 		}
 		if !strings.HasPrefix(base, "http://") && !strings.HasPrefix(base, "https://") {
 			base = "http://" + base
@@ -37,7 +37,7 @@ func (a *App) TestProxyDelay(name string) (int, error) {
 		base = strings.TrimRight(base, "/")
 		ep = strings.TrimPrefix(base, "http://")
 		ep = strings.TrimPrefix(ep, "https://")
-		secret = strings.TrimSpace(os.Getenv("SLOTH_CLASH_SECRET"))
+		secret = strings.TrimSpace(os.Getenv("ARCHCLASH_CLASH_SECRET"))
 	}
 
 	q := url.Values{}

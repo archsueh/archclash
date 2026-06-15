@@ -1,6 +1,6 @@
-# Arch Clash — desktop shell
+# ArchClash — desktop shell
 
-This is the **Wails (Go + React/TS)** desktop application for **Arch Clash**, a GUI around **Mihomo** (Clash Meta).
+This is the **Wails (Go + React/TS)** desktop application for **ArchClash**, a GUI around **Mihomo** (Clash Meta).
 
 > Full project docs — overview, screenshots, downloads, build, and contributing — live in the **repository root**:
 > **[`../../README.md`](../../README.md)** · [Русский](../../docs/README_ru.md) · [简体中文](../../docs/README_zh.md)

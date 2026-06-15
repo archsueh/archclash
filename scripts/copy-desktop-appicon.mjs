@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
-const envSrc = process.env.SLOTH_APPICON_SOURCE
+const envSrc = process.env.ARCHCLASH_APPICON_SOURCE
 const preferred = path.join(repoRoot, 'docs', 'appicon-main.png')
 const fallback = path.join(repoRoot, 'docs', 'appicon.png')
 const src = envSrc

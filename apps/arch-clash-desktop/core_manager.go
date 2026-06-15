@@ -153,7 +153,7 @@ func mihomoSidecarSearchDirs() []string {
 		add(filepath.Join(filepath.Dir(exeDir), "sidecar"))
 		add(filepath.Join(filepath.Dir(exeDir), "build", "sidecar"))
 	}
-	if v := strings.TrimSpace(os.Getenv("SLOTH_CLASH_DESKTOP_ROOT")); v != "" {
+	if v := strings.TrimSpace(os.Getenv("ARCHCLASH_CLASH_DESKTOP_ROOT")); v != "" {
 		add(filepath.Join(v, "build", "sidecar"))
 	}
 	wd, err := os.Getwd()
@@ -175,7 +175,7 @@ func mihomoSidecarSearchDirs() []string {
 }
 
 func (a *App) resolveMihomoBinary() (string, error) {
-	if p := strings.TrimSpace(os.Getenv("SLOTH_MIHOMO_PATH")); p != "" {
+	if p := strings.TrimSpace(os.Getenv("ARCHCLASH_MIHOMO_PATH")); p != "" {
 		if st, err := os.Stat(p); err == nil && !st.IsDir() {
 			return p, nil
 		}
@@ -189,7 +189,7 @@ func (a *App) resolveMihomoBinary() (string, error) {
 		// directory layout); they are intentionally NOT searched here so a
 		// stale Apr-vintage verge-mihomo binary cannot win over today's
 		// freshly-downloaded arch-mihomo. Operators who deliberately want
-		// to point at a different binary can set SLOTH_MIHOMO_PATH.
+		// to point at a different binary can set ARCHCLASH_MIHOMO_PATH.
 		patterns = append(patterns,
 			filepath.Join(dir, "arch-mihomo*.exe"),
 			filepath.Join(dir, "arch-mihomo*"),
@@ -219,7 +219,7 @@ func (a *App) resolveMihomoBinary() (string, error) {
 	// extract error IS the real diagnostic — most commonly antivirus /
 	// Defender quarantining the written mihomo.exe, secondarily a Group
 	// Policy that blocks write to %APPDATA%/ArchClash/runtime/_sidecar.
-	hint := "Run `pnpm run prebuild` from repo root or set SLOTH_MIHOMO_PATH to an absolute path."
+	hint := "Run `pnpm run prebuild` from repo root or set ARCHCLASH_MIHOMO_PATH to an absolute path."
 	if extractErr != nil {
 		debugLog("startup", "H1", "core_manager.go:resolveMihomoBinary",
 			"mihomo binary not found — extract from embed failed",

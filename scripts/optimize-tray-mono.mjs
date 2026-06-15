@@ -4,18 +4,14 @@
  *
  * Why: drop a 2048x2048 source PNG with generous transparent margins in there
  * and macOS will scale it down on the fly. The subject reads tiny in the menu
- * bar unless you forcibly upscale the icon — which is what the old code did
- * (`tray_darwin_native.m::ArchTrayNormalisedIconSize` clamped embedded
- * mono to 30-34pt instead of the system-standard 18-22pt). That made the
- * icon visually "fat" compared to every other native menu bar item.
+ * bar unless you forcibly upscale the icon.
  *
- * What this does:
- *  1. Trims fully transparent margins (alpha threshold 1).
- *  2. Resizes the trimmed bitmap so the longest side is 44px (= 22pt @ 2x retina).
- *  3. Re-encodes as a small, compressed PNG.
+ * This script crops the source image to a perfect square centered around the
+ * optical/visual center of the logo, then resizes it to 44x44px. This prevents
+ * any vertical/horizontal misalignment in the macOS menu bar.
  *
  * Run with `node scripts/optimize-tray-mono.mjs` after replacing the source
- * mono.png. Safe to re-run.
+ * icon. Safe to re-run.
  */
 import path from 'node:path'
 import fs from 'node:fs/promises'
@@ -24,6 +20,7 @@ import sharp from 'sharp'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const repoRoot = path.resolve(__dirname, '..')
+
 const target = path.join(
   repoRoot,
   'apps',
@@ -32,34 +29,104 @@ const target = path.join(
   'mono.png',
 )
 
+const svgSrc = path.join(repoRoot, 'docs', 'appicon.svg')
+const pngSrcPreferred = path.join(repoRoot, 'docs', 'appicon-main.png')
+const pngSrcFallback = path.join(repoRoot, 'docs', 'appicon.png')
+
 const MAX_SIDE = 44
 
 async function main() {
-  const stat = await fs.stat(target).catch(() => null)
-  if (!stat) {
-    console.error('[optimize-tray-mono] not found:', target)
+  // 1. Determine source of truth
+  let src = svgSrc
+  let exists = await fs
+    .stat(src)
+    .then(() => true)
+    .catch(() => false)
+  if (!exists) {
+    src = pngSrcPreferred
+    exists = await fs
+      .stat(src)
+      .then(() => true)
+      .catch(() => false)
+  }
+  if (!exists) {
+    src = pngSrcFallback
+    exists = await fs
+      .stat(src)
+      .then(() => true)
+      .catch(() => false)
+  }
+  if (!exists) {
+    console.error(
+      '[optimize-tray-mono] No source icon found in docs/ (appicon.svg, appicon-main.png, appicon.png)',
+    )
     process.exit(1)
   }
 
-  const before = await sharp(target).metadata()
-  const buf = await sharp(target)
+  console.log(
+    `[optimize-tray-mono] Using source icon: ${path.relative(repoRoot, src)}`,
+  )
+
+  // 2. Load the source image and get its dimensions
+  const image = sharp(src)
+  const metadata = await image.metadata()
+  const imgWidth = metadata.width
+  const imgHeight = metadata.height
+
+  // 3. Find the trimmed bounding box of non-transparent pixels
+  const { info } = await image
+    .clone()
     .trim({ threshold: 1 })
-    .resize({
-      width: MAX_SIDE,
-      height: MAX_SIDE,
-      fit: 'inside',
-      withoutEnlargement: true,
+    .toBuffer({ resolveWithObject: true })
+
+  const left = Math.abs(info.trimOffsetLeft || 0)
+  const top = Math.abs(info.trimOffsetTop || 0)
+  const width = info.width
+  const height = info.height
+
+  // 4. Calculate the optical center (middle of the canvas)
+  const cx = imgWidth / 2
+  const cy = imgHeight / 2
+
+  // 5. Calculate the maximum distance from the center to any edge of the bounding box
+  const distLeft = cx - left
+  const distRight = left + width - cx
+  const distTop = cy - top
+  const distBottom = top + height - cy
+
+  const maxDist = Math.ceil(Math.max(distLeft, distRight, distTop, distBottom))
+
+  // 6. Crop box centered at (cx, cy) with side length 2 * maxDist
+  const cropLeft = Math.max(0, Math.floor(cx - maxDist))
+  const cropTop = Math.max(0, Math.floor(cy - maxDist))
+  const cropSize = Math.min(imgWidth, imgHeight, maxDist * 2)
+
+  console.log(
+    `[optimize-tray-mono] Original: ${imgWidth}x${imgHeight} | Bounding Box: [L:${left}, T:${top}, W:${width}, H:${height}]`,
+  )
+  console.log(
+    `[optimize-tray-mono] Optical Crop: [L:${cropLeft}, T:${cropTop}, W:${cropSize}, H:${cropSize}]`,
+  )
+
+  // 7. Perform the extraction, resize to MAX_SIDE (44px) to make it a perfect square, and write
+  const buf = await image
+    .extract({
+      left: cropLeft,
+      top: cropTop,
+      width: cropSize,
+      height: cropSize,
     })
+    .resize(MAX_SIDE, MAX_SIDE)
     .png({ compressionLevel: 9, palette: false })
     .toBuffer()
 
+  // Ensure output directory exists
+  await fs.mkdir(path.dirname(target), { recursive: true })
   await fs.writeFile(target, buf)
-  const after = await sharp(target).metadata()
-  const beforeSize = stat.size
-  const afterSize = (await fs.stat(target)).size
 
+  const finalMeta = await sharp(target).metadata()
   console.log(
-    `[optimize-tray-mono] ${before.width}x${before.height} (${beforeSize} B) → ${after.width}x${after.height} (${afterSize} B)`,
+    `[optimize-tray-mono] Successfully generated perfect square tray icon: ${finalMeta.width}x${finalMeta.height} (${buf.length} B)`,
   )
 }
 

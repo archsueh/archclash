@@ -54,7 +54,7 @@ const (
 // silently rejected and the default is used; the rejection is recorded as
 // a `pipeline.config.timeout_override skip` trace event so a misconfigured
 // install is visible in the debug log.
-const envCoreReloadTimeout = "SLOTH_RELOAD_TIMEOUT"
+const envCoreReloadTimeout = "ARCHCLASH_RELOAD_TIMEOUT"
 
 var (
 	coreReloadTimeoutOnce  sync.Once

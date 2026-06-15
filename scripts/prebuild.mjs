@@ -483,14 +483,14 @@ const resolveServicePermission = async () => {
 // Arch Windows service IPC binaries (fork of clash-verge-service-ipc).
 // Release asset tag is usually the Rust host triple. GNU Windows hosts often
 // have no matching GitHub release — use MSVC triple for downloads instead.
-// Override with: SLOTH_SERVICE_RELEASE_TAG=v0.1.0 pnpm run prebuild
+// Override with: ARCHCLASH_SERVICE_RELEASE_TAG=v0.1.0 pnpm run prebuild
 const SERVICE_DOWNLOAD_TAG =
-  process.env.SLOTH_SERVICE_RELEASE_TAG ||
+  process.env.ARCHCLASH_SERVICE_RELEASE_TAG ||
   (platform === 'win32' && SIDECAR_HOST.includes('pc-windows-gnu')
     ? SIDECAR_HOST.replace('pc-windows-gnu', 'pc-windows-msvc')
     : SIDECAR_HOST)
 
-const SERVICE_URL = `https://github.com/Nemu-x/arch-clash-service-ipc/releases/download/${SERVICE_DOWNLOAD_TAG}`
+const SERVICE_URL = `https://github.com/Nemu-x/sloth-clash-service-ipc/releases/download/${SERVICE_DOWNLOAD_TAG}`
 
 /** Same filenames as GitHub Release assets (see arch-clash-service-ipc release.yml). */
 const resolveService = () => {
@@ -499,7 +499,7 @@ const resolveService = () => {
   return resolveResource({
     file: name,
     dir: SERVICE_DIR,
-    downloadURL: `${SERVICE_URL}/${name}`,
+    downloadURL: `${SERVICE_URL}/sloth-clash-service${ext}`,
   })
 }
 const resolveInstall = () => {
@@ -508,7 +508,7 @@ const resolveInstall = () => {
   return resolveResource({
     file: name,
     dir: SERVICE_DIR,
-    downloadURL: `${SERVICE_URL}/${name}`,
+    downloadURL: `${SERVICE_URL}/sloth-clash-service-install${ext}`,
   })
 }
 const resolveUninstall = () => {
@@ -517,7 +517,7 @@ const resolveUninstall = () => {
   return resolveResource({
     file: name,
     dir: SERVICE_DIR,
-    downloadURL: `${SERVICE_URL}/${name}`,
+    downloadURL: `${SERVICE_URL}/sloth-clash-service-uninstall${ext}`,
   })
 }
 

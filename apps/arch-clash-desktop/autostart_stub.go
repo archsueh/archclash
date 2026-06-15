@@ -116,8 +116,8 @@ func setLaunchOnStartupLinux(exe string, enabled bool) error {
 	content := fmt.Sprintf(`[Desktop Entry]
 Type=Application
 Version=1.0
-Name=Arch Clash
-Comment=Arch Clash desktop client
+Name=ArchClash
+Comment=ArchClash desktop client
 Exec="%s" --minimized
 Terminal=false
 X-GNOME-Autostart-enabled=true

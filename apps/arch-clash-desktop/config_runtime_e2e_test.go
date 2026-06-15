@@ -198,9 +198,9 @@ append:
 }
 
 func TestIntegrationPreflightWithRealCoreBinary(t *testing.T) {
-	bin := strings.TrimSpace(os.Getenv("SLOTH_MIHOMO_BIN"))
+	bin := strings.TrimSpace(os.Getenv("ARCHCLASH_MIHOMO_BIN"))
 	if bin == "" {
-		t.Skip("set SLOTH_MIHOMO_BIN to run real-core preflight integration")
+		t.Skip("set ARCHCLASH_MIHOMO_BIN to run real-core preflight integration")
 	}
 	dir := t.TempDir()
 	validCfg := `

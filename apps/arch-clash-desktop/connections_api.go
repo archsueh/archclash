@@ -52,16 +52,16 @@ func (a *App) FetchConnectionsOverview() ConnectionsOverview {
 	a.mu.RUnlock()
 
 	if ep == "" || (conn != "connected" && !running) {
-		base := strings.TrimSpace(os.Getenv("SLOTH_CLASH_CONTROLLER"))
+		base := strings.TrimSpace(os.Getenv("ARCHCLASH_CLASH_CONTROLLER"))
 		if base == "" {
-			return ConnectionsOverview{LastError: "connect Arch or set SLOTH_CLASH_CONTROLLER for external core"}
+			return ConnectionsOverview{LastError: "connect Arch or set ARCHCLASH_CLASH_CONTROLLER for external core"}
 		}
 		if !strings.HasPrefix(base, "http://") && !strings.HasPrefix(base, "https://") {
 			base = "http://" + base
 		}
 		base = strings.TrimRight(base, "/")
 		ep = strings.TrimPrefix(strings.TrimPrefix(base, "http://"), "https://")
-		secret = strings.TrimSpace(os.Getenv("SLOTH_CLASH_SECRET"))
+		secret = strings.TrimSpace(os.Getenv("ARCHCLASH_CLASH_SECRET"))
 	}
 
 	out := ConnectionsOverview{Connections: make([]ConnectionItem, 0, 32)}

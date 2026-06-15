@@ -17,10 +17,10 @@ var conflictingTunServiceNames = []string{
 	"FlClashHelperService",
 }
 
-// skipTunTakeoverByEnv: set SLOTH_SKIP_TUN_TAKEOVER=1 to experiment without stopping
+// skipTunTakeoverByEnv: set ARCHCLASH_SKIP_TUN_TAKEOVER=1 to experiment without stopping
 // other VPN services (Clash Verge, FlClash). TUN may still conflict at the OS level.
 func skipTunTakeoverByEnv() bool {
-	v := strings.ToLower(strings.TrimSpace(os.Getenv("SLOTH_SKIP_TUN_TAKEOVER")))
+	v := strings.ToLower(strings.TrimSpace(os.Getenv("ARCHCLASH_SKIP_TUN_TAKEOVER")))
 	return v == "1" || v == "true" || v == "yes"
 }
 

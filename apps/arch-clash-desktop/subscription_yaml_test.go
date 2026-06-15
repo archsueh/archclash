@@ -116,8 +116,8 @@ var canonicalUpstreamExcluded = map[string]string{
 // machine with internet (which is what we use for releases) will see the
 // regression immediately.
 func TestCanonicalKeyOrderCoversUpstreamMihomo(t *testing.T) {
-	if os.Getenv("SLOTH_OFFLINE") == "1" {
-		t.Skip("SLOTH_OFFLINE=1 — skipping mihomo upstream key sync check")
+	if os.Getenv("ARCHCLASH_OFFLINE") == "1" {
+		t.Skip("ARCHCLASH_OFFLINE=1 — skipping mihomo upstream key sync check")
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()

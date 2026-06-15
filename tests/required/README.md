@@ -17,7 +17,7 @@ From repo root:
 - runtime pipeline smoke validation: `TestRuntimeSmoke*`
 - runtime E2E scenarios: `TestE2ERuntime*`
 - optional local stress sample: `TestLocalStressYamlFromDownloadsIfPresent` (skip if absent)
-- optional real-core preflight: `TestIntegrationPreflightWithRealCoreBinary` (skip if `SLOTH_MIHOMO_BIN` is not set)
+- optional real-core preflight: `TestIntegrationPreflightWithRealCoreBinary` (skip if `ARCHCLASH_MIHOMO_BIN` is not set)
 
 These are intentionally fast smoke checks to block obviously broken runtime/config changes.
 
@@ -25,9 +25,9 @@ These are intentionally fast smoke checks to block obviously broken runtime/conf
 
 You can run preflight integration tests against a real mihomo binary:
 
-`SLOTH_MIHOMO_BIN=/absolute/path/to/mihomo go test ./...`
+`ARCHCLASH_MIHOMO_BIN=/absolute/path/to/mihomo go test ./...`
 
-These tests are auto-skipped when `SLOTH_MIHOMO_BIN` is not set.
+These tests are auto-skipped when `ARCHCLASH_MIHOMO_BIN` is not set.
 
 For CI across all target OS, use manual workflow:
 
