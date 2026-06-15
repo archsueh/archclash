@@ -1,0 +1,36 @@
+node_modules
+.pnpm-store
+.DS_Store
+dist
+!apps/sloth-clash-desktop/frontend/dist/
+apps/sloth-clash-desktop/frontend/dist/*
+!apps/sloth-clash-desktop/frontend/dist/.gitkeep
+dist-ssr
+*.local
+update.json
+scripts/_env.sh
+.vscode
+.tool-versions
+.idea
+.old
+.eslintcache
+.changelog_backups
+target
+CLAUDE.md
+.vfox.toml
+.vfox/
+.claude
+
+# Optional local-only pnpm tuning (e.g. Windows AV); keep out of the repo.
+.npmrc
+
+# Wails / desktop build outputs (binaries, sidecars)
+apps/sloth-clash-desktop/build/
+!apps/sloth-clash-desktop/build/
+apps/sloth-clash-desktop/build/*
+!apps/sloth-clash-desktop/build/resources/
+apps/sloth-clash-desktop/build/resources/*
+!apps/sloth-clash-desktop/build/resources/.gitkeep
+!apps/sloth-clash-desktop/build/sidecar/
+apps/sloth-clash-desktop/build/sidecar/*
+!apps/sloth-clash-desktop/build/sidecar/.gitkeep

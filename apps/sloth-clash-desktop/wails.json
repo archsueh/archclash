@@ -1,0 +1,27 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "SlothClashDesktop",
+  "nsisType": "multiple",
+  "outputfilename": "sloth-clash-desktop",
+  "frontend:install": "pnpm install",
+  "frontend:build": "pnpm run build",
+  "frontend:dev:watcher": "pnpm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "author": {
+    "name": "Nemu-x"
+  },
+  "info": {
+    "companyName": "Nemu-x",
+    "productName": "Sloth Clash",
+    "productVersion": "0.6.0",
+    "copyright": "GPL-3.0",
+    "comments": "https://github.com/Nemu-x/SlothClash",
+    "protocols": [
+      {
+        "scheme": "slothclash",
+        "description": "Sloth Clash (subscription / install-config links)",
+        "role": "Editor"
+      }
+    ]
+  }
+}
