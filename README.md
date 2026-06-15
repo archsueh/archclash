@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="docs/readmelogo.png" alt="Arch Clash" width="256" />
+  <img src="docs/readmelogo.png" alt="ArchClash" width="256" />
 </h1>
 
 <p align="center">
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/preview.png" alt="Arch Clash preview" width="900" />
+  <img src="docs/preview.png" alt="ArchClash preview" width="900" />
 </p>
 
 ---
