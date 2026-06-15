@@ -94,6 +94,8 @@ func ensureDefaultDNSForTun(m map[string]any) {
 		s := strings.ToLower(strings.TrimSpace(v))
 		respectRules = s == "true" || s == "1" || s == "yes" || s == "on"
 	}
+	ensureDNSFallback(dns)
+
 	if respectRules {
 		repair := true
 		switch vv := dns["proxy-server-nameserver"].(type) {
@@ -119,6 +121,42 @@ func ensureDefaultDNSForTun(m map[string]any) {
 		}
 	}
 	m["dns"] = dns
+}
+
+// ensureDNSFallback fills empty Mihomo DNS fallback lists — a common Clash Party
+// pain point where override.js sets fallbacks but the merged YAML still ships
+// fallback: [] and AI / Apple auth domains fail intermittently.
+func ensureDNSFallback(dns map[string]any) {
+	if dns == nil {
+		return
+	}
+	defaults := []any{
+		"https://1.1.1.1/dns-query",
+		"https://8.8.8.8/dns-query",
+		"https://dns.cloudflare.com/dns-query",
+	}
+	if empty, _ := stringListEmpty(dns["fallback"]); empty {
+		dns["fallback"] = append([]any(nil), defaults...)
+	}
+	if _, ok := dns["fallback-filter"]; !ok {
+		dns["fallback-filter"] = map[string]any{
+			"geoip":     true,
+			"geoip-code": "CN",
+		}
+	}
+}
+
+func stringListEmpty(raw any) (bool, int) {
+	switch v := raw.(type) {
+	case nil:
+		return true, 0
+	case []any:
+		return len(v) == 0, len(v)
+	case []string:
+		return len(v) == 0, len(v)
+	default:
+		return true, 0
+	}
 }
 
 // ensureTunOverlayForTraffic installs or hardens the TUN block in the generated
@@ -226,4 +264,7 @@ func overlayArchRuntimeOnMap(m map[string]any, mixedPort, ctrlPort int, secret, 
 	prefs := currentDesktopPrefs()
 	applyUserTunOverlay(m, prefs.TUN)
 	applyUserTrafficOverlay(m, prefs.Traffic)
+	if lvl := effectiveLogLevel(); lvl != "" {
+		m["log-level"] = lvl
+	}
 }

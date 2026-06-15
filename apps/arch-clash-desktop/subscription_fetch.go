@@ -211,7 +211,7 @@ func kickBackgroundSubscriptionRefresh(dataDir, subURL string) {
 // taken — replaces the prior `(bool, error)` return that conflated "not a
 // full profile" with "fetch failed" with "merge template malformed".
 func tryWriteMergedFullProfile(
-	dataDir, subURL, extendTemplate, proxyTemplate, rulesTemplate string,
+	dataDir, subURL, extendTemplate, proxyTemplate, rulesTemplate, scriptTemplate string,
 	ctrlPort, mixedPort int,
 	secret, traffic string,
 	withExternalController bool,
@@ -300,6 +300,14 @@ func tryWriteMergedFullProfile(
 		traceEvent("pipeline.subscription.merge", "fail", time.Since(mergeStart), map[string]any{
 			"dataDir": dataDir,
 			"stage":   "rules",
+			"error":   err.Error(),
+		})
+		return pipelineTemplateFail, err
+	}
+	if err := applyProfileScript(doc, scriptTemplate); err != nil {
+		traceEvent("pipeline.subscription.merge", "fail", time.Since(mergeStart), map[string]any{
+			"dataDir": dataDir,
+			"stage":   "script",
 			"error":   err.Error(),
 		})
 		return pipelineTemplateFail, err

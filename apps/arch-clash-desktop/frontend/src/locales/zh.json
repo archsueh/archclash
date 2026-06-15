@@ -51,6 +51,9 @@
       "findProcessLabel": "find-process-mode"
     },
     "profilesUpdates": "配置与更新",
+    "importFromClashParty": "从 Clash Party 导入",
+    "importFromClashPartyHint": "导入订阅与当前 override 脚本（mihomo-party）",
+    "importFromClashPartyOk": "已从 Clash Party 导入",
     "dataDiag": "数据与诊断",
     "logLevel": "日志级别",
     "info": "信息",

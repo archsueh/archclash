@@ -253,6 +253,7 @@ func (a *App) ensureProfileConfigSnapshot(profileID string) error {
 		target.MergeTemplate,
 		target.ProxyTemplate,
 		target.RulesTemplate,
+		target.ScriptTemplate,
 		0,
 		7890,
 		secret,

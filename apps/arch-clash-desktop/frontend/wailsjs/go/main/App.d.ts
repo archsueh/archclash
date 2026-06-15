@@ -65,6 +65,8 @@ export function ImportProfileFromURL(
   arg2: string,
 ): Promise<main.AppState>
 
+export function ImportFromClashParty(): Promise<main.AppState>
+
 export function InstallService(): Promise<main.TunSetupResult>
 
 export function ListProfiles(): Promise<Array<main.Profile>>
@@ -119,6 +121,8 @@ export function SetCloseToTrayPreference(arg1: boolean): Promise<main.AppState>
 export function SetHwidEnabled(arg1: boolean): Promise<main.DesktopPrefs>
 
 export function SetLaunchOnStartupPreference(arg1: boolean): Promise<void>
+
+export function SetLogLevel(arg1: string): Promise<main.DesktopPrefs>
 
 export function SetMode(arg1: string): Promise<main.AppState>
 

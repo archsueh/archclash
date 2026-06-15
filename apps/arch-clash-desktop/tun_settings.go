@@ -37,6 +37,8 @@ type DesktopPrefs struct {
 	Traffic   TrafficSettings   `json:"traffic"`
 	Privacy   PrivacySettings   `json:"privacy"`
 	AppUpdate AppUpdateSettings `json:"appUpdate"`
+	// LogLevel is the Mihomo core log level (warning/info/error/debug). Default warning.
+	LogLevel string `json:"logLevel,omitempty"`
 	// Lang is the current UI language ("en"/"ru"/"zh"/""). Frontend pushes
 	// this on i18n init / change so the native tray menu can localize its
 	// labels without a separate IPC roundtrip on each redraw.
@@ -177,6 +179,35 @@ func normalizeFindProcessMode(v string) string {
 	default:
 		return ""
 	}
+}
+
+func effectiveLogLevel() string {
+	lvl := strings.TrimSpace(strings.ToLower(currentDesktopPrefs().LogLevel))
+	switch lvl {
+	case "error":
+		return "error"
+	case "warn", "warning":
+		return "warning"
+	case "debug", "trace":
+		return "debug"
+	case "info":
+		return "info"
+	case "silent":
+		return "silent"
+	default:
+		return "warning"
+	}
+}
+
+// SetLogLevel persists the Mihomo log level and reloads the running core.
+func (a *App) SetLogLevel(level string) DesktopPrefs {
+	prefsMu.Lock()
+	prefsCurrent.LogLevel = strings.TrimSpace(level)
+	snapshot := prefsCurrent
+	_ = saveDesktopPrefsLocked(snapshot)
+	prefsMu.Unlock()
+	a.triggerRuntimeReloadForPrefs()
+	return snapshot
 }
 
 // GetDesktopPrefs is the Wails-exposed getter for the Settings UI.

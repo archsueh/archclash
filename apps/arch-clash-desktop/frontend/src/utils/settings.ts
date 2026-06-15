@@ -8,7 +8,7 @@ export const DEFAULT_SETTINGS: CompactSettings = {
   dnsSmartFallback: true,
   dnsIpv6: false,
   dnsAllowLan: false,
-  logLevel: 'info',
+  logLevel: 'warn',
   defaultAutoUpdateMinutes: 360,
   reconnectOnManualProfileUpdate: true,
   uiScale: 1,
@@ -28,6 +28,18 @@ export function applyUiScale(scale: number): void {
   // CSS `zoom` (Chromium/WebView2) scales layout uniformly — px, rem and
   // embedded widgets (Monaco) alike — without a px→rem refactor.
   document.documentElement.style.zoom = String(clampUiScale(scale))
+}
+
+/** Map Mihomo / prefs.json log level to the Settings select value. */
+export function normalizeLogLevelFromBackend(
+  level?: string,
+): CompactSettings['logLevel'] {
+  const l = String(level ?? '')
+    .trim()
+    .toLowerCase()
+  if (l === 'warning' || l === 'warn') return 'warn'
+  if (l === 'error' || l === 'info' || l === 'debug') return l
+  return DEFAULT_SETTINGS.logLevel
 }
 
 export function loadCompactSettings(): CompactSettings {

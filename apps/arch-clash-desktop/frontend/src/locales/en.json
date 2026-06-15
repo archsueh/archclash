@@ -51,6 +51,9 @@
       "findProcessLabel": "find-process-mode"
     },
     "profilesUpdates": "Profiles & Updates",
+    "importFromClashParty": "Import from Clash Party",
+    "importFromClashPartyHint": "Subscriptions + active override script (mihomo-party)",
+    "importFromClashPartyOk": "Imported from Clash Party",
     "dataDiag": "Data & Diagnostics",
     "logLevel": "Log level",
     "info": "Info",

@@ -55,12 +55,14 @@ export function SettingsPage({
   onSetTheme,
   onSetLang,
   onSetSetting,
+  onSetLogLevel,
   onSetLaunchOnStartup,
   onInstallService,
   onEnsureTun,
   onShowTunModal,
   onApplyDefaultAutoUpdate,
   onRefreshAllSubs,
+  onImportFromClashParty,
   onExportDiagnostics,
   onClearCache,
   onOpenResetModal,
@@ -89,12 +91,14 @@ export function SettingsPage({
     key: K,
     value: CompactSettings[K],
   ) => void
+  onSetLogLevel: (level: CompactSettings['logLevel']) => void
   onSetLaunchOnStartup: (next: boolean) => void
   onInstallService: () => void
   onEnsureTun: () => void
   onShowTunModal: () => void
   onApplyDefaultAutoUpdate: () => void
   onRefreshAllSubs: () => void
+  onImportFromClashParty: () => void
   onExportDiagnostics: () => void
   onClearCache: () => void
   onOpenResetModal: (mode: SettingsResetMode) => void
@@ -356,6 +360,19 @@ export function SettingsPage({
                 }
               />
             </div>
+            <p className="muted settingsMicroHint">
+              {t('settings.importFromClashPartyHint')}
+            </p>
+            <div className="row">
+              <button
+                type="button"
+                className="btn ghost"
+                disabled={settingsBusy}
+                onClick={onImportFromClashParty}
+              >
+                {t('settings.importFromClashParty')}
+              </button>
+            </div>
             <div className="row">
               <button
                 type="button"
@@ -389,10 +406,7 @@ export function SettingsPage({
                 className="selectModern"
                 value={settings.logLevel}
                 onChange={(e) =>
-                  onSetSetting(
-                    'logLevel',
-                    e.target.value as CompactSettings['logLevel'],
-                  )
+                  onSetLogLevel(e.target.value as CompactSettings['logLevel'])
                 }
               >
                 <option value="error">error</option>

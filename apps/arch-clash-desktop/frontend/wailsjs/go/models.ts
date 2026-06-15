@@ -528,6 +528,7 @@ export namespace main {
     traffic: TrafficSettings
     privacy: PrivacySettings
     appUpdate: AppUpdateSettings
+    logLevel?: string
     lang?: string
 
     static createFrom(source: any = {}) {
@@ -543,6 +544,7 @@ export namespace main {
         source['appUpdate'],
         AppUpdateSettings,
       )
+      this.logLevel = source['logLevel']
       this.lang = source['lang']
     }
 

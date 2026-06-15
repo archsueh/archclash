@@ -52,6 +52,12 @@ func (a *App) Connect() (AppState, error) {
 	a.state.Connection.Health = ""
 	a.state.Connection.LastError = ""
 	a.state.Connection.LastWarning = ""
+	if conflicts := detectConflictingProxyApps(); len(conflicts) > 0 {
+		a.state.Connection.LastWarning = fmt.Sprintf(
+			"Other proxy clients are running (%s) — quit them to avoid dual TUN conflicts",
+			strings.Join(conflicts, ", "),
+		)
+	}
 	a.state.UpdatedAt = time.Now().Unix()
 	gen := a.connectGen.Add(1)
 	a.mu.Unlock()

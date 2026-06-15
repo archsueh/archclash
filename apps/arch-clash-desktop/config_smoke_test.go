@@ -63,6 +63,7 @@ rules:
 		"",
 		"",
 		"",
+		"",
 		9090,
 		7890,
 		"secret",
@@ -115,6 +116,7 @@ rules:
 	outcome, err := tryWriteMergedFullProfile(
 		tmp,
 		srv.URL,
+		"",
 		"",
 		"",
 		"",
@@ -184,6 +186,7 @@ rules:
 		"",
 		"",
 		"",
+		"",
 		9090,
 		7890,
 		"secret",
@@ -227,6 +230,7 @@ rules:
 	outcome, err := tryWriteMergedFullProfile(
 		tmp,
 		srv.URL,
+		"",
 		"",
 		"",
 		"",

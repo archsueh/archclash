@@ -106,6 +106,10 @@ export function ImportProfileFromURL(arg1, arg2) {
   return window['go']['main']['App']['ImportProfileFromURL'](arg1, arg2)
 }
 
+export function ImportFromClashParty() {
+  return window['go']['main']['App']['ImportFromClashParty']()
+}
+
 export function InstallService() {
   return window['go']['main']['App']['InstallService']()
 }
@@ -196,6 +200,10 @@ export function SetHwidEnabled(arg1) {
 
 export function SetLaunchOnStartupPreference(arg1) {
   return window['go']['main']['App']['SetLaunchOnStartupPreference'](arg1)
+}
+
+export function SetLogLevel(arg1) {
+  return window['go']['main']['App']['SetLogLevel'](arg1)
 }
 
 export function SetMode(arg1) {

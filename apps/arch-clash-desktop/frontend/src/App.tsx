@@ -40,6 +40,7 @@ import {
   SetCloseToTrayPreference,
   SetHwidEnabled,
   SetLaunchOnStartupPreference,
+  SetLogLevel,
   SetUiLanguage,
   StartedMinimized,
 } from './api/prefs'
@@ -47,6 +48,7 @@ import {
   ActivateProfile,
   DeleteProfile,
   GetProfilePaths,
+  ImportFromClashParty,
   ImportProfileFromText,
   ImportProfileFromURL,
   ReadProfileConfig,
@@ -127,6 +129,7 @@ import {
   applyUiScale,
   DEFAULT_SETTINGS,
   loadCompactSettings,
+  normalizeLogLevelFromBackend,
 } from './utils/settings'
 import { yamlValidationError } from './utils/yaml'
 
@@ -441,6 +444,9 @@ function App() {
         // AppUpdate.autoCheckEnabled is *bool too: undefined/null → default on.
         const rawAppUpd = (prefs as any)?.appUpdate?.autoCheckEnabled
         setAppUpdateEnabled(rawAppUpd === false ? false : true)
+        if (prefs?.logLevel) {
+          setSetting('logLevel', normalizeLogLevelFromBackend(prefs.logLevel))
+        }
       } catch {
         /* ignore: prefs API unavailable */
       }
@@ -993,6 +999,25 @@ function App() {
 
   // Tun stack / sniffer summary value still consumed by SettingsPage card.
   const tunStackValue: string = tunPrefs.stack ?? ''
+
+  const importFromClashParty = async () => {
+    if (settingsBusy) return
+    setSettingsBusy(true)
+    setError('')
+    try {
+      await ImportFromClashParty()
+      pushToast({
+        kind: 'success',
+        message: t('settings.importFromClashPartyOk'),
+      })
+    } catch (e: any) {
+      setError(String(e))
+      pushToast({ kind: 'error', message: String(e) })
+    } finally {
+      setSettingsBusy(false)
+      await refresh()
+    }
+  }
 
   const refreshAllSubscriptions = async () => {
     if (settingsBusy) return
@@ -1909,6 +1934,18 @@ function App() {
               onSetTheme={setTheme}
               onSetLang={setLang}
               onSetSetting={setSetting}
+              onSetLogLevel={(level) => {
+                const prev = settings.logLevel
+                setSetting('logLevel', level)
+                void (async () => {
+                  try {
+                    await SetLogLevel(level)
+                  } catch (e: any) {
+                    setError(String(e))
+                    setSetting('logLevel', prev)
+                  }
+                })()
+              }}
               onSetLaunchOnStartup={(next) => {
                 setSetting('launchOnStartup', next)
                 void (async () => {
@@ -1927,6 +1964,7 @@ function App() {
                 void applyDefaultAutoUpdateToProfiles()
               }
               onRefreshAllSubs={() => void refreshAllSubscriptions()}
+              onImportFromClashParty={() => void importFromClashParty()}
               onExportDiagnostics={() => void exportDiagnosticsBundle()}
               onClearCache={clearTempUiState}
               onOpenResetModal={(mode) => setSettingsResetModal(mode)}

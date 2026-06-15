@@ -8,6 +8,7 @@ export {
   GetProfilePaths,
   GetProfileProxyGroupsBaseline,
   GetProfileRulesBaseline,
+  ImportFromClashParty,
   ImportProfileFromText,
   ImportProfileFromURL,
   ReadProfileConfig,
